@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo -n "Checking norminette before commit..."
+if ! norminette > /dev/null 2> >(cat >&2); then
+	echo "❌"
+	echo "norminette failed. Commit aborted."
+	exit 1
+fi
+echo "✅"
+echo "Build OK. Processing to commit."
