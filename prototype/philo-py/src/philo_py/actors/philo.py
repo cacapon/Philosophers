@@ -37,6 +37,7 @@ class PhiloActor(Actor):
 		self.sv = sv
 
 	def on_receive(self, msg):
+		self.sv.tell(MonitorMsg(args={"instance": self}))
 		match msg:
 			case UpdateMsg():
 				if self.sts == sts.DEAD:
@@ -52,7 +53,6 @@ class PhiloActor(Actor):
 				self._confirm_fork(msg.sender)
 			case ForkReleasedMsg():
 				self._on_fork_released(msg.sender)
-		self.sv.tell(MonitorMsg(args={"instance": self}))
 
 	def _common_update(self):
 		self.hp["now"] -= 1

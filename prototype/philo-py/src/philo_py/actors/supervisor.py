@@ -115,7 +115,7 @@ class SuperVisorActor(Actor):
 
 		for data in self.monitor_data:
 			strs = [
-				f"[{data.no}]",
+				f"[{data.no: <3}]",
 				f"{sts_face.get(data.sts, '❌')}",
 				self._convert_bar(data),
 				f"L{'🟢' if data.l_fork else '🔴'}",
