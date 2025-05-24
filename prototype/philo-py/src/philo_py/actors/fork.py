@@ -32,6 +32,8 @@ class ForkActor(Actor):
 				self._on_release_fork(msg.sender)
 
 	def _on_request_fork(self, sender: ref):
+		if self.holder == sender:
+			return
 		if self.sts == sts.AVAILABLE:
 			self.sts = sts.HELD
 			self.holder = sender
