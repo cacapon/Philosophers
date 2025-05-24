@@ -117,8 +117,21 @@ class SuperVisorActor(Actor):
 			strs = [
 				f"[{data.no}]",
 				f"{sts_face.get(data.sts, '❌')}",
-				f"{data.hp.get('now', 'XXX')}/{data.hp.get('max', 'XXX')}",
+				self._convert_bar(data),
 				f"L{'🟢' if data.l_fork else '🔴'}",
 				f"R{'🟢' if data.r_fork else '🔴'}",
 			]
 			print(":".join(strs))
+	
+	def _convert_bar(self, data:MonitorData):
+		block = ["","▏","▎","▍","▌","▋","▊","▉","█","█"]
+		try:
+			par = (data.hp.get('now', 100) * 100 // data.hp.get('max', 100)) * 100 // 100
+		except ZeroDivisionError:
+			par = 0
+		full_blocks = par // 10
+		partical = par % 10
+		bar = "█" * full_blocks + block[partical]
+		return f"[{bar: <10}]{data.hp.get('now', 'XXX'): <5}"
+	
+
