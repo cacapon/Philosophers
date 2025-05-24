@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-import os
 import sys
 import pykka
 from actors.philo import PhiloActor
-
 
 def init_philo_actors(num_of_philos:int) -> list[pykka.ActorRef[PhiloActor]]:
 	philo_actors = []
