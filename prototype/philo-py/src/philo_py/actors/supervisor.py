@@ -23,9 +23,11 @@ class MonitorData:
 
 
 class SuperVisorActor(Actor):
-	def __init__(self, num_of_philos: int):
+	def __init__(self, num_of_philos: int, t_die: int, t_eat: int, t_slp: int):
 		self.forks_ref: list[ref[Fork]] = self._create_forks(num_of_philos)
-		self.philos_ref: list[ref[Philo]] = self._create_philos(num_of_philos)
+		self.philos_ref: list[ref[Philo]] = self._create_philos(
+			num_of_philos, self.forks_ref, t_die, t_eat, t_slp
+		)
 		self.monitor_data: list[MonitorData] = self._init_monitor()
 
 	def _create_forks(self, num: int) -> list[ref[Fork]]:
@@ -34,7 +36,9 @@ class SuperVisorActor(Actor):
 			forks.append(Fork.start())
 		return forks
 
-	def _create_philos(self, num: int, forks: list[ref[Fork]]) -> list[ref[Philo]]:
+	def _create_philos(
+		self, num: int, forks: list[ref[Fork]], t_die: int, t_eat: int, t_slp: int
+	) -> list[ref[Philo]]:
 		philos: list[ref[Philo]] = []
 		for i in range(num):
 			philos.append(
@@ -43,9 +47,9 @@ class SuperVisorActor(Actor):
 					l_fork=forks[(i - 1) % len(forks)],
 					r_fork=forks[i % len(forks)],
 					no=i + 1,
-					t_die=0,  # TODO
-					t_eat=0,  # TODO
-					t_slp=0,  # TODO
+					t_die=t_die,
+					t_eat=t_eat,
+					t_slp=t_slp,
 				)
 			)
 		return philos
@@ -91,8 +95,8 @@ class SuperVisorActor(Actor):
 			strs = [
 				f"[{data.no}]",
 				f"{sts_face.get(data.sts, '❌')}",
-			    f"{data.hp.get('now', 'XXX')}/{data.hp.get('max', 'XXX')}",
-	    		f"L{"🟢"if data.l_fork else "🔴"}",
-    			f"R{"🟢"if data.r_fork else "🔴"}",
-            ]
+				f"{data.hp.get('now', 'XXX')}/{data.hp.get('max', 'XXX')}",
+				f"L{'🟢' if data.l_fork else '🔴'}",
+				f"R{'🟢' if data.r_fork else '🔴'}",
+			]
 			print(":".join(strs))
