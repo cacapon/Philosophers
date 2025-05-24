@@ -1,7 +1,7 @@
 import os
 from pykka import ThreadingActor as Actor
 from pykka import ActorRef as ref
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from actors.fork import ForkActor as Fork
 from actors.philo import (
 	PhiloActor as Philo,
@@ -10,6 +10,7 @@ from actors.philo import (
 from actors.msg import (
 	UpdateMsg,
 	MonitorMsg,
+	ActorDeadMsg,
 )
 
 
@@ -17,18 +18,46 @@ from actors.msg import (
 class MonitorData:
 	no: int = 0
 	sts: PhiloSts = PhiloSts.WAITING
-	hp: dict = None
-	l_fork: ref[Fork] = False
-	r_fork: ref[Fork] = False
+	hp: dict = field(default_factory=lambda: {"now": 0, "max": 0})
+	l_fork: bool = False
+	r_fork: bool = False
 
 
 class SuperVisorActor(Actor):
 	def __init__(self, num_of_philos: int, t_die: int, t_eat: int, t_slp: int):
-		self.forks_ref: list[ref[Fork]] = self._create_forks(num_of_philos)
+		super().__init__()
+		self.num = num_of_philos
+		self.t_die = t_die
+		self.t_eat = t_eat
+		self.t_slp = t_slp
+		self.timestamp = 0
+
+
+	def on_start(self):
+		self.forks_ref: list[ref[Fork]] = self._create_forks(self.num)
 		self.philos_ref: list[ref[Philo]] = self._create_philos(
-			num_of_philos, self.forks_ref, t_die, t_eat, t_slp
+			self.num, self.forks_ref, self.t_die, self.t_eat, self.t_slp
 		)
 		self.monitor_data: list[MonitorData] = self._init_monitor()
+
+
+	def on_receive(self, msg):
+		match msg:
+			case UpdateMsg():
+				self.timestamp += 1
+				self._update_philos()
+				self._show_monitor()
+			case MonitorMsg():
+				self._update_monitor(msg)
+			case ActorDeadMsg():
+				self._update_monitor(msg)
+				self.stop()
+
+	def on_stop(self):
+		for philo in self.philos_ref:
+			philo.stop()
+		for fork in self.forks_ref:
+			fork.stop()
 
 	def _create_forks(self, num: int) -> list[ref[Fork]]:
 		forks: list[ref[Fork]] = []
@@ -59,16 +88,7 @@ class SuperVisorActor(Actor):
 		for i in range(len(self.philos_ref)):
 			monitor_data.append(MonitorData(no=i + 1))
 		return monitor_data
-
-	def on_receive(self, msg):
-		match msg:
-			case UpdateMsg():
-				self._update_philos()
-				self._show_monitor()
-			case MonitorMsg():
-				self._update_monitor(msg)
-		pass
-
+		
 	def _update_philos(self):
 		for philo in self.philos_ref:
 			philo.tell(UpdateMsg())
@@ -91,6 +111,8 @@ class SuperVisorActor(Actor):
 			PhiloSts.DEAD: "💀",
 		}
 		os.system("clear")
+		print(f"[time]:{self.timestamp}\n")
+
 		for data in self.monitor_data:
 			strs = [
 				f"[{data.no}]",

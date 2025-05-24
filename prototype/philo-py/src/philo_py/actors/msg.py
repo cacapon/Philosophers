@@ -1,7 +1,8 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from abc import ABC
 from enum import Enum, auto
 from pykka import ActorRef as ref
+from typing import Optional
 
 # FIXME: Messageの型ではんていできるのでぶっちゃけ要らないかも
 class EnumMsgCmd(Enum):
@@ -17,34 +18,33 @@ e_cmd = EnumMsgCmd
 
 @dataclass
 class MsgBase(ABC):
-    cmd: e_cmd
-    sender: ref
-    args: dict
+    sender:Optional[ref] = None
+    args: dict = field(default_factory=dict)
 
 @dataclass
 class MonitorMsg(MsgBase):
-    cmd = e_cmd.MONITOR
+    pass
 
 @dataclass
 class UpdateMsg(MsgBase):
-    cmd = e_cmd.UPDATE
+    pass
 
 @dataclass
 class ActorDeadMsg(MsgBase):
-    cmd = e_cmd.ACTOR_DEAD
+    pass
 
 @dataclass
 class RequestForkMsg(MsgBase):
-    cmd = e_cmd.REQUEST_FORK
+    pass
 
 @dataclass
 class GrantForkMsg(MsgBase):
-    cmd = e_cmd.GRANT_FORK
+    pass
 
 @dataclass
 class ReleaseForkMsg(MsgBase):
-    cmd = e_cmd.RELEASE_FORK
+    pass
 
 @dataclass
 class ForkReleasedMsg(MsgBase):
-    cmd = e_cmd.FORK_RELEASED
+    pass

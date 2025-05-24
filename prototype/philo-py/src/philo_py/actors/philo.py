@@ -58,7 +58,7 @@ class PhiloActor(Actor):
 		self.hp["now"] -= 1
 		if self.hp["now"] == 0:
 			self.sts = sts.DEAD
-			self.sv.tell(ActorDeadMsg(sender=self.actor_ref, args={"id": self.no}))
+			self.sv.tell(ActorDeadMsg(sender=self.actor_ref, args={"instance": self}))
 
 	def _thinking(self):
 		if not self.has_fork["l"]:
@@ -94,5 +94,5 @@ class PhiloActor(Actor):
 			self.has_fork["l"] = False
 		if sender == self.fork_ref["r"]:
 			self.has_fork["r"] = False
-		if self.has_fork["l"] and self.has_fork["r"]:
+		if not (self.has_fork["l"] and self.has_fork["r"]):
 			self.sts = sts.SLEEPING
