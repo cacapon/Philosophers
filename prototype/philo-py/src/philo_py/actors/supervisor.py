@@ -11,6 +11,9 @@ from actors.msg import (
 	UpdateMsg,
 	MonitorMsg,
 	ActorDeadMsg,
+	PhiloEatDoneMsg,
+	PhiloReadyMsg,
+	GrantEatMsg,
 )
 
 
@@ -31,7 +34,20 @@ class SuperVisorActor(Actor):
 		self.t_eat = t_eat
 		self.t_slp = t_slp
 		self.timestamp = 0
+		self.philo_done_count = 0
+		self.ptn_i = 0
+		self.send_ptn = self._create_send_ptn(self.num)
 
+	def _create_send_ptn(self, num):
+		ptn = []
+		if num % 2 == 0:
+			ptn.append(list(range(0,num,2)))
+			ptn.append(list(range(1,num,2)))
+		else:
+			base = list(range(1,num,2))
+			for i in range(num):
+				ptn.append([(x + i) % num for x in base])
+		return ptn
 
 	def on_start(self):
 		self.forks_ref: list[ref[Fork]] = self._create_forks(self.num)
@@ -39,10 +55,13 @@ class SuperVisorActor(Actor):
 			self.num, self.forks_ref, self.t_die, self.t_eat, self.t_slp
 		)
 		self.monitor_data: list[MonitorData] = self._init_monitor()
-
+		for target in self.send_ptn[self.ptn_i]:
+				self.philos_ref[target].tell(GrantEatMsg())
 
 	def on_receive(self, msg):
 		match msg:
+			case PhiloEatDoneMsg():
+				self._advance_to_next_phase()
 			case UpdateMsg():
 				self.timestamp += 1
 				self._update_philos()
@@ -58,6 +77,14 @@ class SuperVisorActor(Actor):
 			philo.stop()
 		for fork in self.forks_ref:
 			fork.stop()
+
+	def _advance_to_next_phase(self):
+		self.philo_done_count += 1
+		if self.philo_done_count >= len(self.send_ptn[self.ptn_i]):
+			self.philo_done_count = 0
+			self.ptn_i = (self.ptn_i + 1) % len(self.send_ptn)
+			for target in self.send_ptn[self.ptn_i]:
+				self.philos_ref[target].tell(GrantEatMsg())
 
 	def _create_forks(self, num: int) -> list[ref[Fork]]:
 		forks: list[ref[Fork]] = []
@@ -111,6 +138,8 @@ class SuperVisorActor(Actor):
 			PhiloSts.DEAD: "💀",
 		}
 		os.system("clear")
+		print(f"[Done]:{self.philo_done_count}")
+		print(f"[ptn]:{self.ptn_i}:[{self.send_ptn[self.ptn_i]}]")
 		print(f"[time]:{self.timestamp}\n")
 
 		for data in self.monitor_data:

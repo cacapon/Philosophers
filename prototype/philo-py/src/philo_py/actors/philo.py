@@ -2,6 +2,7 @@ from pykka import ThreadingActor as Actor
 from pykka import ActorRef as ref
 from enum import Enum, auto
 from actors.msg import (
+	PhiloReadyMsg,
 	UpdateMsg,
 	ActorDeadMsg,
 	RequestForkMsg,
@@ -9,6 +10,8 @@ from actors.msg import (
 	ReleaseForkMsg,
 	ForkReleasedMsg,
 	MonitorMsg,
+	PhiloEatDoneMsg,
+	GrantEatMsg,
 )
 
 
@@ -35,6 +38,10 @@ class PhiloActor(Actor):
 		self.fork_ref = {"l": l_fork, "r": r_fork}
 		self.has_fork = {"l": False, "r": False}
 		self.sv = sv
+		self.can_eat = False
+
+	def on_start(self):
+		self.sv.tell(MonitorMsg(args={"instance": self}))
 
 	def on_receive(self, msg):
 		self.sv.tell(MonitorMsg(args={"instance": self}))
@@ -49,6 +56,8 @@ class PhiloActor(Actor):
 					self._eating()
 				elif self.sts == sts.SLEEPING:
 					self._sleeping()
+			case GrantEatMsg():
+				self.can_eat = True
 			case GrantForkMsg():
 				self._confirm_fork(msg.sender)
 			case ForkReleasedMsg():
@@ -61,6 +70,8 @@ class PhiloActor(Actor):
 			self.sv.tell(ActorDeadMsg(sender=self.actor_ref, args={"instance": self}))
 
 	def _thinking(self):
+		if not self.can_eat:
+			return
 		if not self.has_fork["l"]:
 			self.fork_ref["l"].tell(RequestForkMsg(sender=self.actor_ref))
 		if not self.has_fork["r"]:
@@ -75,6 +86,8 @@ class PhiloActor(Actor):
 			self.eat_bar["now"] = 0
 			self.fork_ref["l"].tell(ReleaseForkMsg(sender=self.actor_ref))
 			self.fork_ref["r"].tell(ReleaseForkMsg(sender=self.actor_ref))
+			self.sv.tell(PhiloEatDoneMsg())
+			self.can_eat = False
 			self.sts = sts.WAITING
 
 	def _sleeping(self):
