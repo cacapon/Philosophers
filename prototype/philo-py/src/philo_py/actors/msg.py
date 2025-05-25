@@ -4,22 +4,18 @@ from enum import Enum, auto
 from pykka import ActorRef as ref
 from typing import Optional
 
-# FIXME: Messageの型ではんていできるのでぶっちゃけ要らないかも
-class EnumMsgCmd(Enum):
-    UPDATE = auto()
-    MONITOR = auto()
-    ACTOR_DEAD = auto()
-    REQUEST_FORK = auto()
-    GRANT_FORK = auto()
-    RELEASE_FORK = auto()
-    FORK_RELEASED = auto()
-
-e_cmd = EnumMsgCmd
-
 @dataclass
 class MsgBase(ABC):
     sender:Optional[ref] = None
     args: dict = field(default_factory=dict)
+
+@dataclass
+class PhiloReadyMsg(MsgBase):
+    pass
+
+@dataclass
+class GrantEatMsg(MsgBase):
+    pass
 
 @dataclass
 class MonitorMsg(MsgBase):
@@ -27,6 +23,10 @@ class MonitorMsg(MsgBase):
 
 @dataclass
 class UpdateMsg(MsgBase):
+    pass
+
+@dataclass
+class PhiloEatDoneMsg(MsgBase):
     pass
 
 @dataclass
