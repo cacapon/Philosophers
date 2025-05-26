@@ -304,6 +304,7 @@ $RECYCLE.BIN/
 philo/philo
 philo_bonus/philo_bonus
 .vscode/
+check/
 
 # End of https://www.toptal.com/developers/gitignore/api/c,linux,python,macos,windows
 

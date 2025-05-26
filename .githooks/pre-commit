@@ -1,8 +1,8 @@
 #!/bin/bash
 
+echo "check" | ./copy_to_subject.sh
 echo -n "Checking norminette before commit..."
-echo "dest" | ./copy_to_subject.sh
-if ! norminette dest/ > /dev/null 2> >(cat >&2); then
+if ! norminette check/ > /dev/null 2> >(cat >&2); then
 	echo "❌"
 	echo "norminette failed. Commit aborted."
 	exit 1
