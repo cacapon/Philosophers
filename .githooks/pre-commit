@@ -5,7 +5,6 @@ echo -n "Checking norminette before commit..."
 if ! norminette check/ > /dev/null 2> >(cat >&2); then
 	echo "❌"
 	echo "norminette failed. Commit aborted."
-	rm -rf check/
 	exit 1
 fi
 echo "✅"
