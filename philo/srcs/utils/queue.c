@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/26 23:50:04 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/27 11:50:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,16 @@ static t_msg	*_dequeue(t_queue *self)
 	t_node	*node;
 
 	msg = NULL;
-	while (1)
+	pthread_mutex_lock(&self->mutex);
+	if (self->head)
 	{
-		pthread_mutex_lock(&self->mutex);
-		if (self->head)
-		{
-			node = self->head;
-			msg = node->msg;
-			self->head = node->next;
-			if (!self->head)
-				self->tail = NULL;
-			free(node);
-			pthread_mutex_unlock(&self->mutex);
-			return (msg);
-		}
-		pthread_mutex_unlock(&self->mutex);
-		usleep(1000);
+		node = self->head;
+		msg = node->msg;
+		self->head = node->next;
+		if (!self->head)
+			self->tail = NULL;
+		free(node);
 	}
+	pthread_mutex_unlock(&self->mutex);
+	return (msg);
 }
