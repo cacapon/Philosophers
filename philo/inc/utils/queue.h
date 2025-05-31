@@ -6,14 +6,12 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:11 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/26 23:54:06 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/30 19:09:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef QUEUE_H
 # define QUEUE_H
-
-# define _DEFAULT_SOURCE
 
 # include "message.h"
 # include <pthread.h>
@@ -43,7 +41,7 @@ typedef struct s_queue
 	t_msg				*(*dequeue)(t_queue *self);
 }						t_queue;
 
-void					queue_init(t_queue *q);
+t_queue					*queue_init(void);
 void					queue_clear(t_queue **q);
 
 #endif

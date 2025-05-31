@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:40:09 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/27 12:27:03 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/30 19:10:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 t_queue *q = NULL;
 
 void setUp(void) {
-    q = malloc(sizeof(t_queue));
-    queue_init(q);
+    q = queue_init();
 }
 
 void tearDown(void) {
