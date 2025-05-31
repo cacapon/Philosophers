@@ -6,12 +6,16 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/30 19:34:15 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/31 16:27:41 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MESSAGE_H
 # define MESSAGE_H
+
+// using NULL malloc()
+# include <stddef.h>
+# include <stdlib.h>
 
 typedef struct s_actor	t_actor;
 
@@ -35,5 +39,7 @@ typedef struct s_msg
 	t_actor				*sender;
 	void				*args;
 }						t_msg;
+
+t_msg	*gen_msg(t_msg_type type, t_actor *sender, void *args);
 
 #endif

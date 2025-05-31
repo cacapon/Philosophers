@@ -6,33 +6,58 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 09:11:22 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/31 16:37:36 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "actor.h"
 
-// startがいる
-//
+static bool	_tell(t_actor *self, t_msg *msg)
+{
+	return (self->msg_box->enqueue(self->msg_box, msg));
+}
 
-// ? どうやってtell->actor.msgboxにアクセスできるだろう?
-// typedef struct s_actor_ref
-// {
-// 	void	(*tell)(t_msg msg);
-// 	void	(*stop)(void);
-// }			t_actor_ref;
+static void	*_actor_loop(void *arg)
+{
+	t_actor	*actor;
+	t_msg	*msg;
 
-// static void	_actor_loop(void *args)
-// {
-// }
+	actor = (t_actor *)arg;
+	while (true)
+	{
+		usleep(1000);
+		msg = actor->msg_box->dequeue(actor->msg_box);
+		if (!msg)
+			continue ;
+		if (!(actor->on_recieve(msg)))
+		{
+			free(msg);
+			break ;
+		}
+		free(msg);
+	}
+	return (NULL);
+}
 
-// // スレッドを走らせる
-// // 無限ループで待つmsgbox受信待機関数を動かす。
-// // メッセージがあったらカスタムのon_recieveにmsgを渡す
-// t_actor_ref	*actor_start(void *args)
-// {
-// 	pthread_t th;
+t_actor	*init_actor(int id, bool (*on_recieve)(t_msg *msg))
+{
+	t_actor	*actor;
 
-// 	pthread_create(&th, NULL, _actor_loop, args);
-// 	pthread_detach(&th);
-// }
+	actor = malloc(sizeof(t_actor));
+	if (!actor)
+		return (NULL);
+	actor->msg_box = queue_init();
+	if (!actor->msg_box)
+		return (NULL);
+	actor->id = id;
+	actor->th_id = 0;
+	actor->on_recieve = on_recieve;
+	actor->ref = NULL;
+	actor->tell = _tell;
+	return (actor);
+}
+
+void	actor_start(t_actor *actor)
+{
+	pthread_create(&actor->th_id, NULL, _actor_loop, actor);
+}
