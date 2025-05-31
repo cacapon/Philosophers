@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/27 12:34:12 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/30 19:09:53 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,19 @@ static t_msg	*_dequeue(t_queue *self)
 	return (msg);
 }
 
-void	queue_init(t_queue *q)
+t_queue	*queue_init(void)
 {
+	t_queue	*q;
+
+	q = malloc(sizeof(t_queue));
+	if (!q)
+		return (NULL);
 	q->head = NULL;
 	q->tail = NULL;
 	pthread_mutex_init(&q->mutex, NULL);
 	q->enqueue = _enqueue;
 	q->dequeue = _dequeue;
+	return (q);
 }
 
 void	queue_clear(t_queue **q)
