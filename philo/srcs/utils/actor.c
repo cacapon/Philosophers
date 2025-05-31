@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 16:44:24 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/31 16:55:41 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	actor_stop(t_actor **actor_pt)
 	pthread_join(actor->th_id, NULL);
 	free(actor->msg_box);
 	free(actor);
+	*actor_pt = NULL;
 }
