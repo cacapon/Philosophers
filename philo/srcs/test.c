@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 17:41:57 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 16:38:18 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/31 16:45:11 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(void)
 	}
 	actor1->tell(actor1, gen_msg(PHILO_DEAD, actor1, NULL));
 	actor2->tell(actor2, gen_msg(PHILO_DEAD, actor2, NULL));
-	pthread_join(actor1->th_id, NULL);
-	pthread_join(actor2->th_id, NULL);
+	actor_stop(&actor1);
+	actor_stop(&actor2);
 	return (0);
 }

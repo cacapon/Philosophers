@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 16:37:36 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/05/31 16:44:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,14 @@ t_actor	*init_actor(int id, bool (*on_recieve)(t_msg *msg))
 void	actor_start(t_actor *actor)
 {
 	pthread_create(&actor->th_id, NULL, _actor_loop, actor);
+}
+
+void	actor_stop(t_actor **actor_pt)
+{
+	t_actor	*actor;
+
+	actor = *actor_pt;
+	pthread_join(actor->th_id, NULL);
+	free(actor->msg_box);
+	free(actor);
 }
