@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_calloc.h                                     :+:      :+:    :+:   */
+/*   sv_actor_utils.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 19:05:32 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/04 17:20:27 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/03 19:18:01 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/04 18:17:08 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_CALLOC_H
-# define PHILO_CALLOC_H
+#ifndef SV_ACTOR_UTILS_H
+# define SV_ACTOR_UTILS_H
 
-# include <stdlib.h>
+# include "philo_calloc.h"
+# include <stddef.h>
 # include <stdint.h>
 
-void	*philo_calloc(size_t count, size_t size);
+typedef struct s_sv_actor	t_sv_actor;
+
+size_t						**_create_send_ptn(t_sv_actor *self, size_t n);
 
 #endif

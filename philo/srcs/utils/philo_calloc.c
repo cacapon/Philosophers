@@ -6,13 +6,13 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:04:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/03 19:11:36 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/04 17:20:04 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_calloc.h"
 
-static void	*ft_actor_memset(void *b, int c, size_t len)
+static void	*_philo_memset(void *b, int c, size_t len)
 {
 	size_t			i;
 	unsigned char	*ptr;
@@ -26,7 +26,7 @@ static void	*ft_actor_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-void	*ft_actor_calloc(size_t count, size_t size)
+void	*philo_calloc(size_t count, size_t size)
 {
 	void	*_block;
 
@@ -37,6 +37,6 @@ void	*ft_actor_calloc(size_t count, size_t size)
 	_block = malloc(count * size);
 	if (!_block)
 		return (NULL);
-	ft_actor_memset(_block, 0, count * size);
+	_philo_memset(_block, 0, count * size);
 	return (_block);
 }
