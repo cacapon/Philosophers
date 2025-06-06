@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/04 18:17:16 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 10:37:30 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SV_ACTOR_H
 
 # include "actor.h"
+# include "philo_calloc.h"
 # include <stdint.h>
 
 typedef struct s_actor_ref	t_actor_ref;
