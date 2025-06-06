@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 10:34:40 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 10:38:31 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_actor	*actor_new(int id, void *ref, const t_actor_vtable *vtable)
 {
 	t_actor	*a;
 
-	a = malloc(sizeof(t_actor));
+	a = philo_calloc(1, sizeof(t_actor));
 	if (!a)
 		return (NULL);
 	a->id = id;
