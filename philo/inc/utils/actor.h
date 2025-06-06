@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 10:22:04 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 10:34:31 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,29 @@
 # include "queue.h"
 # include <pthread.h>
 
-typedef struct s_actor	t_actor;
+typedef struct s_actor		t_actor;
+
+typedef struct s_actor_vtable
+{
+	bool					(*on_start)(t_actor * self);
+	bool					(*on_recieve)(t_actor * self, t_msg * msg);
+	bool					(*on_stop)(t_actor * self);
+	bool					(*tell)(t_actor * self, t_msg * msg);
+}							t_actor_vtable;
 
 typedef struct s_actor
 {
-	int					id;
-	pthread_t			th_id;
-	t_queue				*msg_box;
-	void				*ref;
-	bool				(*on_start)(t_actor * self, t_msg * msg);
-	bool				(*on_recieve)(t_actor * self, t_msg * msg);
-	bool				(*on_stop)(t_actor * self, t_msg * msg);
-	bool				(*tell)(t_actor * self, t_msg * msg);
-}						t_actor;
+	int						id;
+	pthread_t				th_id;
+	t_queue					*msg_box;
+	void					*ref;
+	const t_actor_vtable	*vtable;
+}							t_actor;
 
-t_actor					*actor_new(void);
-t_actor					*init_actor(int id, bool (*on_recieve)(t_msg *msg));
-void					actor_start(t_actor *actor);
-void					actor_stop(t_actor **actor_pt);
+bool						default_tell(t_actor *self, t_msg *msg);
+t_actor						*actor_new(int id, void *ref,
+								const t_actor_vtable *vtable);
+void						actor_start(t_actor *actor);
+void						actor_stop(t_actor **actor_pt);
 
 #endif
