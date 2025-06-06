@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 10:38:31 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 17:37:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*actor_thread_main(void *arg)
 	t_msg	*msg;
 
 	self = (t_actor *)arg;
-	if (!self || !self->vtable || !self->vtable->on_recieve)
+	if (!self || !self->vtable || !self->vtable->on_receive)
 		return (NULL);
 	while (true)
 	{
@@ -31,7 +31,7 @@ void	*actor_thread_main(void *arg)
 		msg = self->msg_box->dequeue(self->msg_box);
 		if (!msg)
 			continue ;
-		if (!(self->vtable->on_recieve(self, msg)))
+		if (!(self->vtable->on_receive(self, msg)))
 		{
 			free(msg);
 			break ;

@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _fork_actor_methods.c                              :+:      :+:    :+:   */
+/*   _philo_actor_methods2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 17:47:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 18:07:52 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fork_actor.h"
+#include "philo_actor.h"
 
-void	_on_request_fork(t_fork_actor *fork, t_actor *sender)
+void	_confirm_fork(t_philo_actor *self, t_actor *sender)
 {
-	if (fork->holder == sender)
-		return ;
-	if (fork->sts == FORK_AVAILABLE)
-	{
-		fork->sts = FORK_HELD;
-		fork->holder = sender;
-		sender->vtable->tell(sender, gen_msg(GRANT_FORK, fork->base, NULL));
-	}
+	if (sender == self->l_fork)
+		self->has_l_fork = true;
+	if (sender == self->r_fork)
+		self->has_r_fork = true;
 }
 
-void	_on_release_fork(t_fork_actor *fork, t_actor *sender)
+void	_on_fork_released(t_philo_actor *self, t_actor *sender)
 {
-	if (fork->holder != sender)
-		return ;
-	if (fork->sts == FORK_HELD)
-	{
-		fork->sts = FORK_AVAILABLE;
-		fork->holder = NULL;
-		sender->vtable->tell(sender, gen_msg(FORK_RELEASED, fork->base, NULL));
-	}
+	if (sender == self->l_fork)
+		self->has_l_fork = false;
+	if (sender == self->r_fork)
+		self->has_r_fork = false;
+	if (!(self->has_l_fork && self->has_r_fork))
+		self->sts = PHILO_STS_SLEEPING;
 }
