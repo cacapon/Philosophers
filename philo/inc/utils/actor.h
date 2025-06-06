@@ -6,13 +6,14 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 10:34:31 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 10:50:00 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ACTOR_H
 # define ACTOR_H
 
+# include "philo_calloc.h"
 # include "queue.h"
 # include <pthread.h>
 
@@ -20,9 +21,9 @@ typedef struct s_actor		t_actor;
 
 typedef struct s_actor_vtable
 {
-	bool					(*on_start)(t_actor * self);
-	bool					(*on_recieve)(t_actor * self, t_msg * msg);
-	bool					(*on_stop)(t_actor * self);
+	void					(*on_start)(t_actor *self);
+	bool					(*on_receive)(t_actor * self, t_msg * msg);
+	void					(*on_stop)(t_actor *self);
 	bool					(*tell)(t_actor * self, t_msg * msg);
 }							t_actor_vtable;
 
