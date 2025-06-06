@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 10:50:00 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 17:04:33 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ t_actor						*actor_new(int id, void *ref,
 								const t_actor_vtable *vtable);
 void						actor_start(t_actor *actor);
 void						actor_stop(t_actor **actor_pt);
+void						free_actor(t_actor **actor_ptr);
 
 #endif
