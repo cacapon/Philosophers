@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 10:16:03 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 10:22:04 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_actor
 	bool				(*tell)(t_actor * self, t_msg * msg);
 }						t_actor;
 
+t_actor					*actor_new(void);
 t_actor					*init_actor(int id, bool (*on_recieve)(t_msg *msg));
 void					actor_start(t_actor *actor);
 void					actor_stop(t_actor **actor_pt);

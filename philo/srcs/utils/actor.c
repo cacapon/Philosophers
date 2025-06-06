@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 16:55:41 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 10:24:30 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static bool	_tell(t_actor *self, t_msg *msg)
 	return (self->msg_box->enqueue(self->msg_box, msg));
 }
 
-static void	*_actor_loop(void *arg)
+void	*actor_thread_main(void *arg)
 {
-	t_actor	*actor;
+	t_actor	*self;
 	t_msg	*msg;
 
-	actor = (t_actor *)arg;
+	self = (t_actor *)arg;
 	while (true)
 	{
 		usleep(1000);
-		msg = actor->msg_box->dequeue(actor->msg_box);
+		msg = self->msg_box->dequeue(self->msg_box);
 		if (!msg)
 			continue ;
-		if (!(actor->on_recieve(msg)))
+		if (self->on_recieve && !(self->on_recieve(self, msg)))
 		{
 			free(msg);
 			break ;
@@ -57,9 +57,9 @@ t_actor	*init_actor(int id, bool (*on_recieve)(t_msg *msg))
 	return (actor);
 }
 
-void	actor_start(t_actor *actor)
+void	actor_start(t_actor *self)
 {
-	pthread_create(&actor->th_id, NULL, _actor_loop, actor);
+	pthread_create(&self->th_id, NULL, actor_thread_main, self);
 }
 
 void	actor_stop(t_actor **actor_pt)
