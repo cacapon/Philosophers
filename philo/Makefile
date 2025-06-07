@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/07 13:03:53 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/07 14:00:12 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ TESTS = \
 	tests/test_all.c \
 	tests/utils/test_queue.c \
 	tests/actors/fork/test_fork_actor.c \
+	tests/actors/philo/test_philo_actor.c \
 	tests/unity/src/unity.c
 
 TEST_ALL_OUT = tests/test_all.out
