@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:49:40 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 14:58:12 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,55 @@ void	test_sleeping_wakeup(void)
 	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_THINKING);
 }
 
+void	test_confirm_fork_l(void)
+{
+	p->l_fork = p_dummy;
+	p->r_fork = p_dummy2;
+	p->has_l_fork = false;
+	_confirm_fork(p, p_dummy);
+	TEST_ASSERT_EQUAL_INT(p->has_l_fork, true);
+}
+
+void	test_confirm_fork_r(void)
+{
+	p->l_fork = p_dummy;
+	p->r_fork = p_dummy2;
+	p->has_r_fork = false;
+	_confirm_fork(p, p_dummy2);
+	TEST_ASSERT_EQUAL_INT(p->has_r_fork, true);
+}
+
+void	test_on_fork_released_l()
+{
+	p->l_fork = p_dummy;
+	p->r_fork = p_dummy2;
+	p->has_l_fork = true;
+	_on_fork_released(p, p_dummy);
+	TEST_ASSERT_EQUAL_INT(p->has_l_fork, false);
+}
+
+void	test_on_fork_released_r()
+{
+	p->l_fork = p_dummy;
+	p->r_fork = p_dummy2;
+	p->has_r_fork = true;
+	_on_fork_released(p, p_dummy2);
+	TEST_ASSERT_EQUAL_INT(p->has_r_fork, false);
+}
+
+void	test_on_fork_released_both()
+{
+	p->l_fork = p_dummy;
+	p->r_fork = p_dummy2;
+	p->has_l_fork = true;
+	p->has_r_fork = true;
+	_on_fork_released(p, p_dummy);
+	_on_fork_released(p, p_dummy2);
+	TEST_ASSERT_EQUAL_INT(p->has_l_fork, false);
+	TEST_ASSERT_EQUAL_INT(p->has_r_fork, false);
+	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_SLEEPING);
+}
+
 void test_philo(void) {
     RUN_PHILO_TEST(test_common_update_normal);
     RUN_PHILO_TEST(test_common_update_dead);
@@ -205,4 +254,9 @@ void test_philo(void) {
 	RUN_PHILO_TEST(test_eating_done);
 	RUN_PHILO_TEST(test_sleeping);
 	RUN_PHILO_TEST(test_sleeping_wakeup);
+	RUN_PHILO_TEST(test_confirm_fork_l);
+	RUN_PHILO_TEST(test_confirm_fork_r);
+	RUN_PHILO_TEST(test_on_fork_released_l);
+	RUN_PHILO_TEST(test_on_fork_released_r);
+	RUN_PHILO_TEST(test_on_fork_released_both);
 }
