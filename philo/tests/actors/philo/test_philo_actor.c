@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:15:05 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 14:33:34 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 t_philo_actor *p = NULL;
 t_actor *p_dummy = NULL;
+t_actor	*p_dummy2 = NULL;
 const t_actor_vtable p_dummy_vtable = {
     .on_start = NULL,
     .on_receive = NULL,
@@ -35,12 +36,14 @@ static void setup(void) {
 		.number_of_times_each_philosopher_must_eat = -1
 	};
     p = philo_actor_new(0, args);
-    p_dummy = actor_new(0, NULL, &p_dummy_vtable);
+    p_dummy = actor_new(1, NULL, &p_dummy_vtable);
+	p_dummy2 = actor_new(2, NULL, &p_dummy_vtable);
 }
 
 static void teardown(void) {
     free_philo(&p);
     free_actor(&p_dummy);
+	free_actor(&p_dummy2);
 }
 
 static t_msg   *_wait_mes(t_actor *p_dummy, size_t max)
@@ -89,28 +92,14 @@ void	test_thinking_cant_eat(void)
     TEST_ASSERT_NULL(res);
 }
 
-void	test_thinking_has_l_fork(void)
-{
-    t_msg   *res = NULL;
-
-	p->can_eat = true;
-	p->has_l_fork = true;
-	p->r_fork = p_dummy;
-	p->l_fork = p_dummy;
-	_thinking(p);
-	res = _wait_mes(p_dummy, WAIT_TIME);
-    TEST_ASSERT_NOT_NULL(res);
-	TEST_ASSERT_EQUAL_INT(res->type, REQUEST_FORK);
-	free(res);
-}
-
-void	test_thinking_has_r_fork(void)
+void	test_thinking_l_fork_send(void)
 {
     t_msg   *res = NULL;
 
 	p->can_eat = true;
 	p->has_r_fork = true;
-	p->r_fork = p_dummy;
+	p->has_l_fork = false;
+	p->r_fork = p_dummy2;
 	p->l_fork = p_dummy;
 	_thinking(p);
 	res = _wait_mes(p_dummy, WAIT_TIME);
@@ -119,9 +108,45 @@ void	test_thinking_has_r_fork(void)
 	free(res);
 }
 
+void	test_thinking_r_fork_send(void)
+{
+    t_msg   *res = NULL;
+
+	p->can_eat = true;
+	p->has_r_fork = false;
+	p->has_l_fork = true;
+	p->r_fork = p_dummy;
+	p->l_fork = p_dummy2;
+	_thinking(p);
+	res = _wait_mes(p_dummy, WAIT_TIME);
+    TEST_ASSERT_NOT_NULL(res);
+	TEST_ASSERT_EQUAL_INT(res->type, REQUEST_FORK);
+	free(res);
+}
+
+void	test_thinking_has_both_fork(void)
+{
+    t_msg   *res1 = NULL;
+    t_msg   *res2 = NULL;
+
+	p->can_eat = true;
+	p->has_r_fork = true;
+	p->has_l_fork = true;
+	p->r_fork = p_dummy;
+	p->l_fork = p_dummy2;
+	_thinking(p);
+	res1 = _wait_mes(p_dummy, WAIT_TIME);
+	res2 = _wait_mes(p_dummy2, WAIT_TIME);
+    TEST_ASSERT_NULL(res1);
+    TEST_ASSERT_NULL(res2);
+	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_EATING);
+	TEST_ASSERT_EQUAL_INT(p->max_hp, p->now_hp);
+}
+
 void test_philo(void) {
     RUN_PHILO_TEST(test_common_update_normal);
     RUN_PHILO_TEST(test_common_update_dead);
-	RUN_PHILO_TEST(test_thinking_has_l_fork);
-	RUN_PHILO_TEST(test_thinking_has_r_fork);
+	RUN_PHILO_TEST(test_thinking_l_fork_send);
+	RUN_PHILO_TEST(test_thinking_r_fork_send);
+	RUN_PHILO_TEST(test_thinking_has_both_fork);
 }
