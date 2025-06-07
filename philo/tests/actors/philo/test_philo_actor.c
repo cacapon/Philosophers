@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:45:35 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 14:49:40 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,22 @@ void	test_eating_done(void)
 	free(res3);
 }
 
+void	test_sleeping(void)
+{
+	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
+	_sleeping(p);
+	TEST_ASSERT_EQUAL_INT(p->now_slp, 1);
+}
+
+void	test_sleeping_wakeup(void)
+{
+	p->max_slp = 1;
+	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
+	_sleeping(p);
+	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
+	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_THINKING);
+}
+
 void test_philo(void) {
     RUN_PHILO_TEST(test_common_update_normal);
     RUN_PHILO_TEST(test_common_update_dead);
@@ -187,4 +203,6 @@ void test_philo(void) {
 	RUN_PHILO_TEST(test_thinking_has_both_fork);
 	RUN_PHILO_TEST(test_eating);
 	RUN_PHILO_TEST(test_eating_done);
+	RUN_PHILO_TEST(test_sleeping);
+	RUN_PHILO_TEST(test_sleeping_wakeup);
 }
