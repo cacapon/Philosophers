@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/05/27 12:31:06 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/07 12:36:30 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME=philo
 CC = cc
 
 W_FLG = -Wall -Wextra -Werror
-I_FLG = -Iinc/utils -Itests/unity/src
+I_FLG = -Iinc/utils -Itests/unity/src -Itests/inc
 
 SRC = srcs/utils/queue.c
 

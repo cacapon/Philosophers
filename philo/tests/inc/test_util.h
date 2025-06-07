@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_all.c                                         :+:      :+:    :+:   */
+/*   test_util.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 12:09:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 12:28:50 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/07 12:33:49 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/07 12:34:57 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity.h"
+#ifndef TEST_UTIL_H
+# define TEST_UTIL_H
 
-void	setUp(void)
-{
-}
+# include "unity.h"
 
-void	tearDown(void)
-{
-}
+# define RUN_PHILO_TEST(test_func) \
+	do { setup(); RUN_TEST(test_func); teardown(); } while (0)
 
-void	test_queue(void);
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_queue();
-	return (UNITY_END());
-}
+#endif 
