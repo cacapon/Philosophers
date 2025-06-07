@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:04:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 17:09:05 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:05:00 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_actor(t_actor **actor_ptr)
 	a = *actor_ptr;
 	if (!a)
 		return ;
-	queue_clear(a->msg_box);
+	queue_clear(&a->msg_box);
 	free(a);
 	*actor_ptr = NULL;
 }

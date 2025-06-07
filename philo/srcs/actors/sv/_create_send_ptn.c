@@ -6,11 +6,24 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/04 18:16:56 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:09:47 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sv_actor_utils.h"
+#include "sv_actor.h"
+
+static void	free_send_patterns(size_t ***ptns_ptr)
+{
+	size_t	i;
+	size_t	**ptns;
+
+	ptns = *ptns_ptr;
+	i = 0;
+	while (ptns[i])
+		free(ptns[i++]);
+	free(ptns);
+	*ptns_ptr = NULL;
+}
 
 static size_t	*_calloc_send_pattern(size_t n)
 {
@@ -62,19 +75,7 @@ static void	_create_range(size_t *list, size_t st, size_t ed, size_t add)
 	list[list_i] = -1;
 }
 
-void	free_send_patterns(size_t ***ptns_ptr)
-{
-	size_t	i;
-	size_t	**ptns;
-
-	ptns = *ptns_ptr;
-	while (ptns[i])
-		free(ptns[i++]);
-	free(ptns);
-	*ptns_ptr = NULL;
-}
-
-size_t	**_create_send_ptn(t_sv_actor *self, size_t n)
+size_t	**_create_send_ptn(size_t n)
 {
 	size_t	i;
 	size_t	**ptns;

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 10:37:30 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:09:27 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ typedef struct s_sv_prop
 
 typedef struct s_sv_method
 {
-	void					(*on_start)(t_sv_actor *self);
-	void					(*on_recieve)(t_sv_actor *self, t_msg *msg);
-	void					(*on_stop)(t_sv_actor *self);
+	void					(*on_start)(t_actor *self);
+	void					(*on_recieve)(t_actor *self, t_msg *msg);
+	void					(*on_stop)(t_actor *self);
 }							t_sv_method;
 
 typedef struct s_sv_actor
@@ -46,5 +46,7 @@ typedef struct s_sv_actor
 	t_sv_prop				prop;
 	t_sv_method				method;
 }							t_sv_actor;
+
+size_t						**_create_send_ptn(size_t n);
 
 #endif

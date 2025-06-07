@@ -6,24 +6,23 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 17:07:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:15:30 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fork_actor.h"
 
-static void	*on_start(t_actor *self)
+static void	on_start(t_actor *self)
 {
 	t_fork_actor	*fork;
 
 	fork = (t_fork_actor *)self->ref;
 	fork->sts = FORK_AVAILABLE;
 	fork->holder = NULL;
-	return (NULL);
 }
 
 // TODO: 31行目にデバッグ出力を仕込みたい
-static bool	*on_receive(t_actor *self, t_msg *msg)
+static bool	on_receive(t_actor *self, t_msg *msg)
 {
 	t_fork_actor	*fork;
 
@@ -63,6 +62,6 @@ t_fork_actor	*fork_actor_new(int id)
 		return (NULL);
 	fork->base = actor_new(id, fork, &vtable);
 	if (!fork->base)
-		return (free_fork(fork->base), NULL);
+		return (free_fork(&fork), NULL);
 	return (fork);
 }

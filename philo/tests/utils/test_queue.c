@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:40:09 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 12:35:49 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:13:07 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_queue		*q = NULL;
 
 static void	setup(void)
 {
-	q = queue_init();
+	q = queue_new();
 }
 
 static void	teardown(void)

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:11 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/30 19:09:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:13:17 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_queue
 	t_msg				*(*dequeue)(t_queue *self);
 }						t_queue;
 
-t_queue					*queue_init(void);
+t_queue					*queue_new(void);
 void					queue_clear(t_queue **q);
 
 #endif

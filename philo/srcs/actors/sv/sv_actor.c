@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 16:27:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:10:56 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 static void	sv_on_start(t_actor *self)
 {
+	(void)self;
 }
 
 static bool	sv_on_receive(t_actor *self, t_msg *msg)
 {
+	(void)self;
+	(void)msg;
 	return (false);
 }
 
 static void	sv_on_stop(t_actor *self)
 {
+	(void)self;
 }
 
 t_sv_actor	*sv_actor_new(int id)
@@ -38,4 +42,5 @@ t_sv_actor	*sv_actor_new(int id)
 	if (!sv)
 		return (NULL);
 	sv->base = actor_new(id, sv, &vtable);
+	return (sv);
 }

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 17:52:35 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:11:51 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_philo_actor
 	t_actor		*base;
 	t_actor		*l_fork;
 	t_actor		*r_fork;
-	int			*sts;
+	int			sts;
 	size_t		max_hp;
 	size_t		now_hp;
 	size_t		max_eat;
@@ -48,7 +48,7 @@ typedef struct s_philo_actor
 t_philo_actor	*philo_actor_new(int id, t_philo_args args);
 void			_common_update(t_philo_actor *self, t_actor *sender);
 void			_thinking(t_philo_actor *self);
-void			_eating(t_philo_actor *self);
+void			_eating(t_philo_actor *self, t_actor *sender);
 void			_sleeping(t_philo_actor *self);
 void			_confirm_fork(t_philo_actor *self, t_actor *sender);
 void			_on_fork_released(t_philo_actor *self, t_actor *sender);

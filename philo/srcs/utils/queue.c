@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/30 19:09:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:13:13 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_msg	*_dequeue(t_queue *self)
 	return (msg);
 }
 
-t_queue	*queue_init(void)
+t_queue	*queue_new(void)
 {
 	t_queue	*q;
 

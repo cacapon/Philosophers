@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 18:12:01 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 13:12:10 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	_common_update(t_philo_actor *self, t_actor *sender)
 	self->now_hp--;
 	if (self->now_hp == 0)
 	{
-		self->sts == PHILO_DEAD;
+		self->sts = PHILO_DEAD;
 		sender->vtable->tell(sender, gen_msg(PHILO_DEAD, self->base, self));
 	}
 }
