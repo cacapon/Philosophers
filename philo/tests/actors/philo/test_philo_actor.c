@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:33:34 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 14:45:35 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,48 @@ void	test_thinking_has_both_fork(void)
 	TEST_ASSERT_EQUAL_INT(p->max_hp, p->now_hp);
 }
 
+void	test_eating(void)
+{
+	p->r_fork = p_dummy;
+	p->l_fork = p_dummy2;
+	TEST_ASSERT_EQUAL_INT(p->now_eat, 0);
+	_eating(p, p_dummy);
+	TEST_ASSERT_EQUAL_INT(p->now_eat, 1);
+}
+
+void	test_eating_done(void)
+{
+	t_msg	*res1 = NULL;
+	t_msg	*res2 = NULL;
+	t_msg	*res3 = NULL;
+
+	p->r_fork = p_dummy;
+	p->l_fork = p_dummy;
+	p->max_eat = 1;
+	TEST_ASSERT_EQUAL_INT(p->now_eat, 0);
+	_eating(p, p_dummy2);
+	res1 = _wait_mes(p_dummy, WAIT_TIME);
+	res2 = _wait_mes(p_dummy, WAIT_TIME);
+	res3 = _wait_mes(p_dummy2, WAIT_TIME);
+	TEST_ASSERT_NOT_NULL(res1);
+	TEST_ASSERT_NOT_NULL(res2);
+	TEST_ASSERT_NOT_NULL(res3);
+	TEST_ASSERT_EQUAL_INT(res1->type, RELEASE_FORK);
+	TEST_ASSERT_EQUAL_INT(res2->type, RELEASE_FORK);
+	TEST_ASSERT_EQUAL_INT(res3->type, PHILO_EAT_DONE);
+	TEST_ASSERT_EQUAL_INT(p->can_eat, false);
+	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_WAITING);
+	free(res1);
+	free(res2);
+	free(res3);
+}
+
 void test_philo(void) {
     RUN_PHILO_TEST(test_common_update_normal);
     RUN_PHILO_TEST(test_common_update_dead);
 	RUN_PHILO_TEST(test_thinking_l_fork_send);
 	RUN_PHILO_TEST(test_thinking_r_fork_send);
 	RUN_PHILO_TEST(test_thinking_has_both_fork);
+	RUN_PHILO_TEST(test_eating);
+	RUN_PHILO_TEST(test_eating_done);
 }
