@@ -59,6 +59,7 @@ void    test_on_request_fork_normal(void) {
     res = _wait_mes(f_dummy, WAIT_TIME);
     TEST_ASSERT_NOT_NULL(res);
     TEST_ASSERT_EQUAL_INT(res->type, GRANT_FORK);
+    free(res);
 }
 
 void    test_on_request_fork_failed(void) {
@@ -84,6 +85,7 @@ void    test_on_release_fork_normal(void) {
     res = _wait_mes(f_dummy, WAIT_TIME);
     TEST_ASSERT_NOT_NULL(res);
     TEST_ASSERT_EQUAL_INT(res->type, FORK_RELEASED);
+    free(res);
 }
 
 void    test_on_release_fork_failed(void) {

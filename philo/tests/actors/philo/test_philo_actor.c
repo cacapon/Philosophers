@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:01:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 14:15:05 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,52 @@ void	test_common_update_dead(void)
 	res = _wait_mes(p_dummy, WAIT_TIME);
 	TEST_ASSERT_NOT_NULL(res);
 	TEST_ASSERT_EQUAL_INT(res->type, PHILO_DEAD);
+	free(res);
+}
+
+void	test_thinking_cant_eat(void)
+{
+    t_msg   *res = NULL;
+
+	p->can_eat = false;
+	_thinking(p);
+	res = _wait_mes(p_dummy, WAIT_TIME);
+    TEST_ASSERT_NULL(res);
+}
+
+void	test_thinking_has_l_fork(void)
+{
+    t_msg   *res = NULL;
+
+	p->can_eat = true;
+	p->has_l_fork = true;
+	p->r_fork = p_dummy;
+	p->l_fork = p_dummy;
+	_thinking(p);
+	res = _wait_mes(p_dummy, WAIT_TIME);
+    TEST_ASSERT_NOT_NULL(res);
+	TEST_ASSERT_EQUAL_INT(res->type, REQUEST_FORK);
+	free(res);
+}
+
+void	test_thinking_has_r_fork(void)
+{
+    t_msg   *res = NULL;
+
+	p->can_eat = true;
+	p->has_r_fork = true;
+	p->r_fork = p_dummy;
+	p->l_fork = p_dummy;
+	_thinking(p);
+	res = _wait_mes(p_dummy, WAIT_TIME);
+    TEST_ASSERT_NOT_NULL(res);
+	TEST_ASSERT_EQUAL_INT(res->type, REQUEST_FORK);
+	free(res);
 }
 
 void test_philo(void) {
     RUN_PHILO_TEST(test_common_update_normal);
     RUN_PHILO_TEST(test_common_update_dead);
+	RUN_PHILO_TEST(test_thinking_has_l_fork);
+	RUN_PHILO_TEST(test_thinking_has_r_fork);
 }

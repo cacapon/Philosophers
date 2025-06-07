@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 23:40:09 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 13:13:07 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 14:19:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	setup(void)
 
 static void	teardown(void)
 {
-	queue_clear(&q);
+	queue_destroy(&q);
 }
 
 void	test_push_and_pop(void)
