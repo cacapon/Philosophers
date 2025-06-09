@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/09 18:10:41 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/09 19:28:09 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME=philo
 CC = cc
 
 W_FLG = -Wall -Wextra -Werror
-I_FLG = -Iinc/utils \
+I_FLG = -Iinc/ \
+		-Iinc/utils \
 		-Iinc/actors \
 		-Itests/unity/src \
 		-Itests/inc \
@@ -31,7 +32,8 @@ UTILS_SRC	= queue.c	philo_calloc.c	message.c	free_actor.c	actor.c \
 			  matrix.c
 FORK_SRC	= fork_actor.c	_fork_actor_methods.c
 PHILO_SRC	= philo_actor.c	_philo_actor_methods1.c	_philo_actor_methods2.c
-SV_SRC		= sv_actor.c	_create_send_ptn.c
+SV_SRC		= sv_actor.c	free_sv.c \
+			  _create_send_ptn.c	_advance_to_next_phase.c _sv_prop.c	
 
 SRCS = 	$(addprefix $(UTILS_DIR), $(UTILS_SRC)) \
 		$(addprefix $(FORK_DIR), $(FORK_SRC)) \

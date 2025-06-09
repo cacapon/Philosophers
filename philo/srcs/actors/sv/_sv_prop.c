@@ -1,47 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sv_actor.c                                         :+:      :+:    :+:   */
+/*   _sv_prop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/09 19:27:02 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/09 19:27:10 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sv_actor.h"
 
-static void	sv_on_start(t_actor *self)
+t_sv_prop	*_sv_prop_new(t_main_args args)
 {
-	(void)self;
-}
+	t_sv_prop	*prop;
 
-static bool	sv_on_receive(t_actor *self, t_msg *msg)
-{
-	(void)self;
-	(void)msg;
-	return (false);
-}
-
-static void	sv_on_stop(t_actor *self)
-{
-	(void)self;
-}
-
-t_sv_actor	*sv_actor_new(int id, t_main_args args)
-{
-	t_sv_actor					*sv;
-	static const t_actor_vtable	vtable = {
-		.on_start = sv_on_start,
-		.on_receive = sv_on_receive,
-		.on_stop = sv_on_stop,
-		.tell = default_tell};
-
-	sv = philo_calloc(1, sizeof(t_sv_actor));
-	if (!sv)
+	prop = philo_calloc(1, sizeof(t_sv_prop));
+	if (!prop)
 		return (NULL);
-	sv->base = actor_new(id, sv, &vtable);
-	sv->prop = _sv_prop_new(args);
-	return (sv);
+	prop->args = args;
+	prop->forks_ref = NULL;
+	prop->philos_ref = NULL;
+	prop->philo_done_count = 0;
+	prop->ptn_i = 0;
+	prop->timestamp = 0;
+	prop->send_ptn = _create_send_ptn(args.num_of_philos);
+	if (!prop->send_ptn)
+		return (free(prop), NULL);
+	return (prop);
 }

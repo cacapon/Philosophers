@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "main.h"
 #include "sv_actor.h"
 #include "test_util.h"
 #include <time.h>
@@ -19,15 +20,25 @@
 
 t_sv_actor				*sv = NULL;
 t_actor					*sv_dummy = NULL;
-const t_actor_vtable	sv_dummy_vtable = {
+const t_actor_vtable	sv_dummy_vtable = 
+{
 	.on_start = NULL,
 	.on_receive = NULL,
 	.on_stop = NULL,
-	.tell = default_tell};
+	.tell = default_tell
+};
+const t_main_args main_args = 
+{
+	.num_of_philos = 5,
+	.time_to_die = 800,
+	.time_to_eat = 200,
+	.time_to_sleep = 200,
+	.number_of_times_each_philosopher_must_eat = -1
+};
 
 static void	setup(void)
 {
-	sv = sv_actor_new(0);
+	sv = sv_actor_new(0, main_args);
 	sv_dummy = actor_new(1, NULL, &sv_dummy_vtable);
 }
 
@@ -119,9 +130,11 @@ void	test_create_send_ptn_odd(void)
 	}
 }
 
-void	test_advance_to_next_phase(void)
+void	test_advance_to_next_phase_countup(void)
 {
-	TEST_ASSERT_EQUAL(true, false);
+	TEST_ASSERT_EQUAL_INT(sv->prop->philo_done_count, 0);
+	_advance_to_next_phase(sv);
+	TEST_ASSERT_EQUAL_INT(sv->prop->philo_done_count, 1);
 }
 
 void	test_create_forks(void)
@@ -143,7 +156,7 @@ void	test_sv(void)
 {
 	RUN_PHILO_TEST(test_create_send_ptn_even);
 	RUN_PHILO_TEST(test_create_send_ptn_odd);
-	// RUN_PHILO_TEST(test_advance_to_next_phase);
+	RUN_PHILO_TEST(test_advance_to_next_phase_countup);
 	// RUN_PHILO_TEST(test_create_forks);
 	// RUN_PHILO_TEST(test_create_philos);
 	// RUN_PHILO_TEST(test_update_philos);
