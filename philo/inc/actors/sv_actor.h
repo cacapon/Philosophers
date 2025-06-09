@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 13:09:27 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/09 18:08:58 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "actor.h"
 # include "philo_calloc.h"
+# include "matrix.h"
 # include <stdint.h>
 
 typedef struct s_actor_ref	t_actor_ref;
@@ -47,6 +48,9 @@ typedef struct s_sv_actor
 	t_sv_method				method;
 }							t_sv_actor;
 
-size_t						**_create_send_ptn(size_t n);
+void						free_send_patterns(size_t ***ptns_ptr);
+void						free_sv(t_sv_actor **sv_ptr);
+t_sv_actor					*sv_actor_new(int id);
+t_size_t_matrix				*_create_send_ptn(size_t n);
 
 #endif

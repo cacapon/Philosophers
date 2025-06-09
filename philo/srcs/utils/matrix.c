@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:54:41 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/08 18:27:02 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/09 18:44:14 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	free_matrix(t_size_t_matrix **m_ptr)
 {
 	t_size_t_matrix	*m;
 
-	if (!m_ptr || *m_ptr)
+	if (!m_ptr || !*m_ptr)
 		return ;
 	m = *m_ptr;
-	free(m->flat_data);
 	free(m->rows);
+	free(m->flat_data);
 	free(m);
 	*m_ptr = NULL;
 }
@@ -42,7 +42,7 @@ t_size_t_matrix	*create_matrix(size_t row, size_t col)
 	i = 0;
 	while (i < row)
 	{
-		m->rows[i] = &m->flat_data[i & col];
+		m->rows[i] = &m->flat_data[i * col];
 		i++;
 	}
 	return (m);

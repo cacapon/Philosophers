@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/07 14:00:12 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/09 18:10:41 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ FORK_DIR	= $(ACTORS_DIR)fork/
 PHILO_DIR	= $(ACTORS_DIR)philo/
 SV_DIR		= $(ACTORS_DIR)sv/
 
-UTILS_SRC	= queue.c	philo_calloc.c	message.c	free_actor.c	actor.c
+UTILS_SRC	= queue.c	philo_calloc.c	message.c	free_actor.c	actor.c \
+			  matrix.c
 FORK_SRC	= fork_actor.c	_fork_actor_methods.c
 PHILO_SRC	= philo_actor.c	_philo_actor_methods1.c	_philo_actor_methods2.c
 SV_SRC		= sv_actor.c	_create_send_ptn.c
@@ -42,6 +43,7 @@ TESTS = \
 	tests/utils/test_queue.c \
 	tests/actors/fork/test_fork_actor.c \
 	tests/actors/philo/test_philo_actor.c \
+	tests/actors/sv/test_sv_actor.c \
 	tests/unity/src/unity.c
 
 TEST_ALL_OUT = tests/test_all.out
