@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:28:18 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:35:34 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ static t_system	*_system_ref(t_system *sys, size_t len)
 
 t_system	*system_create(t_main_args args)
 {
-	size_t		i;
-	size_t		result_forks;
-	size_t		result_philos;
 	t_system	*sys;
 
 	sys = _calloc_system(args.num_of_philos);

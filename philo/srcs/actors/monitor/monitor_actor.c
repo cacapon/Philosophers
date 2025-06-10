@@ -6,26 +6,16 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 15:46:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:38:06 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "monitor_actor.h"
 
-static void	on_start(t_actor *self)
-{
-	t_monitor_actor	*monitor;
-
-	monitor = (t_monitor_actor *)self->ref;
-}
-
 static bool	on_receive(t_actor *self, t_msg *msg)
 {
-	t_monitor_actor	*monitor;
-
 	if (!self || !self->ref || !msg)
 		return (true);
-	monitor = self->ref;
 	if (msg->type == MONITOR)
 		_show_monitor(msg);
 	return (true);
@@ -61,7 +51,7 @@ t_monitor_actor	*monitor_actor_new(int id)
 {
 	t_monitor_actor			*monitor;
 	const t_actor_vtable	vtable = {
-		.on_start = on_start,
+		.on_start = NULL,
 		.on_receive = on_receive,
 		.on_stop = NULL,
 		.tell = default_tell};
