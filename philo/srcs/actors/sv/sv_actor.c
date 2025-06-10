@@ -6,10 +6,11 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/09 19:27:02 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:06:23 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "main.h"
 #include "sv_actor.h"
 
 static void	sv_on_start(t_actor *self)

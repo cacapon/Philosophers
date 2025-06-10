@@ -6,14 +6,14 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 14:46:34 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:23:31 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SV_ACTOR_H
 # define SV_ACTOR_H
 
-# include "main.h"
+# include "args.h"
 # include "actor.h"
 # include "matrix.h"
 # include "philo_calloc.h"

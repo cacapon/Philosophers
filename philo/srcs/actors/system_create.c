@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 15:45:30 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:28:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_system	*_calloc_system(size_t num)
 	return (sys);
 }
 
-t_system	*_system_new(t_system *sys, t_main_args args)
+static t_system	*_system_new(t_system *sys, t_main_args args)
 {
 	size_t	i;
 
@@ -58,8 +58,8 @@ t_system	*_system_new(t_system *sys, t_main_args args)
 		return (_free_system(&sys, i), NULL);
 	while (i < args.num_of_philos)
 	{
-		sys->forks = fork_actor_new(i);
-		sys->philos = philo_actor_new(i + 1, args);
+		sys->forks[i] = fork_actor_new(i);
+		sys->philos[i] = philo_actor_new(i + 1, args);
 		if (!sys->forks || !sys->philos)
 			return (_free_system(&sys, i), NULL);
 		i++;
@@ -67,8 +67,7 @@ t_system	*_system_new(t_system *sys, t_main_args args)
 	return (sys);
 }
 
-// TODO: sv->monitor
-t_system	*system_ref(t_system *sys, size_t len)
+static t_system	*_system_ref(t_system *sys, size_t len)
 {
 	size_t	i;
 

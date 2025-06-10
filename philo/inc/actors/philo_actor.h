@@ -6,15 +6,16 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 14:50:23 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:05:00 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_ACTOR_H
 # define PHILO_ACTOR_H
 
-# include "main.h"
 # include "actor.h"
+
+typedef struct s_main_args	t_main_args;
 
 enum			e_philo_sts
 {

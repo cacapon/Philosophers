@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:14:19 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:19:18 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:27:19 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static long int	_strtol_base10(const char *nptr)
 		sign = -1;
 	if (*nptr == '+' || *nptr == '-')
 		nptr++;
-	while (ft_isdigit(*nptr))
+	while (('0' <= *nptr && *nptr <= '9'))
 	{
 		degit = *nptr - '0';
 		if (_is_next_overflow(sign * num, sign * degit))

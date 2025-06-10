@@ -6,10 +6,11 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 13:51:49 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:05:20 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "main.h"
 #include "philo_actor.h"
 
 static void	on_start(t_actor *self)

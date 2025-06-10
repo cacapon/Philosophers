@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:04:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:11:24 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 16:24:36 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # include <stdio.h>
 # include "args.h"
 # include "system_create.h"
+# include "philo_atoi.h"
 
 #endif
