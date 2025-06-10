@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/09 19:27:24 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 14:46:34 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_sv_prop
 	uint64_t		timestamp;
 	size_t			philo_done_count;
 	size_t			ptn_i;
-	t_actor			**forks_ref;
 	t_actor			**philos_ref;
 }					t_sv_prop;
 
