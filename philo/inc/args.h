@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   args.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 19:04:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:11:24 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/10 16:10:32 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/10 16:21:39 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
-
-# define USAGE_STR "usage: ./philo <number_of_philosophers> \
-<time_to_die> <time_to_eat> <time_to_sleep> \
-[number_of_times_each_philosopher_must_eat]\n"
+#ifndef ARGS_H
+# define ARGS_H
 
 # include <stddef.h>
-# include <stdio.h>
-# include "args.h"
-# include "system_create.h"
+
+typedef struct s_main_args
+{
+	size_t	num_of_philos;
+	size_t	time_to_die;
+	size_t	time_to_eat;
+	size_t	time_to_sleep;
+	int		number_of_times_each_philosopher_must_eat;
+}			t_main_args;
 
 #endif
