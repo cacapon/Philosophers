@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 15:01:17 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 15:45:30 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	_free_system(t_system **sys_ptr, size_t num)
 	free(sys->forks);
 	free(sys->philos);
 	free_sv(&sys->sv);
+	free_monitor(&sys->monitor);
 	free(sys);
 	*sys_ptr = NULL;
 }
@@ -52,7 +53,8 @@ t_system	*_system_new(t_system *sys, t_main_args args)
 
 	i = 0;
 	sys->sv = sv_actor_new(0, args);
-	if (!sys->sv)
+	sys->monitor = monitor_actor_new(0);
+	if (!sys->sv || !sys->monitor)
 		return (_free_system(&sys, i), NULL);
 	while (i < args.num_of_philos)
 	{
