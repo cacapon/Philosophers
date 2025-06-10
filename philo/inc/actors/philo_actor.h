@@ -6,15 +6,15 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:00:49 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 14:50:23 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_ACTOR_H
 # define PHILO_ACTOR_H
 
+# include "main.h"
 # include "actor.h"
-# include "philo_args.h"
 
 enum			e_philo_sts
 {
@@ -28,6 +28,7 @@ enum			e_philo_sts
 typedef struct s_philo_actor
 {
 	t_actor		*base;
+	t_actor		*sv;
 	t_actor		*l_fork;
 	t_actor		*r_fork;
 	int			sts;
@@ -45,7 +46,7 @@ typedef struct s_philo_actor
 	bool		can_eat;
 }				t_philo_actor;
 
-t_philo_actor	*philo_actor_new(int id, t_philo_args args);
+t_philo_actor	*philo_actor_new(int id, t_main_args args);
 void			free_philo(t_philo_actor **philo_ptr);
 void			_common_update(t_philo_actor *self, t_actor *sender);
 void			_thinking(t_philo_actor *self);

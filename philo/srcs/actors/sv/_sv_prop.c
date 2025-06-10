@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/09 19:27:10 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 15:04:15 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_sv_prop	*_sv_prop_new(t_main_args args)
 	if (!prop)
 		return (NULL);
 	prop->args = args;
-	prop->forks_ref = NULL;
 	prop->philos_ref = NULL;
 	prop->philo_done_count = 0;
 	prop->ptn_i = 0;

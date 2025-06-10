@@ -6,10 +6,11 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:58:12 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 15:05:02 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "main.h"
 #include "philo_actor.h"
 #include "test_util.h"
 
@@ -27,9 +28,9 @@ const t_actor_vtable p_dummy_vtable = {
 };
 
 static void setup(void) {
-	t_philo_args	args;
-	args = (t_philo_args){
-		.number_of_philosophers = 1,
+	t_main_args	args;
+	args = (t_main_args){
+		.num_of_philos = 1,
 		.time_to_die = 500,
 		.time_to_eat = 100,
 		.time_to_sleep = 100,

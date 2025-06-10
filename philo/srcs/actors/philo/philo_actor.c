@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 13:16:37 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/10 13:51:49 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	free_philo(t_philo_actor **philo_ptr)
 	*philo_ptr = NULL;
 }
 
-t_philo_actor	*philo_actor_new(int id, t_philo_args args)
+t_philo_actor	*philo_actor_new(int id, t_main_args args)
 {
 	t_philo_actor			*philo;
 	const t_actor_vtable	vtable = {
