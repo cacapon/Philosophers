@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:35:34 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/11 10:38:33 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static t_system	*_system_ref(t_system *sys, size_t len)
 	size_t	i;
 
 	i = 0;
-	while (sys->philos[i])
+	while (i < len)
 	{
 		sys->sv->prop->philos_ref[i] = sys->philos[i]->base;
 		sys->philos[i]->sv = sys->sv->base;
