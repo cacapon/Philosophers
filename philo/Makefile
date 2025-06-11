@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/10 16:42:05 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/11 10:56:43 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ MONITOR_DIR = $(ACTORS_DIR)monitor/
 
 UTILS_SRC	= queue.c	philo_calloc.c	message.c	free_actor.c	actor.c \
 			  matrix.c	philo_atoi.c
-SYS_SRC		= system_create.c 
+SYS_SRC		= system_create.c system_destroy.c
 FORK_SRC	= fork_actor.c	_fork_actor_methods.c
 PHILO_SRC	= philo_actor.c	_philo_actor_methods1.c	_philo_actor_methods2.c
 SV_SRC		= sv_actor.c	free_sv.c \
