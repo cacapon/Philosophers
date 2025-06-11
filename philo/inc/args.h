@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_all.c                                         :+:      :+:    :+:   */
+/*   args.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 12:09:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/08 18:42:19 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/10 16:10:32 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/10 16:21:39 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity.h"
+#ifndef ARGS_H
+# define ARGS_H
 
-void	setUp(void)
+# include <stddef.h>
+
+typedef struct s_main_args
 {
-}
+	size_t	num_of_philos;
+	size_t	time_to_die;
+	size_t	time_to_eat;
+	size_t	time_to_sleep;
+	int		number_of_times_each_philosopher_must_eat;
+}			t_main_args;
 
-void	tearDown(void)
-{
-}
-
-void	test_queue(void);
-void	test_fork(void);
-void	test_philo(void);
-void	test_sv(void);
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_queue();
-	test_fork();
-	test_philo();
-	test_sv();
-	return (UNITY_END());
-}
+#endif

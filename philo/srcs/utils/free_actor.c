@@ -1,51 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_queue.c                                       :+:      :+:    :+:   */
+/*   free_actor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 23:40:09 by ttsubo            #+#    #+#             */
+/*   Created: 2025/06/03 19:04:40 by ttsubo            #+#    #+#             */
 /*   Updated: 2025/06/07 14:19:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "queue.h"
-#include "test_util.h"
+#include "actor.h"
 
-t_queue		*q = NULL;
-
-static void	setup(void)
+void	free_actor(t_actor **actor_ptr)
 {
-	q = queue_new();
-}
+	t_actor	*a;
 
-static void	teardown(void)
-{
-	queue_destroy(&q);
-}
-
-void	test_push_and_pop(void)
-{
-	t_msg	msg1;
-	t_msg	*msg2;
-
-	msg1 = (t_msg){.type = UPDATE, .args = "NULL", .sender = NULL};
-	q->enqueue(q, &msg1);
-	msg2 = q->dequeue(q);
-	TEST_ASSERT_EQUAL_PTR(&msg1, msg2);
-}
-
-void	test_dequeue_is_empty(void)
-{
-	t_msg	*msg;
-
-	msg = q->dequeue(q);
-	TEST_ASSERT_NULL(msg);
-}
-
-void	test_queue(void)
-{
-	RUN_PHILO_TEST(test_push_and_pop);
-	RUN_PHILO_TEST(test_dequeue_is_empty);
+	a = *actor_ptr;
+	if (!a)
+		return ;
+	queue_destroy(&a->msg_box);
+	free(a);
+	*actor_ptr = NULL;
 }

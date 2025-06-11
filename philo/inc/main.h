@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_all.c                                         :+:      :+:    :+:   */
+/*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 12:09:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/08 18:42:19 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/09 19:04:01 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/11 10:55:45 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity.h"
+#ifndef MAIN_H
+# define MAIN_H
 
-void	setUp(void)
-{
-}
+# define USAGE_STR "usage: ./philo <number_of_philosophers> \
+<time_to_die> <time_to_eat> <time_to_sleep> \
+[number_of_times_each_philosopher_must_eat]\n"
 
-void	tearDown(void)
-{
-}
+# include <stddef.h>
+# include <stdio.h>
+# include "args.h"
+# include "system.h"
+# include "philo_atoi.h"
 
-void	test_queue(void);
-void	test_fork(void);
-void	test_philo(void);
-void	test_sv(void);
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_queue();
-	test_fork();
-	test_philo();
-	test_sv();
-	return (UNITY_END());
-}
+#endif

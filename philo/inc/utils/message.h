@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 16:27:41 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 17:52:19 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ typedef struct s_actor	t_actor;
 
 typedef enum e_msg_type
 {
-	PHILO_READY,
 	GRANT_EAT,
 	MONITOR,
 	UPDATE,
 	PHILO_EAT_DONE,
 	PHILO_DEAD,
 	GRANT_FORK,
+	REQUEST_FORK,
 	RELEASE_FORK,
 	FORK_RELEASED,
 }						t_msg_type;

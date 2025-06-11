@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_all.c                                         :+:      :+:    :+:   */
+/*   matrix.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 12:09:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/08 18:42:19 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/08 17:47:07 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/08 18:26:45 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity.h"
+#ifndef MATRIX_H
+# define MATRIX_H
 
-void	setUp(void)
+# include "philo_calloc.h"
+# include "stddef.h"
+
+typedef struct s_size_t_matrix
 {
-}
+	size_t		**rows;
+	size_t		*flat_data;
+	size_t		row;
+	size_t		col;
+}				t_size_t_matrix;
 
-void	tearDown(void)
-{
-}
+void			free_matrix(t_size_t_matrix **m_ptr);
+t_size_t_matrix	*create_matrix(size_t row, size_t col);
 
-void	test_queue(void);
-void	test_fork(void);
-void	test_philo(void);
-void	test_sv(void);
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_queue();
-	test_fork();
-	test_philo();
-	test_sv();
-	return (UNITY_END());
-}
+#endif

@@ -6,30 +6,32 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 16:55:41 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/06 17:37:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "actor.h"
 
-static bool	_tell(t_actor *self, t_msg *msg)
+bool	default_tell(t_actor *self, t_msg *msg)
 {
 	return (self->msg_box->enqueue(self->msg_box, msg));
 }
 
-static void	*_actor_loop(void *arg)
+void	*actor_thread_main(void *arg)
 {
-	t_actor	*actor;
+	t_actor	*self;
 	t_msg	*msg;
 
-	actor = (t_actor *)arg;
+	self = (t_actor *)arg;
+	if (!self || !self->vtable || !self->vtable->on_receive)
+		return (NULL);
 	while (true)
 	{
 		usleep(1000);
-		msg = actor->msg_box->dequeue(actor->msg_box);
+		msg = self->msg_box->dequeue(self->msg_box);
 		if (!msg)
 			continue ;
-		if (!(actor->on_recieve(msg)))
+		if (!(self->vtable->on_receive(self, msg)))
 		{
 			free(msg);
 			break ;
@@ -39,27 +41,23 @@ static void	*_actor_loop(void *arg)
 	return (NULL);
 }
 
-t_actor	*init_actor(int id, bool (*on_recieve)(t_msg *msg))
+t_actor	*actor_new(int id, void *ref, const t_actor_vtable *vtable)
 {
-	t_actor	*actor;
+	t_actor	*a;
 
-	actor = malloc(sizeof(t_actor));
-	if (!actor)
+	a = philo_calloc(1, sizeof(t_actor));
+	if (!a)
 		return (NULL);
-	actor->msg_box = queue_init();
-	if (!actor->msg_box)
-		return (NULL);
-	actor->id = id;
-	actor->th_id = 0;
-	actor->on_recieve = on_recieve;
-	actor->ref = NULL;
-	actor->tell = _tell;
-	return (actor);
+	a->id = id;
+	a->ref = ref;
+	a->vtable = vtable;
+	a->msg_box = queue_new();
+	return (a);
 }
 
-void	actor_start(t_actor *actor)
+void	actor_start(t_actor *self)
 {
-	pthread_create(&actor->th_id, NULL, _actor_loop, actor);
+	pthread_create(&self->th_id, NULL, actor_thread_main, self);
 }
 
 void	actor_stop(t_actor **actor_pt)

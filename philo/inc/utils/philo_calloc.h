@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_all.c                                         :+:      :+:    :+:   */
+/*   philo_calloc.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 12:09:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/08 18:42:19 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/03 19:05:32 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/04 17:20:27 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "unity.h"
+#ifndef PHILO_CALLOC_H
+# define PHILO_CALLOC_H
 
-void	setUp(void)
-{
-}
+# include <stdlib.h>
+# include <stdint.h>
 
-void	tearDown(void)
-{
-}
+void	*philo_calloc(size_t count, size_t size);
 
-void	test_queue(void);
-void	test_fork(void);
-void	test_philo(void);
-void	test_sv(void);
-
-int	main(void)
-{
-	UNITY_BEGIN();
-	test_queue();
-	test_fork();
-	test_philo();
-	test_sv();
-	return (UNITY_END());
-}
+#endif

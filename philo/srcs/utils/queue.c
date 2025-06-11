@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/30 19:09:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/07 14:20:00 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static t_msg	*_dequeue(t_queue *self)
 	return (msg);
 }
 
-t_queue	*queue_init(void)
+t_queue	*queue_new(void)
 {
 	t_queue	*q;
 
@@ -77,7 +77,7 @@ t_queue	*queue_init(void)
 	return (q);
 }
 
-void	queue_clear(t_queue **q)
+void	queue_destroy(t_queue **q)
 {
 	t_node	*curr;
 	t_node	*next;
@@ -91,5 +91,7 @@ void	queue_clear(t_queue **q)
 		free(curr);
 		curr = next;
 	}
+	pthread_mutex_destroy(&(*q)->mutex);
+	free(*q);
 	*q = NULL;
 }
