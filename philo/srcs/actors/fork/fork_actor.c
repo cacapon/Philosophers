@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 13:53:18 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:43:23 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	free_fork(t_fork_actor **fork_ptr)
 
 t_fork_actor	*fork_actor_new(int id)
 {
-	t_fork_actor			*fork;
-	const t_actor_vtable	vtable = {
+	t_fork_actor				*fork;
+	static const t_actor_vtable	vtable = {
 		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,

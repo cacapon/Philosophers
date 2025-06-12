@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 14:01:41 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:43:09 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	free_monitor(t_monitor_actor **monitor_ptr)
 
 t_monitor_actor	*monitor_actor_new(int id)
 {
-	t_monitor_actor			*monitor;
-	const t_actor_vtable	vtable = {
+	t_monitor_actor				*monitor;
+	static const t_actor_vtable	vtable = {
 		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,

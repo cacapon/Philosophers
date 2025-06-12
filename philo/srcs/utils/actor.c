@@ -6,11 +6,12 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 13:45:16 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:43:47 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "actor.h"
+#include <stdio.h>
 
 static void	*_actor_thread_main(void *arg)
 {
@@ -18,8 +19,10 @@ static void	*_actor_thread_main(void *arg)
 	t_msg	*msg;
 
 	self = (t_actor *)arg;
-	if (!self || !self->vtable || !self->vtable->on_receive)
+	if (!self || !self->vtable || !self->vtable->on_start
+		|| !self->vtable->on_receive)
 		return (NULL);
+	self->vtable->on_start(self);
 	while (true)
 	{
 		usleep(1000);
