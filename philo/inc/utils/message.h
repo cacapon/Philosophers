@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 13:03:16 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:35:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // using NULL malloc()
 # include <stddef.h>
-# include <stdlib.h>
+# include "philo_calloc.h"
 
 typedef struct s_actor	t_actor;
 
@@ -42,5 +42,6 @@ typedef struct s_msg
 }						t_msg;
 
 t_msg	*gen_msg(t_msg_type type, t_actor *sender, void *args);
+void	free_msg(t_msg **msg_ptr);
 
 #endif
