@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/11 10:59:17 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 12:53:53 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_sv_prop	*_sv_prop_new(t_main_args args)
 	prop->philo_done_count = 0;
 	prop->ptn_i = 0;
 	prop->timestamp = 0;
+	prop->child_ready_count = 0;
 	prop->send_ptn = _create_send_ptn(args.num_of_philos);
 	if (!prop->send_ptn || !prop->philos_ref)
 		return (free_sv_prop(&prop), NULL);
