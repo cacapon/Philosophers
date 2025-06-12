@@ -6,18 +6,13 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 12:39:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:45:16 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "actor.h"
 
-bool	default_tell(t_actor *self, t_msg *msg)
-{
-	return (self->msg_box->enqueue(self->msg_box, msg));
-}
-
-void	*actor_thread_main(void *arg)
+static void	*_actor_thread_main(void *arg)
 {
 	t_actor	*self;
 	t_msg	*msg;
@@ -58,7 +53,7 @@ t_actor	*actor_new(int id, void *ref, const t_actor_vtable *vtable)
 
 void	actor_start(t_actor *self)
 {
-	pthread_create(&self->th_id, NULL, actor_thread_main, self);
+	pthread_create(&self->th_id, NULL, _actor_thread_main, self);
 }
 
 void	actor_stop(t_actor **actor_pt)

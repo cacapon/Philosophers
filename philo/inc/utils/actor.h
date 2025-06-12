@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 12:39:02 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:45:04 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ typedef struct s_actor
 	pthread_t				th_id;
 	t_queue					*msg_box;
 	void					*ref;
+	void					*parent;
 	const t_actor_vtable	*vtable;
 	bool					is_ready;
 }							t_actor;
 
 bool						default_tell(t_actor *self, t_msg *msg);
+void						set_actor_parent(t_actor *self, void *parent);
 t_actor						*actor_new(int id, void *ref,
 								const t_actor_vtable *vtable);
 void						actor_start(t_actor *actor);
