@@ -6,11 +6,23 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:38:06 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:01:41 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "monitor_actor.h"
+#include "sv_actor.h"
+
+static void	on_start(t_actor *self)
+{
+	t_monitor_actor	*monitor;
+	t_sv_actor		*parent;
+
+	monitor = self->ref;
+	parent = self->parent;
+	monitor->base->is_ready = true;
+	parent->base->vtable->tell(parent->base, gen_msg(INIT_DONE, NULL, NULL));
+}
 
 static bool	on_receive(t_actor *self, t_msg *msg)
 {
@@ -51,7 +63,7 @@ t_monitor_actor	*monitor_actor_new(int id)
 {
 	t_monitor_actor			*monitor;
 	const t_actor_vtable	vtable = {
-		.on_start = NULL,
+		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,
 		.tell = default_tell};

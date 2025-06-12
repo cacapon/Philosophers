@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 13:52:11 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:53:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	on_start(t_actor *self)
 	parent = (t_sv_actor *)self->parent;
 	fork->sts = FORK_AVAILABLE;
 	fork->holder = NULL;
+	fork->base->is_ready = true;
 	parent->base->vtable->tell(parent->base, gen_msg(INIT_DONE, NULL, NULL));
 }
 

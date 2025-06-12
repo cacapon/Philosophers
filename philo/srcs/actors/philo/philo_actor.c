@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:05:20 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:00:54 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 static void	on_start(t_actor *self)
 {
 	t_philo_actor	*philo;
+	t_sv_actor		*parent;
 
 	philo = self->ref;
+	parent = self->parent;
 	philo->sts = PHILO_STS_THINKING;
 	philo->now_hp = philo->max_hp;
 	philo->now_eat = 0;
@@ -26,6 +28,8 @@ static void	on_start(t_actor *self)
 	philo->has_r_fork = false;
 	philo->has_l_fork = false;
 	philo->can_eat = false;
+	philo->base->is_ready = true;
+	parent->base->vtable->tell(parent->base, gen_msg(INIT_DONE, NULL, NULL));
 }
 
 static bool	on_receive(t_actor *self, t_msg *msg)

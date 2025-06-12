@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 13:48:28 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:58:17 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static t_system	*_system_ref(t_system *sys)
 		i++;
 	}
 	sys->sv->prop->monitor_ref = sys->monitor->base;
+	set_actor_parent(sys->monitor->base, sys->sv);
 	return (sys);
 }
 
