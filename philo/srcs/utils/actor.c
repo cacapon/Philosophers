@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 17:37:24 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 12:39:21 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_actor	*actor_new(int id, void *ref, const t_actor_vtable *vtable)
 	a->id = id;
 	a->ref = ref;
 	a->vtable = vtable;
+	a->is_ready = false;
 	a->msg_box = queue_new();
 	return (a);
 }

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 13:08:54 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 12:39:02 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_actor
 	t_queue					*msg_box;
 	void					*ref;
 	const t_actor_vtable	*vtable;
+	bool					is_ready;
 }							t_actor;
 
 bool						default_tell(t_actor *self, t_msg *msg);
