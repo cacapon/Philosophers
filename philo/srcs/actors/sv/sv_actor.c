@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 13:11:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:16:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ static bool	sv_on_receive(t_actor *self, t_msg *msg)
 	if (msg->type == INIT_DONE)
 		_child_init_done(sv);
 	if (msg->type == UPDATE)
-		_update(sv);
+		;
 	if (msg->type == PHILO_DEAD)
-		_stop(&self);
+		;
 	return (false);
 }
 
 static void	sv_on_stop(t_actor *self)
 {
+	(void) self;
 }
 
 t_sv_actor	*sv_actor_new(int id, t_main_args args)
