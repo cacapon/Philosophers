@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:47:33 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/11 10:56:12 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:02:27 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 	else
 		args.number_of_times_each_philosopher_must_eat = -1;
 	sys = system_create(args);
+	system_start(sys);
 	system_destroy(&sys);
 	return (0);
 }
