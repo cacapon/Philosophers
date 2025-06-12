@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 14:01:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:50:47 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	_child_init_done(t_sv_actor *self)
 	if (self->prop->child_ready_count >= total)
 	{
 		self->base->is_ready = true;
-		printf("DBG: child init done!\n");
 	}
 }
 
@@ -36,7 +35,7 @@ static bool	sv_on_receive(t_actor *self, t_msg *msg)
 		;
 	if (msg->type == PHILO_DEAD)
 		;
-	return (false);
+	return (true);
 }
 
 static void	sv_on_stop(t_actor *self)
