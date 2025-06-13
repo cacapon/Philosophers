@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/11 10:59:48 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 13:11:58 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ typedef struct s_sv_prop
 	uint64_t		timestamp;
 	size_t			philo_done_count;
 	size_t			ptn_i;
+	size_t			child_ready_count;
 	t_actor			**philos_ref;
+	t_actor			**forks_ref;
+	t_actor			*monitor_ref;
 }					t_sv_prop;
 
 typedef struct s_sv_actor
@@ -35,6 +38,7 @@ typedef struct s_sv_actor
 	t_sv_prop		*prop;
 }					t_sv_actor;
 
+void				sv_on_start(t_actor *self);
 void				free_sv_prop(t_sv_prop **prop_ptr);
 void				free_sv(t_sv_actor **sv_ptr);
 t_sv_actor			*sv_actor_new(int id, t_main_args args);

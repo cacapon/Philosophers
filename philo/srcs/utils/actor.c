@@ -6,25 +6,23 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 17:37:24 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:43:47 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "actor.h"
+#include <stdio.h>
 
-bool	default_tell(t_actor *self, t_msg *msg)
-{
-	return (self->msg_box->enqueue(self->msg_box, msg));
-}
-
-void	*actor_thread_main(void *arg)
+static void	*_actor_thread_main(void *arg)
 {
 	t_actor	*self;
 	t_msg	*msg;
 
 	self = (t_actor *)arg;
-	if (!self || !self->vtable || !self->vtable->on_receive)
+	if (!self || !self->vtable || !self->vtable->on_start
+		|| !self->vtable->on_receive)
 		return (NULL);
+	self->vtable->on_start(self);
 	while (true)
 	{
 		usleep(1000);
@@ -51,13 +49,14 @@ t_actor	*actor_new(int id, void *ref, const t_actor_vtable *vtable)
 	a->id = id;
 	a->ref = ref;
 	a->vtable = vtable;
+	a->is_ready = false;
 	a->msg_box = queue_new();
 	return (a);
 }
 
 void	actor_start(t_actor *self)
 {
-	pthread_create(&self->th_id, NULL, actor_thread_main, self);
+	pthread_create(&self->th_id, NULL, _actor_thread_main, self);
 }
 
 void	actor_stop(t_actor **actor_pt)

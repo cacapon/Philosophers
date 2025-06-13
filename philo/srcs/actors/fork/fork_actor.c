@@ -6,19 +6,24 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 13:15:30 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/12 14:43:23 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fork_actor.h"
+#include "sv_actor.h"
 
 static void	on_start(t_actor *self)
 {
 	t_fork_actor	*fork;
+	t_sv_actor		*parent;
 
 	fork = (t_fork_actor *)self->ref;
+	parent = (t_sv_actor *)self->parent;
 	fork->sts = FORK_AVAILABLE;
 	fork->holder = NULL;
+	fork->base->is_ready = true;
+	parent->base->vtable->tell(parent->base, gen_msg(INIT_DONE, NULL, NULL));
 }
 
 // TODO: 31行目にデバッグ出力を仕込みたい
@@ -50,8 +55,8 @@ void	free_fork(t_fork_actor **fork_ptr)
 
 t_fork_actor	*fork_actor_new(int id)
 {
-	t_fork_actor			*fork;
-	const t_actor_vtable	vtable = {
+	t_fork_actor				*fork;
+	static const t_actor_vtable	vtable = {
 		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,
