@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 13:35:18 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/14 15:28:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_actor	t_actor;
 typedef enum e_msg_type
 {
 	INIT_DONE,
+	STOP_DONE,
 	GRANT_EAT,
 	MONITOR,
 	UPDATE,

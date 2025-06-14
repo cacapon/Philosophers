@@ -1,46 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sv_on_start.c                                      :+:      :+:    :+:   */
+/*   sv_on_update.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 13:08:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/14 15:44:59 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/14 15:42:47 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/14 15:44:26 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sv_actor.h"
 
-static void	_start_forks(t_sv_actor *self)
+// TODO: timestampの更新をここで行う。
+void	_sv_on_update(t_sv_actor *self)
 {
 	size_t	i;
+	t_actor	*ref;
 
 	i = 0;
 	while (i < self->prop->args.num_of_philos)
-		actor_start(self->prop->forks_ref[i++]);
-}
-
-static void	_start_philos(t_sv_actor *self)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < self->prop->args.num_of_philos)
-		actor_start(self->prop->philos_ref[i++]);
-}
-
-static void	_start_monitor(t_sv_actor *self)
-{
-	actor_start(self->prop->monitor_ref);
-}
-
-void	_sv_on_start(t_actor *self)
-{
-	t_sv_actor	*sv;
-
-	sv = self->ref;
-	_start_forks(sv);
-	_start_philos(sv);
-	_start_monitor(sv);
+	{
+		ref = self->prop->philos_ref[i++];
+		ref->vtable->tell(ref, gen_msg(UPDATE, NULL, NULL));
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 13:11:58 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/14 15:44:49 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ typedef struct s_sv_actor
 	t_sv_prop		*prop;
 }					t_sv_actor;
 
-void				sv_on_start(t_actor *self);
+void				_sv_on_start(t_actor *self);
+void				_sv_on_update(t_sv_actor *self);
 void				free_sv_prop(t_sv_prop **prop_ptr);
 void				free_sv(t_sv_actor **sv_ptr);
 t_sv_actor			*sv_actor_new(int id, t_main_args args);

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 11:34:15 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/12 14:43:47 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/14 15:53:28 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ static void	*_actor_thread_main(void *arg)
 	t_msg	*msg;
 
 	self = (t_actor *)arg;
-	if (!self || !self->vtable || !self->vtable->on_start
-		|| !self->vtable->on_receive)
+	if (!self || !self->vtable || !self->vtable->on_receive)
 		return (NULL);
-	self->vtable->on_start(self);
+	if (self->vtable->on_start)
+		self->vtable->on_start(self);
 	while (true)
 	{
 		usleep(1000);
@@ -64,6 +64,8 @@ void	actor_stop(t_actor **actor_pt)
 	t_actor	*actor;
 
 	actor = *actor_pt;
+	if (actor->vtable->on_stop)
+		actor->vtable->on_stop(actor);
 	pthread_join(actor->th_id, NULL);
 	free(actor->msg_box);
 	free(actor);
