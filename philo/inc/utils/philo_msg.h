@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   message.c                                          :+:      :+:    :+:   */
+/*   philo_msg.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/31 16:25:38 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 16:27:03 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/16 21:27:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "message.h"
+#ifndef PHILO_MSG_H
+# define PHILO_MSG_H
 
-t_msg	*gen_msg(t_msg_type type, t_actor *sender, void *args)
+# include "ft_actor_msg.h"
+
+typedef enum e_philo_msg_type
 {
-	t_msg	*msg;
+	E_PHILO_TOP = CUSTOM_MSG_START,
+	GRANT_EAT,
+	MONITOR,
+	UPDATE,
+	PHILO_EAT_DONE,
+	PHILO_DEAD,
+	GRANT_FORK,
+	REQUEST_FORK,
+	RELEASE_FORK,
+	FORK_RELEASED,
+}	t_philo_msg_type;
 
-	msg = malloc(sizeof(t_msg));
-	if (!msg)
-		return (NULL);
-	msg->sender = sender;
-	msg->type = type;
-	msg->args = args;
-	return (msg);
-}
+#endif

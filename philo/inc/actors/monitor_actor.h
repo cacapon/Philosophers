@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 15:43:18 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 21:56:19 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define MONITOR_ACTOR_H
 
 # include <stdio.h>
-# include "actor.h"
+# include "ft_actor.h"
 # include "philo_actor.h"
+# include "philo_calloc.h"
 
 # define MSG_TAKEN_FORK "has taken a fork"
 # define MSG_EATING "is eating"
@@ -31,11 +32,11 @@ typedef struct s_monitor_data
 
 typedef struct s_monitor_actor
 {
-	t_actor		*base;
+	t_ft_actor		*base;
 }				t_monitor_actor;
 
-t_monitor_actor	*monitor_actor_new(int id);
-void			free_monitor(t_monitor_actor **monitor_ptr);
-void			_show_monitor(t_msg *msg);
+t_monitor_actor	*monitor_actor_new(void);
+void			monitor_actor_del(t_monitor_actor **monitor);
+void			_show_monitor(t_ft_msg *msg);
 
 #endif

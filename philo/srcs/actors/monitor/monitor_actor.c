@@ -6,22 +6,22 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:38:06 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:13:39 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "monitor_actor.h"
 
-static bool	on_receive(t_actor *self, t_msg *msg)
+static bool	on_receive(t_ft_actor *self, t_ft_msg *msg)
 {
-	if (!self || !self->ref || !msg)
+	if (!self || !msg)
 		return (true);
 	if (msg->type == MONITOR)
 		_show_monitor(msg);
 	return (true);
 }
 
-void	_show_monitor(t_msg *msg)
+void	_show_monitor(t_ft_msg *msg)
 {
 	t_monitor_data	*data;
 	const char		*msg_str[] = {
@@ -35,32 +35,33 @@ void	_show_monitor(t_msg *msg)
 			msg_str[data->philo_no]);
 }
 
-void	free_monitor(t_monitor_actor **monitor_ptr)
+void	monitor_actor_del(t_monitor_actor **monitor)
 {
-	t_monitor_actor	*monitor;
+	t_monitor_actor	*_monitor;
 
-	monitor = *monitor_ptr;
-	if (!monitor)
+	if (!monitor || !*monitor)
 		return ;
-	free_actor(&monitor->base);
-	free(monitor);
-	*monitor_ptr = NULL;
+	_monitor = *monitor;
+	ft_actor_del(&_monitor->base);
+	free(_monitor);
+	*monitor = NULL;
 }
 
-t_monitor_actor	*monitor_actor_new(int id)
+t_monitor_actor	*monitor_actor_new(void)
 {
 	t_monitor_actor			*monitor;
-	const t_actor_vtable	vtable = {
+	const t_ft_actor_vtable	vtable = {
 		.on_start = NULL,
 		.on_receive = on_receive,
 		.on_stop = NULL,
-		.tell = default_tell};
+	};
 
 	monitor = philo_calloc(1, sizeof(t_monitor_actor));
 	if (!monitor)
 		return (NULL);
-	monitor->base = actor_new(id, monitor, &vtable);
+	monitor->base = ft_actor_new(monitor);
 	if (!monitor->base)
-		return (free_monitor(&monitor), NULL);
+		return (monitor_actor_del(&monitor), NULL);
+	monitor->base->v = &vtable;
 	return (monitor);
 }

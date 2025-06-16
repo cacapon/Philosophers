@@ -6,14 +6,14 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:05:20 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:20:44 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include "philo_actor.h"
 
-static void	on_start(t_actor *self)
+static void	on_start(t_ft_actor *self)
 {
 	t_philo_actor	*philo;
 
@@ -28,7 +28,7 @@ static void	on_start(t_actor *self)
 	philo->can_eat = false;
 }
 
-static bool	on_receive(t_actor *self, t_msg *msg)
+static bool	on_receive(t_ft_actor *self, t_ft_msg *msg)
 {
 	t_philo_actor	*philo;
 
@@ -63,26 +63,28 @@ void	free_philo(t_philo_actor **philo_ptr)
 	philo = *philo_ptr;
 	if (!philo)
 		return ;
-	free_actor(&philo->base);
+	ft_actor_del(&philo->base);
 	free(philo);
 	*philo_ptr = NULL;
 }
 
-t_philo_actor	*philo_actor_new(int id, t_main_args args)
+t_philo_actor	*philo_actor_new(size_t no, t_main_args args)
 {
 	t_philo_actor			*philo;
-	const t_actor_vtable	vtable = {
+	const t_ft_actor_vtable	vtable = {
 		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,
-		.tell = default_tell};
+	};
 
 	philo = philo_calloc(1, sizeof(t_philo_actor));
 	if (!philo)
 		return (NULL);
-	philo->base = actor_new(id, philo, &vtable);
+	philo->base = ft_actor_new(philo);
 	if (!philo->base)
 		return (free_philo(&philo), NULL);
+	philo->no = no;
+	philo->base->v = &vtable;
 	philo->max_hp = args.time_to_die;
 	philo->max_eat = args.time_to_eat;
 	philo->max_slp = args.time_to_sleep;

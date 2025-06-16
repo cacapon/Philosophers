@@ -6,11 +6,11 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/16 21:16:41 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/16 22:48:22 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=ft_actor.a
+NAME=libft_actor.a
 
 CC = cc
 MAKEFLAGS += --no-print-directory
@@ -22,11 +22,11 @@ SRCS = ft_actor.c ft_actor_msg.c ft_queue.c ft_actor_calloc.c \
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
-	@echo -n "$(NAME) has been created!"
 
 $(NAME): $(OBJS)
 	@echo -n "Creating $@..."
 	@ar rc $@ $^ && echo "✅" || echo "❌"
+	@echo "$(NAME) has been created!"
 
 %.o: %.c
 	@echo -n "Creating $@..."

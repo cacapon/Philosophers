@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:00:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/11 10:52:23 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:18:40 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ typedef struct s_system
 	t_fork_actor	**forks;
 }					t_system;
 
-t_system			*system_create(t_main_args args);
-void				free_system(t_system **sys_ptr, size_t num);
-void				system_destroy(t_system **sys_ptr);
+t_system			*system_new(t_main_args args);
+void				system_del(t_system **sys, size_t num);
 
 #endif
