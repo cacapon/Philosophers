@@ -6,13 +6,13 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 13:15:30 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:45:39 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fork_actor.h"
 
-static void	on_start(t_actor *self)
+static void	on_start(t_ft_actor *self)
 {
 	t_fork_actor	*fork;
 
@@ -22,7 +22,7 @@ static void	on_start(t_actor *self)
 }
 
 // TODO: 31行目にデバッグ出力を仕込みたい
-static bool	on_receive(t_actor *self, t_msg *msg)
+static bool	on_receive(t_ft_actor *self, t_ft_msg *msg)
 {
 	t_fork_actor	*fork;
 
@@ -36,32 +36,33 @@ static bool	on_receive(t_actor *self, t_msg *msg)
 	return (true);
 }
 
-void	free_fork(t_fork_actor **fork_ptr)
+void	fork_actor_del(t_fork_actor **fork_ptr)
 {
 	t_fork_actor	*fork;
 
 	fork = *fork_ptr;
 	if (!fork)
 		return ;
-	free_actor(&fork->base);
+	ft_actor_del(&fork->base);
 	free(fork);
 	*fork_ptr = NULL;
 }
 
-t_fork_actor	*fork_actor_new(int id)
+t_fork_actor	*fork_actor_new(void)
 {
 	t_fork_actor			*fork;
-	const t_actor_vtable	vtable = {
+	const t_ft_actor_vtable	vtable = {
 		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,
-		.tell = default_tell};
+	};
 
 	fork = philo_calloc(1, sizeof(t_fork_actor));
 	if (!fork)
 		return (NULL);
-	fork->base = actor_new(id, fork, &vtable);
+	fork->base = ft_actor_new(fork);
 	if (!fork->base)
-		return (free_fork(&fork), NULL);
+		return (fork_actor_del(&fork), NULL);
+	fork->base->v = &vtable;
 	return (fork);
 }

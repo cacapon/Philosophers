@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   message.h                                          :+:      :+:    :+:   */
+/*   philo_msg.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/06 17:52:19 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 21:27:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MESSAGE_H
-# define MESSAGE_H
+#ifndef PHILO_MSG_H
+# define PHILO_MSG_H
 
-// using NULL malloc()
-# include <stddef.h>
-# include <stdlib.h>
+# include "ft_actor_msg.h"
 
-typedef struct s_actor	t_actor;
-
-typedef enum e_msg_type
+typedef enum e_philo_msg_type
 {
+	E_PHILO_TOP = CUSTOM_MSG_START,
 	GRANT_EAT,
 	MONITOR,
 	UPDATE,
@@ -30,16 +27,6 @@ typedef enum e_msg_type
 	REQUEST_FORK,
 	RELEASE_FORK,
 	FORK_RELEASED,
-}						t_msg_type;
-
-// TODO: argsの型がきまっていないのでvoid*としています。->actorの内部情報しか渡してない
-typedef struct s_msg
-{
-	t_msg_type			type;
-	t_actor				*sender;
-	void				*args;
-}						t_msg;
-
-t_msg	*gen_msg(t_msg_type type, t_actor *sender, void *args);
+}	t_philo_msg_type;
 
 #endif

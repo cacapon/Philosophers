@@ -16,34 +16,34 @@
 
 
 t_fork_actor *f = NULL;
-t_actor *f_dummy = NULL;
-const t_actor_vtable f_dummy_vtable = {
+t_ft_actor *f_dummy = NULL;
+const t_ft_actor_vtable f_dummy_vtable = {
     .on_start = NULL,
     .on_receive = NULL,
     .on_stop = NULL,
-    .tell = default_tell
+    
 };
 
 static void setup(void) {
-    f = fork_actor_new(0);
-    f_dummy = actor_new(0, NULL, &f_dummy_vtable);
+    f = fork_actor_new();
+    f_dummy = ft_actor_new(NULL);
 }
 
 static void teardown(void) {
-    actor_stop(&f->base);
-    actor_stop(&f_dummy);
-    free_fork(&f);
-    free_actor(&f_dummy);
+    ft_actor_stop(f->base);
+    ft_actor_stop(f_dummy);
+    fork_actor_del(&f);
+    ft_actor_del(&f_dummy);
 }
 
-static t_msg   *_wait_mes(t_actor *f_dummy, size_t max)
+static t_ft_msg   *_wait_mes(t_ft_actor *f_dummy, size_t max)
 {
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
     size_t  time = 0;
 
     while (time < max)
     {
-        res = f_dummy->msg_box->dequeue(f_dummy->msg_box);
+        res = f_dummy->inbox->deq(f_dummy->inbox);
         if (res)
             return (res);
         time++;
@@ -53,7 +53,7 @@ static t_msg   *_wait_mes(t_actor *f_dummy, size_t max)
 
 void    test_on_request_fork_normal(void) {
 
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
     _on_request_fork(f, f_dummy);
     res = _wait_mes(f_dummy, WAIT_TIME);
@@ -64,7 +64,7 @@ void    test_on_request_fork_normal(void) {
 
 void    test_on_request_fork_failed(void) {
 
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
     _on_request_fork(f, f_dummy);
     res = _wait_mes(f_dummy, WAIT_TIME);
@@ -76,7 +76,7 @@ void    test_on_request_fork_failed(void) {
 
 void    test_on_release_fork_normal(void) {
 
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
     _on_request_fork(f, f_dummy);
     res = _wait_mes(f_dummy, WAIT_TIME);
@@ -89,7 +89,7 @@ void    test_on_release_fork_normal(void) {
 }
 
 void    test_on_release_fork_failed(void) {
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
     _on_release_fork(f, f_dummy);
     _wait_mes(f_dummy, WAIT_TIME);

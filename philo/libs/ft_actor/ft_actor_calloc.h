@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_actor.c                                       :+:      :+:    :+:   */
+/*   ft_actor_calloc.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 19:04:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:19:59 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/03 19:05:32 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/16 19:58:37 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "actor.h"
+#ifndef FT_ACTOR_CALLOC_H
+# define FT_ACTOR_CALLOC_H
 
-void	free_actor(t_actor **actor_ptr)
-{
-	t_actor	*a;
+# include <stdlib.h>
+# include <stdint.h>
 
-	a = *actor_ptr;
-	if (!a)
-		return ;
-	queue_destroy(&a->msg_box);
-	free(a);
-	*actor_ptr = NULL;
-}
+void	*ft_actor_calloc(size_t count, size_t size);
+
+#endif

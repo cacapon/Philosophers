@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   queue.c                                            :+:      :+:    :+:   */
+/*   ft_queue.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:20:00 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 21:19:30 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "queue.h"
+#include "ft_queue.h"
 
 /**
  * @return true     :SUCCESS
  * @return false    :FAILURE
  */
-static bool	_enqueue(t_queue *self, t_msg *msg)
+static bool	_enqueue(t_ft_queue *self, void *msg)
 {
-	t_node	*node;
+	t_ft_node	*node;
 
-	node = malloc(sizeof(t_node));
+	node = malloc(sizeof(t_ft_node));
 	if (!node)
 		return (false);
 	node->msg = msg;
@@ -39,13 +39,13 @@ static bool	_enqueue(t_queue *self, t_msg *msg)
  * @brief
  *
  * @param self
- * @return t_msg*   :SUCCESS
+ * @return void*	:SUCCESS
  * @return NULL     :FAILURE
  */
-static t_msg	*_dequeue(t_queue *self)
+static void	*_dequeue(t_ft_queue *self)
 {
-	t_msg	*msg;
-	t_node	*node;
+	void		*msg;
+	t_ft_node	*node;
 
 	msg = NULL;
 	pthread_mutex_lock(&self->mutex);
@@ -62,25 +62,25 @@ static t_msg	*_dequeue(t_queue *self)
 	return (msg);
 }
 
-t_queue	*queue_new(void)
+t_ft_queue	*ft_queue_new(void)
 {
-	t_queue	*q;
+	t_ft_queue	*q;
 
-	q = malloc(sizeof(t_queue));
+	q = malloc(sizeof(t_ft_queue));
 	if (!q)
 		return (NULL);
 	q->head = NULL;
 	q->tail = NULL;
 	pthread_mutex_init(&q->mutex, NULL);
-	q->enqueue = _enqueue;
-	q->dequeue = _dequeue;
+	q->enq = _enqueue;
+	q->deq = _dequeue;
 	return (q);
 }
 
-void	queue_destroy(t_queue **q)
+void	ft_queue_del(t_ft_queue **q)
 {
-	t_node	*curr;
-	t_node	*next;
+	t_ft_node	*curr;
+	t_ft_node	*next;
 
 	if (!q || !*q)
 		return ;

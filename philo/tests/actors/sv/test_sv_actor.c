@@ -19,13 +19,13 @@
 #define MAX_PHILO_COUNT 500
 
 t_sv_actor				*sv = NULL;
-t_actor					*sv_dummy = NULL;
-const t_actor_vtable	sv_dummy_vtable = 
+t_ft_actor					*sv_dummy = NULL;
+const t_ft_actor_vtable	sv_dummy_vtable = 
 {
 	.on_start = NULL,
 	.on_receive = NULL,
 	.on_stop = NULL,
-	.tell = default_tell
+	
 };
 const t_main_args main_args = 
 {
@@ -38,14 +38,14 @@ const t_main_args main_args =
 
 static void	setup(void)
 {
-	sv = sv_actor_new(0, main_args);
-	sv_dummy = actor_new(1, NULL, &sv_dummy_vtable);
+	sv = sv_actor_new(main_args);
+	sv_dummy = ft_actor_new(NULL);
 }
 
 static void	teardown(void)
 {
-	free_sv(&sv);
-	free_actor(&sv_dummy);
+	sv_actor_del(&sv);
+	ft_actor_del(&sv_dummy);
 }
 
 static size_t	make_even_rand(void)
@@ -72,16 +72,16 @@ static size_t	make_odd_rand(void)
 	return (n);
 }
 
-// static t_msg	*_wait_mes(t_actor *sv_dummy, size_t max)
+// static t_ft_msg	*_wait_mes(t_ft_actor *sv_dummy, size_t max)
 // {
-// 	t_msg	*res;
+// 	t_ft_msg	*res;
 // 	size_t	time;
 
 // 	res = NULL;
 // 	time = 0;
 // 	while (time < max)
 // 	{
-// 		res = sv_dummy->msg_box->dequeue(sv_dummy->msg_box);
+// 		res = sv_dummy->inbox->deq(sv_dummy->inbox);
 // 		if (res)
 // 			return (res);
 // 		time++;

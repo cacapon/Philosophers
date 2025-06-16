@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   queue.h                                            :+:      :+:    :+:   */
+/*   ft_queue.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:11 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/07 14:19:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 21:19:44 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUEUE_H
-# define QUEUE_H
+#ifndef FT_QUEUE_H
+# define FT_QUEUE_H
 
-# include "message.h"
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 // Standard library functions used
-// stdlib.h -> malloc()
-// unistd.h -> usleep()
+// pthread.h	-> mutex_*
+// stdlib.h 	-> malloc() free()
+// unistd.h 	-> usleep()
 
-typedef struct s_node	t_node;
-typedef struct s_queue	t_queue;
+typedef struct s_ft_node	t_ft_node;
+typedef struct s_ft_queue	t_ft_queue;
 
-typedef struct s_node
+typedef struct s_ft_node
 {
-	t_msg				*msg;
-	struct s_node		*next;
-}						t_node;
+	void		*msg;
+	t_ft_node	*next;
+}				t_ft_node;
 
-typedef struct s_queue
+typedef struct s_ft_queue
 {
-	t_node				*head;
-	t_node				*tail;
-	pthread_mutex_t		mutex;
-	bool				(*enqueue)(t_queue * self, t_msg * msg);
-	t_msg				*(*dequeue)(t_queue *self);
-}						t_queue;
+	t_ft_node		*head;
+	t_ft_node		*tail;
+	pthread_mutex_t	mutex;
+	bool			(*enq)(t_ft_queue * self, void *msg);
+	void			*(*deq)(t_ft_queue *self);
+}					t_ft_queue;
 
-t_queue					*queue_new(void);
-void					queue_destroy(t_queue **q);
+t_ft_queue	*ft_queue_new(void);
+void		ft_queue_del(t_ft_queue **q);
 
 #endif

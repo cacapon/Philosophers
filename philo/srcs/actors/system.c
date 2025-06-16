@@ -1,16 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   system_create.c                                    :+:      :+:    :+:   */
+/*   system.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/11 10:56:30 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:45:39 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "system.h"
+
+void	system_del(t_system **sys, size_t num)
+{
+	size_t		i;
+	t_system	*_sys;
+
+	if (!sys || !*sys)
+		return ;
+	_sys = *sys;
+	i = 0;
+	while (i < num)
+	{
+		free_philo(&_sys->philos[i]);
+		fork_actor_del(&_sys->forks[i]);
+		i++;
+	}
+	free(_sys->forks);
+	free(_sys->philos);
+	sv_actor_del(&_sys->sv);
+	monitor_actor_del(&_sys->monitor);
+	free(sys);
+	*sys = NULL;
+}
 
 static t_system	*_calloc_system(size_t num)
 {
@@ -22,7 +45,7 @@ static t_system	*_calloc_system(size_t num)
 	sys->philos = philo_calloc(num, sizeof(t_philo_actor *));
 	sys->forks = philo_calloc(num, sizeof(t_fork_actor *));
 	if (!sys->philos || !sys->forks)
-		return (free_system(&sys, 0), NULL);
+		return (system_del(&sys, 0), NULL);
 	return (sys);
 }
 
@@ -32,16 +55,16 @@ static t_system	*_system_new(t_system *sys, t_main_args args)
 
 	i = 0;
 	sys->num = args.num_of_philos;
-	sys->sv = sv_actor_new(0, args);
-	sys->monitor = monitor_actor_new(0);
+	sys->sv = sv_actor_new(args);
+	sys->monitor = monitor_actor_new();
 	if (!sys->sv || !sys->monitor)
-		return (free_system(&sys, i), NULL);
+		return (system_del(&sys, i), NULL);
 	while (i < sys->num)
 	{
-		sys->forks[i] = fork_actor_new(i);
+		sys->forks[i] = fork_actor_new();
 		sys->philos[i] = philo_actor_new(i + 1, args);
 		if (!sys->forks || !sys->philos)
-			return (free_system(&sys, i), NULL);
+			return (system_del(&sys, i), NULL);
 		i++;
 	}
 	return (sys);
@@ -63,7 +86,7 @@ static t_system	*_system_ref(t_system *sys)
 	return (sys);
 }
 
-t_system	*system_create(t_main_args args)
+t_system	*system_new(t_main_args args)
 {
 	t_system	*sys;
 

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 18:47:08 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/09 19:20:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:54:49 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	_advance_to_next_phase(t_sv_actor *self)
 {
-	size_t	i;
-	t_actor	*philo;
+	size_t		i;
+	t_ft_actor	*philo;
 
 	self->prop->philo_done_count++;
 	if (self->prop->philo_done_count >= self->prop->send_ptn->col)
@@ -26,7 +26,7 @@ void	_advance_to_next_phase(t_sv_actor *self)
 		while (i < self->prop->send_ptn->col)
 		{
 			philo = self->prop->philos_ref[i++];
-			philo->vtable->tell(philo, gen_msg(GRANT_EAT, NULL, NULL));
+			philo->tell(philo, msg_new(GRANT_EAT, NULL, NULL));
 		}
 	}
 }

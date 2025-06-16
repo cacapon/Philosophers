@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 15:05:02 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:52:58 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 
 
 t_philo_actor *p = NULL;
-t_actor *p_dummy = NULL;
-t_actor	*p_dummy2 = NULL;
-const t_actor_vtable p_dummy_vtable = {
+t_ft_actor *p_dummy = NULL;
+t_ft_actor	*p_dummy2 = NULL;
+const t_ft_actor_vtable p_dummy_vtable = {
     .on_start = NULL,
     .on_receive = NULL,
     .on_stop = NULL,
-    .tell = default_tell
+    
 };
 
 static void setup(void) {
@@ -37,24 +37,24 @@ static void setup(void) {
 		.number_of_times_each_philosopher_must_eat = -1
 	};
     p = philo_actor_new(0, args);
-    p_dummy = actor_new(1, NULL, &p_dummy_vtable);
-	p_dummy2 = actor_new(2, NULL, &p_dummy_vtable);
+    p_dummy = ft_actor_new(NULL);
+	p_dummy2 = ft_actor_new(NULL);
 }
 
 static void teardown(void) {
     free_philo(&p);
-    free_actor(&p_dummy);
-	free_actor(&p_dummy2);
+    ft_actor_del(&p_dummy);
+	ft_actor_del(&p_dummy2);
 }
 
-static t_msg   *_wait_mes(t_actor *p_dummy, size_t max)
+static t_ft_msg   *_wait_mes(t_ft_actor *p_dummy, size_t max)
 {
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
     size_t  time = 0;
 
     while (time < max)
     {
-        res = p_dummy->msg_box->dequeue(p_dummy->msg_box);
+		res = p_dummy->inbox->deq(p_dummy->inbox);
         if (res)
             return (res);
         time++;
@@ -64,7 +64,7 @@ static t_msg   *_wait_mes(t_actor *p_dummy, size_t max)
 
 void    test_common_update_normal(void)
 {
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
 	_common_update(p, p_dummy);
 	res = _wait_mes(p_dummy, WAIT_TIME);
@@ -73,7 +73,7 @@ void    test_common_update_normal(void)
 
 void	test_common_update_dead(void)
 {
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
 	p->now_hp = 1;
 	_common_update(p, p_dummy);
@@ -85,7 +85,7 @@ void	test_common_update_dead(void)
 
 void	test_thinking_cant_eat(void)
 {
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
 	p->can_eat = false;
 	_thinking(p);
@@ -95,7 +95,7 @@ void	test_thinking_cant_eat(void)
 
 void	test_thinking_l_fork_send(void)
 {
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
 	p->can_eat = true;
 	p->has_r_fork = true;
@@ -111,7 +111,7 @@ void	test_thinking_l_fork_send(void)
 
 void	test_thinking_r_fork_send(void)
 {
-    t_msg   *res = NULL;
+    t_ft_msg   *res = NULL;
 
 	p->can_eat = true;
 	p->has_r_fork = false;
@@ -127,8 +127,8 @@ void	test_thinking_r_fork_send(void)
 
 void	test_thinking_has_both_fork(void)
 {
-    t_msg   *res1 = NULL;
-    t_msg   *res2 = NULL;
+    t_ft_msg   *res1 = NULL;
+    t_ft_msg   *res2 = NULL;
 
 	p->can_eat = true;
 	p->has_r_fork = true;
@@ -155,9 +155,9 @@ void	test_eating(void)
 
 void	test_eating_done(void)
 {
-	t_msg	*res1 = NULL;
-	t_msg	*res2 = NULL;
-	t_msg	*res3 = NULL;
+	t_ft_msg	*res1 = NULL;
+	t_ft_msg	*res2 = NULL;
+	t_ft_msg	*res3 = NULL;
 
 	p->r_fork = p_dummy;
 	p->l_fork = p_dummy;

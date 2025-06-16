@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   message.c                                          :+:      :+:    :+:   */
+/*   ft_actor_msg.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/31 16:25:38 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/05/31 16:27:03 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/16 21:59:46 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "message.h"
+#ifndef FT_ACTOR_MSG_H
+# define FT_ACTOR_MSG_H
 
-t_msg	*gen_msg(t_msg_type type, t_actor *sender, void *args)
+// using NULL
+# include <stddef.h>
+# include "ft_actor_calloc.h"
+
+typedef struct s_ft_actor	t_ft_actor;
+
+enum e_msg_type
 {
-	t_msg	*msg;
+	ACTOR_STOP,
+	CUSTOM_MSG_START = 1000,
+};
 
-	msg = malloc(sizeof(t_msg));
-	if (!msg)
-		return (NULL);
-	msg->sender = sender;
-	msg->type = type;
-	msg->args = args;
-	return (msg);
-}
+typedef struct s_ft_msg
+{
+	int			type;
+	t_ft_actor	*sender;
+	void		*args;
+}				t_ft_msg;
+
+t_ft_msg	*msg_new(int type, t_ft_actor *sender, void *args);
+void		msg_del(t_ft_msg **msg);	
+
+#endif
