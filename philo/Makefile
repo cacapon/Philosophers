@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/16 23:05:17 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/16 23:39:52 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,14 @@ SV_SRC		= sv_actor.c	sv_del.c \
 			  _create_send_ptn.c	_advance_to_next_phase.c _sv_prop.c
 MONITOR_SRC	= monitor_actor.c	
 
-SRCS = 	$(addprefix $(UTILS_DIR), $(UTILS_SRC)) \
+SRCS = 	$(addprefix $(SRCS_DIR), main.c) \
+		$(addprefix $(UTILS_DIR), $(UTILS_SRC)) \
 		$(addprefix $(ACTORS_DIR), $(SYS_SRC)) \
 		$(addprefix $(FORK_DIR), $(FORK_SRC)) \
 		$(addprefix $(PHILO_DIR), $(PHILO_SRC)) \
 		$(addprefix $(SV_DIR), $(SV_SRC)) \
 		$(addprefix $(MONITOR_DIR), $(MONITOR_SRC))
+OBJS = $(SRCS:.c=.o)
 
 TESTS = \
 	tests/test_all.c \
@@ -63,28 +65,37 @@ TEST_ALL_OUT = tests/test_all.out
 
 all: $(NAME)
 
-$(NAME): $(L_FT_ACTOR)
-	$(CC) $(W_FLG) $(I_FLG) srcs/main.c $(SRCS) $(L_FLG) -o $@
+$(NAME): $(OBJS) | $(L_FT_ACTOR)
+	@echo -n "Creating $@..."
+	@$(CC) $(W_FLG) $(I_FLG) $(OBJS) $(L_FLG) -o $@ && echo "✅" || echo "❌"
+	@echo "$(NAME) has been created!"
+
+%.o: %.c
+	@echo -n "Creating $@..."
+	@$(CC) -c $(W_FLG) $(I_FLG) $< -o $@ && echo "✅" || echo "❌"
 
 $(L_FT_ACTOR):
-	@$(MAKE) -C $(L_FT_ACTOR_DIR)
+	@$(MAKE) -sC $(L_FT_ACTOR_DIR)
 
 clean:
-	@$(MAKE) -C $(L_FT_ACTOR_DIR) clean
-	rm -f $(NAME)
-	rm -f $(TEST_ALL_OUT)
+	@$(MAKE) -sC $(L_FT_ACTOR_DIR) clean
+	@echo -n "Deleting $(NAME) objs..."
+	@rm -f $(OBJS) && echo "✅" || echo "❌"
 
 fclean:
-	@$(MAKE) -C $(L_FT_ACTOR_DIR) fclean
+	@$(MAKE) -sC $(L_FT_ACTOR_DIR) fclean
 	@$(MAKE) clean
+	@echo -n "Deleting $(NAME)..."
+	@rm -f $(NAME) && echo "✅" || echo "❌"
 	
 re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
-test: $(SRC) $(TESTS)
-	@$(MAKE) -C $(L_FT_ACTOR_DIR) re
-	@$(CC) $(W_FLG) $(I_FLG) $(SRCS) $(TESTS) $(L_FLG) -o $(TEST_ALL_OUT)
+TEST_SRCS := $(filter-out $(SRCS_DIR)main.c,$(SRCS))
+test: $(TEST_SRCS) | $(L_FT_ACTOR)
+	@$(CC) $(W_FLG) $(I_FLG) $(TEST_SRCS) $(TESTS) $(L_FLG) -o $(TEST_ALL_OUT)
 	./$(TEST_ALL_OUT)
+	rm -f $(TEST_ALL_OUT)
 
 .PHONY: all clean fclean re test
