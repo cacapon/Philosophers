@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 18:25:41 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 18:30:36 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	_enqueue(t_ft_queue *self, void *msg)
  */
 static void	*_dequeue(t_ft_queue *self)
 {
-	void	*msg;
+	void		*msg;
 	t_ft_node	*node;
 
 	msg = NULL;
