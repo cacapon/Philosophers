@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:52:58 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 23:02:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void setup(void) {
 }
 
 static void teardown(void) {
-    free_philo(&p);
+    philo_actor_del(&p);
     ft_actor_del(&p_dummy);
 	ft_actor_del(&p_dummy2);
 }

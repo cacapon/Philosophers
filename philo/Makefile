@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/16 22:49:51 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/16 23:05:17 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,8 @@ re:
 	@$(MAKE) fclean
 	@$(MAKE) all
 
-test: $(L_FT_ACTOR) $(SRC) $(TESTS)
+test: $(SRC) $(TESTS)
+	@$(MAKE) -C $(L_FT_ACTOR_DIR) re
 	@$(CC) $(W_FLG) $(I_FLG) $(SRCS) $(TESTS) $(L_FLG) -o $(TEST_ALL_OUT)
 	./$(TEST_ALL_OUT)
 

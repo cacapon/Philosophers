@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:45:39 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 23:02:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	system_del(t_system **sys, size_t num)
 	i = 0;
 	while (i < num)
 	{
-		free_philo(&_sys->philos[i]);
+		philo_actor_del(&_sys->philos[i]);
 		fork_actor_del(&_sys->forks[i]);
 		i++;
 	}

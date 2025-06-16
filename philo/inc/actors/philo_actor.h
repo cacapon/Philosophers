@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:21:29 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 23:02:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_philo_actor
 }				t_philo_actor;
 
 t_philo_actor	*philo_actor_new(size_t no, t_main_args args);
-void			free_philo(t_philo_actor **philo_ptr);
+void			philo_actor_del(t_philo_actor **philo_ptr);
 void			_common_update(t_philo_actor *self, t_ft_actor *sender);
 void			_thinking(t_philo_actor *self);
 void			_eating(t_philo_actor *self, t_ft_actor *sender);
