@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 20:12:10 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 21:10:04 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_ft_actor	*ft_actor_new(void)
 static void	*_ft_actor_loop(void *arg)
 {
 	t_ft_actor	*self;
-	void		*msg;
+	t_ft_msg	*msg;
 
 	self = (t_ft_actor *)arg;
 	if (!self || !self->v || !self->v->on_receive)
@@ -44,10 +44,10 @@ static void	*_ft_actor_loop(void *arg)
 			continue ;
 		if (!(self->v->on_receive(self, msg)))
 		{
-			free(msg);
+			msg_del(&msg);
 			break ;
 		}
-		free(msg);
+		msg_del(&msg);
 	}
 	return (NULL);
 }

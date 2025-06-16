@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 19:56:20 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 21:01:21 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ typedef enum e_msg_type
 	CUSTOM_MSG_START = 1000,
 }						t_msg_type;
 
-typedef struct s_msg
+typedef struct s_ft_msg
 {
 	t_msg_type	type;
 	t_ft_actor	*sender;
 	void		*args;
-}				t_msg;
+}				t_ft_msg;
 
-t_msg	*gen_msg(int type, t_ft_actor *sender, void *args);
+t_ft_msg	*msg_new(int type, t_ft_actor *sender, void *args);
+void		msg_del(t_ft_msg **msg);	
 
 #endif
