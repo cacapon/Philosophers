@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 23:02:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 23:07:49 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	system_del(t_system **sys, size_t num)
 	free(_sys->philos);
 	sv_actor_del(&_sys->sv);
 	monitor_actor_del(&_sys->monitor);
-	free(sys);
+	free(_sys);
 	*sys = NULL;
 }
 
