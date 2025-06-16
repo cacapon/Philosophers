@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_actor.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/16 18:09:06 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/16 20:00:47 by ttsubo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FT_ACTOR_H
+# define FT_ACTOR_H
+
+# include "ft_actor_calloc.h"
+# include "ft_queue.h"
+# include "stdbool.h"
+# include <pthread.h>
+
+typedef struct s_ft_actor	t_ft_actor;
+
+typedef struct s_ft_actor_vtable
+{
+	void	(*on_start)(t_ft_actor *self);
+	bool	(*on_receive)(t_ft_actor * self, void *msg);
+	void	(*on_stop)(t_ft_actor *self);
+}			t_ft_actor_vtable;
+
+typedef struct s_ft_actor
+{
+	pthread_t				thread;
+	t_ft_queue				*inbox;
+	const t_ft_actor_vtable	*v;
+	bool					is_running;
+}							t_ft_actor;
+
+t_ft_actor	*ft_actor_new(void);
+void		ft_actor_del(t_ft_actor **actor);
+void		ft_actor_start(t_ft_actor *actor);
+void		ft_actor_stop(t_ft_actor *actor);
+
+#endif
