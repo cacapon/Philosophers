@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:11 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 18:37:48 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 20:15:08 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 # include <unistd.h>
 
 // Standard library functions used
-// stdlib.h -> malloc() free()
-// unistd.h -> usleep()
+// pthread.h	-> mutex_*
+// stdlib.h 	-> malloc() free()
+// unistd.h 	-> usleep()
 
 typedef struct s_ft_node	t_ft_node;
 typedef struct s_ft_queue	t_ft_queue;
@@ -31,12 +32,12 @@ typedef struct s_ft_node
 	t_ft_node	*next;
 }				t_ft_node;
 
-typedef struct s_queue
+typedef struct s_ft_queue
 {
 	t_ft_node		*head;
 	t_ft_node		*tail;
 	pthread_mutex_t	mutex;
-	int				(*enq)(t_ft_queue *self, void *msg);
+	bool			(*enq)(t_ft_queue *self, void *msg);
 	void			*(*deq)(t_ft_queue *self);
 }					t_ft_queue;
 

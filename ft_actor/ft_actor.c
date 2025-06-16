@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 20:05:04 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 20:12:10 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_actor_del(t_ft_actor **a)
 	t_ft_actor	*_a;
 
 	_a = *a;
-	ft_queue_del(_a->inbox);
+	ft_queue_del(&_a->inbox);
 	free(_a);
 	*a = NULL;
 }
@@ -65,7 +65,7 @@ void	ft_actor_del(t_ft_actor **a)
 void	ft_actor_start(t_ft_actor *a)
 {
 	a->is_running = true;
-	pthread_create(a->thread, NULL, _ft_actor_loop, a);
+	pthread_create(&a->thread, NULL, _ft_actor_loop, a);
 }
 
 void	ft_actor_stop(t_ft_actor *a)
