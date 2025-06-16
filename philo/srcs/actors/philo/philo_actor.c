@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:20:44 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 23:02:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static bool	on_receive(t_ft_actor *self, t_ft_msg *msg)
 	return (true);
 }
 
-void	free_philo(t_philo_actor **philo_ptr)
+void	philo_actor_del(t_philo_actor **philo_ptr)
 {
 	t_philo_actor	*philo;
 
@@ -82,7 +82,7 @@ t_philo_actor	*philo_actor_new(size_t no, t_main_args args)
 		return (NULL);
 	philo->base = ft_actor_new(philo);
 	if (!philo->base)
-		return (free_philo(&philo), NULL);
+		return (philo_actor_del(&philo), NULL);
 	philo->no = no;
 	philo->base->v = &vtable;
 	philo->max_hp = args.time_to_die;
