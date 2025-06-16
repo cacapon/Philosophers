@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:25:38 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 21:07:45 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 21:19:19 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_ft_msg	*msg_new(int type, t_ft_actor *sender, void *args)
 /**
  * @note pre: msg.args is allocate memory or NULL.
  */
-void		msg_del(t_ft_msg **msg)
+void	msg_del(t_ft_msg **msg)
 {
 	t_ft_msg	*_msg;
 

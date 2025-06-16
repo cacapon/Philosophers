@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 21:10:04 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 21:20:28 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_ft_actor	*ft_actor_new(void)
 		return (NULL);
 	a->inbox = ft_queue_new();
 	a->is_running = false;
+	a->tell = _ft_actor_tell;
 	if (!a->inbox)
 		ft_actor_del(&a);
 	return (a);
