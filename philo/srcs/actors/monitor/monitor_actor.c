@@ -6,11 +6,16 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:13:39 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 22:21:22 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "monitor_actor.h"
+
+static void	on_start(t_ft_actor *self)
+{
+	self->parent->tell(self->parent, msg_new(ACTOR_START_DONE, self, NULL));
+}
 
 static bool	on_receive(t_ft_actor *self, t_ft_msg *msg)
 {
@@ -51,7 +56,7 @@ t_monitor_actor	*monitor_actor_new(void)
 {
 	t_monitor_actor			*monitor;
 	const t_ft_actor_vtable	vtable = {
-		.on_start = NULL,
+		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,
 	};
