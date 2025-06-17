@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:45:39 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 22:20:58 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	on_start(t_ft_actor *self)
 	fork = (t_fork_actor *)self->ref;
 	fork->sts = FORK_AVAILABLE;
 	fork->holder = NULL;
+	self->parent->tell(self->parent, msg_new(ACTOR_START_DONE, self, NULL));
 }
 
 // TODO: 31行目にデバッグ出力を仕込みたい
