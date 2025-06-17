@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:55:00 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 21:47:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,18 @@
 
 static void	sv_on_start(t_ft_actor *self)
 {
-	(void)self;
+	size_t		i;
+	t_sv_actor	*sv;
+
+	sv = self->ref;
+	i = 0;
+	while (i < sv->prop->args.num_of_philos)
+	{
+		ft_actor_start(sv->prop->philos_ref[i]);
+		ft_actor_start(sv->prop->forks_ref[i]);
+		i++;
+	}
+	ft_actor_start(sv->prop->monitor_ref);
 }
 
 static bool	sv_on_receive(t_ft_actor *self, t_ft_msg *msg)

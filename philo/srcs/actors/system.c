@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:39:48 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 21:48:45 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,13 @@ static t_system	*_system_ref(t_system *sys)
 	while (i < sys->num)
 	{
 		sys->sv->prop->philos_ref[i] = sys->philos[i]->base;
+		sys->sv->prop->forks_ref[i] = sys->forks[i]->base;
 		sys->philos[i]->sv = sys->sv->base;
 		sys->philos[i]->l_fork = sys->forks[(i - 1) % sys->num]->base;
 		sys->philos[i]->r_fork = sys->forks[i % sys->num]->base;
 		i++;
 	}
+	sys->sv->prop->monitor_ref = sys->monitor->base;
 	sys->sv->sys_notify_inbox = sys->notify_inbox;
 	return (sys);
 }
