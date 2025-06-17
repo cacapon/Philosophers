@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:47:24 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 21:55:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,11 @@ static void	sv_on_start(t_ft_actor *self)
 	{
 		ft_actor_start(sv->prop->philos_ref[i]);
 		ft_actor_start(sv->prop->forks_ref[i]);
+		sv->prop->ref_count += 2;
 		i++;
 	}
 	ft_actor_start(sv->prop->monitor_ref);
-}
-
-static bool	sv_on_receive(t_ft_actor *self, t_ft_msg *msg)
-{
-	(void)self;
-	(void)msg;
-	return (false);
+	sv->prop->ref_count++;
 }
 
 static void	sv_on_stop(t_ft_actor *self)
@@ -46,7 +41,7 @@ t_sv_actor	*sv_actor_new(t_main_args args)
 	t_sv_actor						*sv;
 	static const t_ft_actor_vtable	vtable = {
 		.on_start = sv_on_start,
-		.on_receive = sv_on_receive,
+		.on_receive = _sv_on_receive,
 		.on_stop = sv_on_stop,
 	};
 
