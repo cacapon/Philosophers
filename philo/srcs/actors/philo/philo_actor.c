@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 22:22:05 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/18 00:11:53 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	philo_actor_del(t_philo_actor **philo_ptr)
 
 t_philo_actor	*philo_actor_new(size_t no, t_main_args args)
 {
-	t_philo_actor			*philo;
-	const t_ft_actor_vtable	vtable = {
+	t_philo_actor					*philo;
+	static const t_ft_actor_vtable	vtable = {
 		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,

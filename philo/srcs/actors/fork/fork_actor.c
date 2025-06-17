@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 22:20:58 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/18 00:12:16 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	fork_actor_del(t_fork_actor **fork_ptr)
 
 t_fork_actor	*fork_actor_new(void)
 {
-	t_fork_actor			*fork;
-	const t_ft_actor_vtable	vtable = {
+	t_fork_actor					*fork;
+	static const t_ft_actor_vtable	vtable = {
 		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,
