@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:48:45 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 22:15:58 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,12 @@ static t_system	*_system_ref(t_system *sys)
 		sys->philos[i]->sv = sys->sv->base;
 		sys->philos[i]->l_fork = sys->forks[(i - 1) % sys->num]->base;
 		sys->philos[i]->r_fork = sys->forks[i % sys->num]->base;
+		ft_actor_set_parent(sys->philos[i]->base, sys->sv->base);
+		ft_actor_set_parent(sys->forks[i]->base, sys->sv->base);
 		i++;
 	}
 	sys->sv->prop->monitor_ref = sys->monitor->base;
+	ft_actor_set_parent(sys->monitor->base, sys->sv->base);
 	sys->sv->sys_notify_inbox = sys->notify_inbox;
 	return (sys);
 }
