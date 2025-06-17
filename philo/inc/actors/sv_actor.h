@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:24:38 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 21:38:55 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_sv_prop
 
 typedef struct s_sv_actor
 {
+	t_ft_queue		*sys_notify_inbox;
 	t_ft_actor		*base;
 	t_sv_prop		*prop;
 }					t_sv_actor;

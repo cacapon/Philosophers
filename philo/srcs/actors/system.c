@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:28:38 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 21:39:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static t_system	*_system_ref(t_system *sys)
 		sys->philos[i]->r_fork = sys->forks[i % sys->num]->base;
 		i++;
 	}
+	sys->sv->sys_notify_inbox = sys->notify_inbox;
 	return (sys);
 }
 
