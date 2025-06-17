@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:47:33 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:42:51 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 22:37:21 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	system_run(t_system *sys)
 	}
 	while (true)
 	{
-		sys->sv->base->tell(sys->sv->base, gen_msg(UPDATE, NULL, NULL));
+		sys->sv->base->tell(sys->sv->base, msg_new(UPDATE, NULL, NULL));
 		sys_msg = sys->notify_inbox->deq(sys->notify_inbox);
 		if (sys_msg && sys_msg->type == ACTOR_STOP_DONE)
 			break ;

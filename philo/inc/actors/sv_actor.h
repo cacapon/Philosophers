@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:54:31 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 22:36:20 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ void				sv_prop_del(t_sv_prop **prop);
 bool				_sv_on_receive(t_ft_actor *self, t_ft_msg *msg);
 t_size_t_matrix		*_create_send_ptn(size_t n);
 void				_advance_to_next_phase(t_sv_actor *self);
+void				_send_grant_eat(t_sv_actor *self);
 
 #endif
