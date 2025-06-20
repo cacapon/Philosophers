@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 23:10:08 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 20:26:37 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@ bool	_sv_on_receive(t_ft_actor *self, t_ft_msg *msg)
 		_on_actor_start_done(sv);
 	if (msg->type == UPDATE)
 		(void)0;
+	if (msg->type == PHILO_DEAD)
+		sv->sys_notify_inbox->enq(sv->sys_notify_inbox,
+			msg_new(ACTOR_STOP, NULL, NULL));
 	return (true);
 }
