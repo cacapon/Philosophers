@@ -6,14 +6,14 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:47:07 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/08 18:26:45 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 21:05:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATRIX_H
 # define MATRIX_H
 
-# include "philo_calloc.h"
+# include "philo_utils.h"
 # include "stddef.h"
 
 typedef struct s_size_t_matrix

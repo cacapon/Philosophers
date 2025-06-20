@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/17 23:17:22 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/20 21:15:44 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ L_FLG = -L$(LIBS_DIR)ft_actor -lft_actor
 
 L_FT_ACTOR		= $(L_FT_ACTOR_DIR)ft_actor.a 
 
-UTILS_SRC	= philo_calloc.c matrix.c	philo_atoi.c get_elapsed_ms.c
+UTILS_SRC	= philo_calloc.c philo_memset.c matrix.c	philo_atoi.c get_elapsed_ms.c
 SYS_SRC		= system.c system_run.c
 FORK_SRC	= fork_actor.c	_fork_actor_methods.c
 PHILO_SRC	= philo_actor.c	_philo_actor_methods1.c	_philo_actor_methods2.c

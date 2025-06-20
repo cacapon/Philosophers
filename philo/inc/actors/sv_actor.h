@@ -17,6 +17,7 @@
 # include "args.h"
 # include "ft_actor.h"
 # include "philo_msg.h"
+# include "philo_utils.h"
 # include "matrix.h"
 # include "philo_calloc.h"
 # include "get_elapsed_ms.h"

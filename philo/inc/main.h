@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:04:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:02:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 21:07:13 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "ft_actor.h"
 # include "args.h"
 # include "system.h"
-# include "philo_atoi.h"
+# include "philo_utils.h"
 # include "philo_msg.h"
 
 #endif

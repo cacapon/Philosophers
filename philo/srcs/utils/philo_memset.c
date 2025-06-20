@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_atoi.h                                       :+:      :+:    :+:   */
+/*   philo_memset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 16:20:26 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/10 16:20:51 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/03 19:04:40 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/20 21:04:05 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_ATOI_H
-# define PHILO_ATOI_H
+#include "philo_utils.h"
 
-int	philo_atoi(const char *str);
+void	*philo_memset(void *b, int c, size_t len)
+{
+	size_t			i;
+	unsigned char	*ptr;
 
-#endif
+	if (!b)
+		return (b);
+	i = 0;
+	ptr = (unsigned char *)b;
+	while (i < len)
+		ptr[i++] = (unsigned char)c;
+	return (b);
+}
