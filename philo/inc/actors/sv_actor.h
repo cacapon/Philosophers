@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 23:09:28 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 21:05:36 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@
 # include "philo_msg.h"
 # include "philo_utils.h"
 # include "matrix.h"
-# include "philo_calloc.h"
-# include "get_elapsed_ms.h"
 
 typedef struct s_sv_prop
 {
 	t_size_t_matrix	*send_ptn;
 	t_main_args		args;
 	struct timeval	start;
+	struct timeval	last_update_time;
 	size_t			philo_done_count;
 	size_t			ptn_i;
 	t_ft_actor		**philos_ref;
