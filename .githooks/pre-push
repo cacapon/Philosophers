@@ -8,3 +8,4 @@ if ! make -C philo re > /dev/null 2> >(cat >&2); then
 fi
 echo "✅"
 echo "Build OK. Processing to push."
+make -C philo fclean > /dev/null 2>
