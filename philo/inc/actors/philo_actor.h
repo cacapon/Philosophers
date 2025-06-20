@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 23:02:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 22:22:25 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ typedef struct s_philo_actor
 	t_ft_actor	*l_fork;
 	t_ft_actor	*r_fork;
 	int			sts;
-	size_t		max_hp;
-	size_t		now_hp;
-	size_t		max_eat;
-	size_t		now_eat;
-	size_t		max_slp;
-	size_t		now_slp;
+	long		max_hp;
+	long		now_hp;
+	long		max_eat;
+	long		now_eat;
+	long		max_slp;
+	long		now_slp;
 	int			max_eat_count;
 	int			eat_count;
 	size_t		no;
@@ -50,9 +50,9 @@ typedef struct s_philo_actor
 
 t_philo_actor	*philo_actor_new(size_t no, t_main_args args);
 void			philo_actor_del(t_philo_actor **philo_ptr);
-void			_common_update(t_philo_actor *self, t_ft_actor *sender);
+void			_common_update(t_philo_actor *self, t_ft_msg *msg);
 void			_thinking(t_philo_actor *self);
-void			_eating(t_philo_actor *self, t_ft_actor *sender);
+void			_eating(t_philo_actor *self);
 void			_sleeping(t_philo_actor *self);
 void			_confirm_fork(t_philo_actor *self, t_ft_actor *sender);
 void			_on_fork_released(t_philo_actor *self, t_ft_actor *sender);

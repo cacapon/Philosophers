@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/18 00:11:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 22:22:38 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ static bool	on_receive(t_ft_actor *self, t_ft_msg *msg)
 	{
 		if (philo->sts == PHILO_STS_DEAD)
 			return (true);
-		_common_update(philo, msg->sender);
+		_common_update(philo, msg);
 		if (philo->sts == PHILO_STS_THINKING)
 			_thinking(philo);
 		if (philo->sts == PHILO_STS_EATING)
-			_eating(philo, msg->sender);
+			_eating(philo);
 		if (philo->sts == PHILO_STS_SLEEPING)
 			_sleeping(philo);
 	}
