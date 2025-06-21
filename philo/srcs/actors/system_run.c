@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 23:13:02 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 20:23:35 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 23:07:16 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	_run_phase(t_system *sys)
 	{
 		sys->sv->base->tell(sys->sv->base, msg_new(UPDATE, NULL, NULL));
 		sys_msg = sys->notify_inbox->deq(sys->notify_inbox);
-		if (sys_msg && sys_msg->type == ACTOR_STOP)
+		if (sys_msg && sys_msg->type == SYSTEM_STOP)
 		{
 			msg_del(&sys_msg);
 			break ;
@@ -49,6 +49,7 @@ static void	_shatdown_phase(t_system *sys)
 {
 	t_ft_msg	*sys_msg;
 
+	sys->sv->base->tell(sys->sv->base, msg_new(SHUT_DOWN, NULL, NULL));
 	while (true)
 	{
 		sys_msg = sys->notify_inbox->deq(sys->notify_inbox);

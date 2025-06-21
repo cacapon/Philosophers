@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:33:38 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 23:06:57 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_ft_actor	t_ft_actor;
 
 enum e_msg_type
 {
+	SYSTEM_STOP,
+	SHUT_DOWN,
 	ACTOR_START,
 	ACTOR_STOP,
 	ACTOR_START_DONE,

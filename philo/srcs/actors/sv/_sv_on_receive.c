@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 22:24:00 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 10:03:31 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,31 @@ static void	_on_update(t_sv_actor *self)
 	self->prop->last_update_time = now;
 }
 
+static void	_on_actor_stop_done(t_sv_actor *sv)
+{
+	sv->prop->ref_count--;
+	if (sv->prop->ref_count == 0)
+	{
+		sv->sys_notify_inbox->enq(sv->sys_notify_inbox,
+			msg_new(ACTOR_STOP_DONE, NULL, NULL));
+		ft_actor_stop(sv->base);
+	}
+}
+
+void	_on_shut_down(t_sv_actor *self)
+{
+	size_t		i;
+
+	i = 0;
+	while (i < self->prop->args.num_of_philos)
+	{
+		ft_actor_stop(self->prop->philos_ref[i]);
+		ft_actor_stop(self->prop->forks_ref[i]);
+		i++;
+	}
+	ft_actor_stop(self->prop->monitor_ref);
+}
+
 bool	_sv_on_receive(t_ft_actor *self, t_ft_msg *msg)
 {
 	t_sv_actor	*sv;
@@ -58,6 +83,10 @@ bool	_sv_on_receive(t_ft_actor *self, t_ft_msg *msg)
 		_on_update(sv);
 	if (msg->type == PHILO_DEAD)
 		sv->sys_notify_inbox->enq(sv->sys_notify_inbox,
-			msg_new(ACTOR_STOP, NULL, NULL));
+			msg_new(SYSTEM_STOP, NULL, NULL));
+	if (msg->type == ACTOR_STOP_DONE)
+		_on_actor_stop_done(sv);
+	if (msg->type == SHUT_DOWN)
+		_on_shut_down(sv);
 	return (true);
 }

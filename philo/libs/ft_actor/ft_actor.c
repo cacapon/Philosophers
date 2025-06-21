@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:13:02 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 10:02:26 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_ft_actor	*ft_actor_new(void *ref)
 	a->is_running = false;
 	a->tell = _ft_actor_tell;
 	a->ref = ref;
+	a->parent = NULL;
 	if (!a->inbox)
 		ft_actor_del(&a);
 	return (a);
@@ -73,5 +74,9 @@ void	ft_actor_start(t_ft_actor *a)
 void	ft_actor_stop(t_ft_actor *a)
 {
 	a->is_running = false;
+	if (a->v && a->v->on_stop)
+		a->v->on_stop(a);
+	if (a->parent)
+		a->parent->tell(a->parent, msg_new(ACTOR_STOP_DONE, a, NULL));
 	pthread_join(a->thread, NULL);
 }

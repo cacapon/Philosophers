@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:55:18 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 10:00:40 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,13 @@ static void	sv_on_start(t_ft_actor *self)
 	sv->prop->ref_count++;
 }
 
-static void	sv_on_stop(t_ft_actor *self)
-{
-	(void)self;
-}
-
 t_sv_actor	*sv_actor_new(t_main_args args)
 {
 	t_sv_actor						*sv;
 	static const t_ft_actor_vtable	vtable = {
 		.on_start = sv_on_start,
 		.on_receive = _sv_on_receive,
-		.on_stop = sv_on_stop,
+		.on_stop = NULL,
 	};
 
 	sv = philo_calloc(1, sizeof(t_sv_actor));
