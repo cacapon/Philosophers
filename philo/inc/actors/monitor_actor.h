@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 19:06:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 20:46:42 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define MSG_TAKEN_FORK "has taken a fork"
 # define MSG_EATING "is eating"
 # define MSG_SLEEPING "is sleeping"
+# define MSG_THINKING "is thinking"
 # define MSG_DIED "died"
 
 typedef struct s_monitor_data
