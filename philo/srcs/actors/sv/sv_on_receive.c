@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 21:41:08 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:56:45 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ bool	sv_on_receive(t_ft_actor *self, t_ft_msg *msg)
 		_on_update(sv);
 	if (msg->type == PHILO_EAT_DONE)
 		_on_philo_eat_done(sv);
+	if (msg->type == PHILO_FINISHED_EATING)
+		_on_philo_finished_eating(sv);
 	if (msg->type == PHILO_DEAD)
 		_on_philo_dead(sv);
 	if (msg->type == ACTOR_STOP_DONE)

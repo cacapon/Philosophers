@@ -6,19 +6,19 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 21:40:55 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 22:03:11 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SV_ACTOR_H
 # define SV_ACTOR_H
 
-# include <stdint.h>
 # include "args.h"
 # include "ft_actor.h"
+# include "matrix.h"
 # include "philo_msg.h"
 # include "philo_utils.h"
-# include "matrix.h"
+# include <stdint.h>
 
 typedef struct s_sv_prop
 {
@@ -33,6 +33,7 @@ typedef struct s_sv_prop
 	t_ft_actor		*monitor_ref;
 	size_t			ref_count;
 	size_t			start_done_count;
+	size_t			philo_finished_eat_count;
 }					t_sv_prop;
 
 typedef struct s_sv_actor
@@ -57,6 +58,7 @@ void				_on_philo_eat_done(t_sv_actor *self);
 void				_on_philo_dead(t_sv_actor *self);
 void				_on_shut_down(t_sv_actor *self);
 void				_on_monitor_msg(t_sv_actor *self, t_ft_msg *msg);
+void				_on_philo_finished_eating(t_sv_actor *self);
 
 // methods
 t_size_t_matrix		*_create_send_ptn(size_t n);
