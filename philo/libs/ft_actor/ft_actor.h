@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:09:06 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/22 00:09:32 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/22 00:14:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_ft_actor
 	t_ft_actor				*parent;
 	const t_ft_actor_vtable	*v;
 	bool					(*tell)(t_ft_actor * self, t_ft_msg * msg);
+	bool					(*eg_tell)(t_ft_actor * self, t_ft_msg * msg);
 	bool					is_running;
 }							t_ft_actor;
 
@@ -47,5 +48,6 @@ void		ft_actor_stop(t_ft_actor *actor);
 void		*_ft_actor_loop(void *arg);
 void		ft_actor_set_parent(t_ft_actor *actor, t_ft_actor *parent);
 bool		_ft_actor_tell(t_ft_actor *self, t_ft_msg *msg);
+bool		_ft_actor_eg_tell(t_ft_actor *self, t_ft_msg *msg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/22 00:10:55 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/22 00:14:32 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_ft_actor	*ft_actor_new(void *ref)
 	a->emergency_inbox = ft_queue_new();
 	a->is_running = false;
 	a->tell = _ft_actor_tell;
+	a->eg_tell = _ft_actor_eg_tell;
 	a->ref = ref;
 	a->parent = NULL;
 	if (!a->inbox || !a->emergency_inbox)
