@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:43:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 18:55:27 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 typedef struct s_monitor_data
 {
-	time_t		timestamp;
-	int			philo_no;
+	long		timestamp;
+	size_t		philo_no;
 	int			msg_id;
 }				t_monitor_data;
 

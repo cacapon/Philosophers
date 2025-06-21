@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:44:33 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 18:57:10 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	_show_monitor(t_ft_msg *msg)
 	if (!data)
 		return ;
 	if (0 <= data->msg_id && data->msg_id < 4)
-		printf("%ld %d %s\n", data->timestamp, data->philo_no,
+		printf("%ld %ld %s\n", data->timestamp, data->philo_no,
 			msg_str[data->philo_no]);
 }

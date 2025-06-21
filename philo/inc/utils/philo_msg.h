@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 21:27:48 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 16:47:53 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef enum e_philo_msg_type
 {
 	E_PHILO_TOP = CUSTOM_MSG_START,
 	GRANT_EAT,
-	MONITOR,
 	UPDATE,
 	PHILO_EAT_DONE,
 	PHILO_DEAD,
@@ -27,6 +26,13 @@ typedef enum e_philo_msg_type
 	REQUEST_FORK,
 	RELEASE_FORK,
 	FORK_RELEASED,
+	MONITOR_MSG_START,
+	MONITOR_TAKEN_FORK,
+	MONITOR_EATING,
+	MONITOR_SLEEPING,
+	MONITOR_THINKING,
+	MONITOR_DIED,
+	MONITOR_MSG_END,
 }	t_philo_msg_type;
 
 #endif
