@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:56:23 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 18:59:13 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ bool	sv_on_receive(t_ft_actor *self, t_ft_msg *msg)
 	if (msg->type == SHUT_DOWN)
 		_on_shut_down(sv);
 	if (msg->type > MONITOR_MSG_START && msg->type < MONITOR_MSG_END)
-		(void)0;
+		_on_monitor_msg(sv, msg);
 	return (true);
 }
