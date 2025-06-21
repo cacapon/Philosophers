@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 22:57:52 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:23:06 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void    test_common_update_normal(void)
 
 void	test_common_update_dead(void)
 {
-    t_ft_msg   *res = NULL;
+    t_ft_msg   *res1 = NULL;
+    t_ft_msg   *res2 = NULL;
 	t_ft_msg	*msg;
 	long		*delta;
 
@@ -90,10 +91,12 @@ void	test_common_update_dead(void)
 	p->now_hp = 1;
 	msg = msg_new(UPDATE, NULL, delta);
 	_common_update(p, msg);
-	res = _wait_mes(p->sv, WAIT_TIME);
-	TEST_ASSERT_NOT_NULL(res);
-	TEST_ASSERT_EQUAL_INT(res->type, PHILO_DEAD);
-	msg_del(&res);
+	res1 = _wait_mes(p->sv, WAIT_TIME);
+	res2 = _wait_mes(p->sv, WAIT_TIME);
+	TEST_ASSERT_NOT_NULL(res2);
+	TEST_ASSERT_EQUAL_INT(res2->type, PHILO_DEAD);
+	msg_del(&res1);
+	msg_del(&res2);
 	msg_del(&msg);
 }
 
