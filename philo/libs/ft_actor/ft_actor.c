@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 10:02:26 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 10:55:36 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	*_ft_actor_loop(void *arg)
 		return (NULL);
 	if (self->v->on_start)
 		self->v->on_start(self);
-	while (true)
+	while (self->is_running)
 	{
 		usleep(1000);
 		msg = self->inbox->deq(self->inbox);
