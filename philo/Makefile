@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/21 17:29:37 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/21 18:24:11 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC = cc
 MAKEFLAGS += --no-print-directory
 
 SRCS_DIR		= srcs/
+OBJS_DIR		= objs/
 LIBS_DIR		= libs/
 INCS_DIR		= inc/
 UTILS_DIR 		= $(SRCS_DIR)utils/
@@ -53,7 +54,7 @@ SRCS = 	$(addprefix $(SRCS_DIR), main.c) \
 		$(addprefix $(PHILO_DIR), $(PHILO_SRC)) \
 		$(addprefix $(SV_DIR), $(SV_SRC)) \
 		$(addprefix $(MONITOR_DIR), $(MONITOR_SRC))
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 
 TESTS = \
 	tests/test_all.c \
@@ -71,7 +72,8 @@ $(NAME): $(OBJS) | $(L_FT_ACTOR)
 	@$(CC) $(W_FLG) $(I_FLG) $(OBJS) $(L_FLG) -o $@ && echo "✅" || echo "❌"
 	@echo "$(NAME) has been created!"
 
-%.o: %.c
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	@mkdir -p $(dir $@)
 	@echo -n "Creating $@..."
 	@$(CC) -c $(W_FLG) $(I_FLG) $< -o $@ && echo "✅" || echo "❌"
 
@@ -81,7 +83,7 @@ $(L_FT_ACTOR):
 clean:
 	@$(MAKE) -sC $(L_FT_ACTOR_DIR) clean
 	@echo -n "Deleting $(NAME) objs..."
-	@rm -f $(OBJS) && echo "✅" || echo "❌"
+	@rm -rf $(OBJS_DIR) && echo "✅" || echo "❌"
 
 fclean:
 	@$(MAKE) -sC $(L_FT_ACTOR_DIR) fclean
