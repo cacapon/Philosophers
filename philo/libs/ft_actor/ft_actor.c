@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 10:55:36 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/22 00:10:55 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,14 @@ t_ft_actor	*ft_actor_new(void *ref)
 	if (!a)
 		return (NULL);
 	a->inbox = ft_queue_new();
+	a->emergency_inbox = ft_queue_new();
 	a->is_running = false;
 	a->tell = _ft_actor_tell;
 	a->ref = ref;
 	a->parent = NULL;
-	if (!a->inbox)
+	if (!a->inbox || !a->emergency_inbox)
 		ft_actor_del(&a);
 	return (a);
-}
-
-static void	*_ft_actor_loop(void *arg)
-{
-	t_ft_actor	*self;
-	t_ft_msg	*msg;
-
-	self = (t_ft_actor *)arg;
-	if (!self || !self->v || !self->v->on_receive)
-		return (NULL);
-	if (self->v->on_start)
-		self->v->on_start(self);
-	while (self->is_running)
-	{
-		usleep(1000);
-		msg = self->inbox->deq(self->inbox);
-		if (!msg)
-			continue ;
-		if (!(self->v->on_receive(self, msg)))
-		{
-			msg_del(&msg);
-			break ;
-		}
-		msg_del(&msg);
-	}
-	return (NULL);
 }
 
 void	ft_actor_del(t_ft_actor **a)
@@ -61,6 +36,7 @@ void	ft_actor_del(t_ft_actor **a)
 
 	_a = *a;
 	ft_queue_del(&_a->inbox);
+	ft_queue_del(&_a->emergency_inbox);
 	free(_a);
 	*a = NULL;
 }
