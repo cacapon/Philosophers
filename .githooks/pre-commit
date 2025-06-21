@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -n "Checking unit test before commit..."
-make -C fclean > /dev/null
+make -C philo/ fclean > /dev/null
 if ! make -C philo/ test > /dev/null 2> /dev/null; then
 	echo "❌"
 	echo "unit test failed. Commit aborted."
