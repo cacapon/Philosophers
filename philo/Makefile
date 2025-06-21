@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/20 21:15:44 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/21 17:29:37 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,9 +41,9 @@ UTILS_SRC	= philo_calloc.c philo_memset.c matrix.c	philo_atoi.c get_elapsed_ms.c
 SYS_SRC		= system.c system_run.c
 FORK_SRC	= fork_actor.c	_fork_actor_methods.c
 PHILO_SRC	= philo_actor.c	_philo_actor_methods1.c	_philo_actor_methods2.c
-SV_SRC		= sv_actor.c	sv_del.c \
-			  _sv_on_receive.c \
-			  _create_send_ptn.c _advance_to_next_phase.c _sv_prop.c _send_grant_eat.c
+SV_SRC		= sv_actor.c sv_on_start.c sv_on_receive.c \
+				_on_actor_start_done.c _on_actor_stop_done.c _on_philo_dead.c _on_shut_down.c _on_update.c \
+			  _create_send_ptn.c _advance_to_next_phase.c _send_grant_eat.c
 MONITOR_SRC	= monitor_actor.c	
 
 SRCS = 	$(addprefix $(SRCS_DIR), main.c) \
