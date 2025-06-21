@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 16:47:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:55:08 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef enum e_philo_msg_type
 	REQUEST_FORK,
 	RELEASE_FORK,
 	FORK_RELEASED,
+	PHILO_FINISHED_EATING,
 	MONITOR_MSG_START,
 	MONITOR_TAKEN_FORK,
 	MONITOR_EATING,
