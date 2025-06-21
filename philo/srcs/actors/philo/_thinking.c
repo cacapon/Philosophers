@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:36:35 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:04:02 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	_thinking(t_philo_actor *self)
 	{
 		self->sts = PHILO_STS_EATING;
 		self->now_hp = self->max_hp;
+		self->sv->tell(self->sv, msg_new(MONITOR_EATING, self->base, NULL));
 	}
 }

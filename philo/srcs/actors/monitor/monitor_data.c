@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor_on_receive.c                               :+:      :+:    :+:   */
+/*   monitor_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:58:19 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/21 19:06:12 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/21 19:09:10 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "monitor_actor.h"
 
-bool	monitor_on_receive(t_ft_actor *self, t_ft_msg *msg)
+void	monitor_data_del(t_monitor_data **data)
 {
-	if (!self || !msg)
-		return (true);
-	if (MONITOR_MSG_START < msg->type && msg->type < MONITOR_MSG_END)
-		_show_monitor(msg);
-	return (true);
+	t_monitor_data	*_data;
+
+	if (!data || !*data)
+		return ;
+	_data = *data;
+	free(_data);
+	*data = NULL;
+}
+
+t_monitor_data	*monitor_data_new(long timestamp, size_t philo_no, int msg_id)
+{
+	t_monitor_data	*data;
+
+	data = philo_calloc(1, sizeof(t_monitor_data));
+	if (!data)
+		return (NULL);
+	data->timestamp = timestamp;
+	data->philo_no = philo_no;
+	data->msg_id = msg_id;
+	return (data);
 }
