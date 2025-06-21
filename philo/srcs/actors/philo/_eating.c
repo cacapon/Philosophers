@@ -6,13 +6,13 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:40:25 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:26:27 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_actor.h"
 
-void	_eating(t_philo_actor *self)
+void	_eating(t_philo_actor *self, long delta)
 {
 	bool (*l_tell)(t_ft_actor * self, t_ft_msg * msg);
 	bool (*r_tell)(t_ft_actor * self, t_ft_msg * msg);
@@ -20,7 +20,7 @@ void	_eating(t_philo_actor *self)
 	l_tell = self->l_fork->tell;
 	r_tell = self->r_fork->tell;
 	sv_tell = self->sv->tell;
-	self->now_eat++;
+	self->now_eat += delta;
 	if (self->now_eat >= self->max_eat)
 	{
 		self->eat_count++;

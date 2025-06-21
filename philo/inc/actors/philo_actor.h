@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:34:50 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:29:05 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ bool			philo_on_receive(t_ft_actor *self, t_ft_msg *msg);
 // methods
 void			_common_update(t_philo_actor *self, t_ft_msg *msg);
 void			_thinking(t_philo_actor *self);
-void			_eating(t_philo_actor *self);
-void			_sleeping(t_philo_actor *self);
+void			_eating(t_philo_actor *self, long delta);
+void			_sleeping(t_philo_actor *self, long delta);
 void			_confirm_fork(t_philo_actor *self, t_ft_actor *sender);
 void			_on_fork_released(t_philo_actor *self, t_ft_actor *sender);
 
