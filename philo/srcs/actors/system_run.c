@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 23:13:02 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 23:07:16 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 10:58:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	_run_phase(t_system *sys)
 
 	while (true)
 	{
+		usleep(1000);
 		sys->sv->base->tell(sys->sv->base, msg_new(UPDATE, NULL, NULL));
 		sys_msg = sys->notify_inbox->deq(sys->notify_inbox);
 		if (sys_msg && sys_msg->type == SYSTEM_STOP)
