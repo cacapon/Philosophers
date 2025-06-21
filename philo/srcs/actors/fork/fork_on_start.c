@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _philo_actor_methods2.c                            :+:      :+:    :+:   */
+/*   fork_on_start.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 21:44:46 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 18:48:14 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_actor.h"
+#include "fork_actor.h"
 
-void	_confirm_fork(t_philo_actor *self, t_ft_actor *sender)
+void	fork_on_start(t_ft_actor *self)
 {
-	if (sender == self->l_fork)
-		self->has_l_fork = true;
-	if (sender == self->r_fork)
-		self->has_r_fork = true;
-}
+	t_fork_actor	*fork;
 
-void	_on_fork_released(t_philo_actor *self, t_ft_actor *sender)
-{
-	if (sender == self->l_fork)
-		self->has_l_fork = false;
-	if (sender == self->r_fork)
-		self->has_r_fork = false;
-	if (!(self->has_l_fork && self->has_r_fork))
-		self->sts = PHILO_STS_SLEEPING;
+	fork = (t_fork_actor *)self->ref;
+	fork->sts = FORK_AVAILABLE;
+	fork->holder = NULL;
+	self->parent->tell(self->parent, msg_new(ACTOR_START_DONE, self, NULL));
 }

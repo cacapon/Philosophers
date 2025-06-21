@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/20 21:15:44 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/21 18:52:23 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC = cc
 MAKEFLAGS += --no-print-directory
 
 SRCS_DIR		= srcs/
+OBJS_DIR		= objs/
 LIBS_DIR		= libs/
 INCS_DIR		= inc/
 UTILS_DIR 		= $(SRCS_DIR)utils/
@@ -39,12 +40,15 @@ L_FT_ACTOR		= $(L_FT_ACTOR_DIR)ft_actor.a
 
 UTILS_SRC	= philo_calloc.c philo_memset.c matrix.c	philo_atoi.c get_elapsed_ms.c
 SYS_SRC		= system.c system_run.c
-FORK_SRC	= fork_actor.c	_fork_actor_methods.c
-PHILO_SRC	= philo_actor.c	_philo_actor_methods1.c	_philo_actor_methods2.c
-SV_SRC		= sv_actor.c	sv_del.c \
-			  _sv_on_receive.c \
-			  _create_send_ptn.c _advance_to_next_phase.c _sv_prop.c _send_grant_eat.c
-MONITOR_SRC	= monitor_actor.c	
+FORK_SRC	= fork_actor.c fork_on_start.c fork_on_receive.c \
+			  _on_release_fork.c _on_request_fork.c
+PHILO_SRC	= philo_actor.c	philo_on_start.c philo_on_recieve.c \
+ 			  _common_update.c _confirm_fork.c _eating.c _on_fork_released.c _sleeping.c _thinking.c
+SV_SRC		= sv_actor.c sv_on_start.c sv_on_receive.c \
+			  _on_actor_start_done.c _on_actor_stop_done.c _on_philo_dead.c _on_shut_down.c _on_update.c \
+			  _create_send_ptn.c _advance_to_next_phase.c _send_grant_eat.c
+MONITOR_SRC	= monitor_actor.c monitor_on_start.c monitor_on_receive.c \
+			  _show_monitor.c	
 
 SRCS = 	$(addprefix $(SRCS_DIR), main.c) \
 		$(addprefix $(UTILS_DIR), $(UTILS_SRC)) \
@@ -53,7 +57,7 @@ SRCS = 	$(addprefix $(SRCS_DIR), main.c) \
 		$(addprefix $(PHILO_DIR), $(PHILO_SRC)) \
 		$(addprefix $(SV_DIR), $(SV_SRC)) \
 		$(addprefix $(MONITOR_DIR), $(MONITOR_SRC))
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 
 TESTS = \
 	tests/test_all.c \
@@ -71,7 +75,8 @@ $(NAME): $(OBJS) | $(L_FT_ACTOR)
 	@$(CC) $(W_FLG) $(I_FLG) $(OBJS) $(L_FLG) -o $@ && echo "✅" || echo "❌"
 	@echo "$(NAME) has been created!"
 
-%.o: %.c
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	@mkdir -p $(dir $@)
 	@echo -n "Creating $@..."
 	@$(CC) -c $(W_FLG) $(I_FLG) $< -o $@ && echo "✅" || echo "❌"
 
@@ -81,7 +86,7 @@ $(L_FT_ACTOR):
 clean:
 	@$(MAKE) -sC $(L_FT_ACTOR_DIR) clean
 	@echo -n "Deleting $(NAME) objs..."
-	@rm -f $(OBJS) && echo "✅" || echo "❌"
+	@rm -rf $(OBJS_DIR) && echo "✅" || echo "❌"
 
 fclean:
 	@$(MAKE) -sC $(L_FT_ACTOR_DIR) fclean

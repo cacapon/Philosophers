@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 21:05:36 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 17:31:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,19 @@ typedef struct s_sv_actor
 
 t_sv_actor			*sv_actor_new(t_main_args args);
 void				sv_actor_del(t_sv_actor **sv);
-t_sv_prop			*_sv_prop_new(t_main_args args);
-void				sv_prop_del(t_sv_prop **prop);
+
+// vtable
+void				sv_on_start(t_ft_actor *self);
+bool				sv_on_receive(t_ft_actor *self, t_ft_msg *msg);
+
+// on_recieved
+void				_on_actor_start_done(t_sv_actor *self);
+void				_on_actor_stop_done(t_sv_actor *sv);
+void				_on_update(t_sv_actor *self);
+void				_on_philo_dead(t_sv_actor *self);
+void				_on_shut_down(t_sv_actor *self);
 
 // methods
-bool				_sv_on_receive(t_ft_actor *self, t_ft_msg *msg);
 t_size_t_matrix		*_create_send_ptn(size_t n);
 void				_advance_to_next_phase(t_sv_actor *self);
 void				_send_grant_eat(t_sv_actor *self);

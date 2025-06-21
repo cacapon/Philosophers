@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fork_actor.c                                       :+:      :+:    :+:   */
+/*   _common_update.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:49:00 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 18:36:23 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fork_actor.h"
+#include "philo_actor.h"
 
-void	fork_actor_del(t_fork_actor **fork_ptr)
+// TODO: UPDATEは必ずlong型のargsを含むメッセージを渡されるのでそれ以外ならerrorにしたい
+void	_common_update(t_philo_actor *self, t_ft_msg *msg)
 {
-	t_fork_actor	*fork;
+	long	delta;
 
-	fork = *fork_ptr;
-	if (!fork)
+	if (!self || !msg || !msg->args)
 		return ;
-	ft_actor_del(&fork->base);
-	free(fork);
-	*fork_ptr = NULL;
-}
-
-t_fork_actor	*fork_actor_new(void)
-{
-	t_fork_actor					*fork;
-	static const t_ft_actor_vtable	vtable = {
-		.on_start = fork_on_start,
-		.on_receive = fork_on_receive,
-		.on_stop = NULL,
-	};
-
-	fork = philo_calloc(1, sizeof(t_fork_actor));
-	if (!fork)
-		return (NULL);
-	fork->base = ft_actor_new(fork);
-	if (!fork->base)
-		return (fork_actor_del(&fork), NULL);
-	fork->base->v = &vtable;
-	return (fork);
+	delta = *(long *)(msg->args);
+	self->now_hp -= delta;
+	if (self->now_hp <= 0)
+	{
+		self->sts = PHILO_STS_DEAD;
+		self->sv->tell(self->sv, msg_new(PHILO_DEAD, self->base, NULL));
+	}
 }
