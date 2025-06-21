@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:41:13 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:29:14 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ bool	philo_on_receive(t_ft_actor *self, t_ft_msg *msg)
 		if (philo->sts == PHILO_STS_THINKING)
 			_thinking(philo);
 		if (philo->sts == PHILO_STS_EATING)
-			_eating(philo);
+			_eating(philo, *(long *)(msg->args));
 		if (philo->sts == PHILO_STS_SLEEPING)
-			_sleeping(philo);
+			_sleeping(philo, *(long *)(msg->args));
 	}
 	if (msg->type == GRANT_EAT)
 		philo->can_eat = true;

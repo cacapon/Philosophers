@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 21:23:06 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:31:56 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void	test_eating(void)
 	p->r_fork = p_dummy;
 	p->l_fork = p_dummy2;
 	TEST_ASSERT_EQUAL_INT(p->now_eat, 0);
-	_eating(p);
+	_eating(p, 1);
 	TEST_ASSERT_EQUAL_INT(p->now_eat, 1);
 }
 
@@ -180,7 +180,7 @@ void	test_eating_done(void)
 	p->l_fork = p_dummy2;
 	p->now_eat = p->max_eat -1;
 	TEST_ASSERT_EQUAL_INT(p->now_eat, p->max_eat -1);
-	_eating(p);
+	_eating(p, 1);
 	res1 = _wait_mes(p_dummy, WAIT_TIME);
 	res2 = _wait_mes(p_dummy2, WAIT_TIME);
 	res3 = _wait_mes(p_sv_dummy, WAIT_TIME);
@@ -200,7 +200,7 @@ void	test_eating_done(void)
 void	test_sleeping(void)
 {
 	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
-	_sleeping(p);
+	_sleeping(p, 1);
 	TEST_ASSERT_EQUAL_INT(p->now_slp, 1);
 }
 
@@ -208,7 +208,7 @@ void	test_sleeping_wakeup(void)
 {
 	p->max_slp = 1;
 	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
-	_sleeping(p);
+	_sleeping(p, 1);
 	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
 	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_THINKING);
 }

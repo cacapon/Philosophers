@@ -6,15 +6,15 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 21:10:54 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:26:44 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_actor.h"
 
-void	_sleeping(t_philo_actor *self)
+void	_sleeping(t_philo_actor *self, long delta)
 {
-	self->now_slp++;
+	self->now_slp += delta;
 	if (self->now_slp >= self->max_slp)
 	{
 		self->now_slp = 0;
