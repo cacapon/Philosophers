@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _advance_to_next_phase.c                           :+:      :+:    :+:   */
+/*   _on_philo_eat_done.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 18:47:08 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:54:49 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/21 21:37:09 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/21 21:47:37 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sv_actor.h"
 
-void	_advance_to_next_phase(t_sv_actor *self)
+static void	_advance_to_next_phase(t_sv_actor *self)
 {
 	size_t		i;
 	t_ft_actor	*philo;
@@ -29,4 +29,9 @@ void	_advance_to_next_phase(t_sv_actor *self)
 			philo->tell(philo, msg_new(GRANT_EAT, NULL, NULL));
 		}
 	}
+}
+
+void	_on_philo_eat_done(t_sv_actor *self)
+{
+	_advance_to_next_phase(self);
 }
