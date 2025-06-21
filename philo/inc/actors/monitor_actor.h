@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 21:06:42 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 18:43:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_monitor_actor
 
 t_monitor_actor	*monitor_actor_new(void);
 void			monitor_actor_del(t_monitor_actor **monitor);
+void			monitor_on_start(t_ft_actor *self);
+bool			monitor_on_receive(t_ft_actor *self, t_ft_msg *msg);
 void			_show_monitor(t_ft_msg *msg);
 
 #endif
