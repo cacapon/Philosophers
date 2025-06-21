@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 21:06:50 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 18:47:54 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_fork_actor
 
 t_fork_actor	*fork_actor_new(void);
 void			fork_actor_del(t_fork_actor **fork_ptr);
+void			fork_on_start(t_ft_actor *self);
+bool			fork_on_receive(t_ft_actor *self, t_ft_msg *msg);
 void			_on_request_fork(t_fork_actor *fork, t_ft_actor *sender);
 void			_on_release_fork(t_fork_actor *fork, t_ft_actor *sender);
 
