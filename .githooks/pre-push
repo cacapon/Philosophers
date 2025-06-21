@@ -1,10 +1,11 @@
 #!/bin/bash
 
 echo -n "Checking build before push..."
-if ! make -C philo > /dev/null 2> >(cat >&2); then
+if ! make -C philo re > /dev/null 2> >(cat >&2); then
 	echo "❌"
 	echo "Build failed. Push aborted."
 	exit 1
 fi
 echo "✅"
 echo "Build OK. Processing to push."
+make -C philo fclean > /dev/null

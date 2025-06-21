@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 23:02:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 22:57:52 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,10 @@
 #define WAIT_TIME 10000
 
 
-t_philo_actor *p = NULL;
-t_ft_actor *p_dummy = NULL;
-t_ft_actor	*p_dummy2 = NULL;
-const t_ft_actor_vtable p_dummy_vtable = {
-    .on_start = NULL,
-    .on_receive = NULL,
-    .on_stop = NULL,
-    
-};
+t_philo_actor 	*p = NULL;
+t_ft_actor		*p_sv_dummy = NULL;
+t_ft_actor 		*p_dummy = NULL;
+t_ft_actor		*p_dummy2 = NULL;
 
 static void setup(void) {
 	t_main_args	args;
@@ -39,10 +34,17 @@ static void setup(void) {
     p = philo_actor_new(0, args);
     p_dummy = ft_actor_new(NULL);
 	p_dummy2 = ft_actor_new(NULL);
+	p_sv_dummy = ft_actor_new(NULL);
+	p->base->parent = p_sv_dummy;
+	p->sv = p_sv_dummy;
+	p->now_hp = p->max_hp;
+	p->now_eat = 0;
+	p->now_slp = 0;
 }
 
 static void teardown(void) {
     philo_actor_del(&p);
+	ft_actor_del(&p_sv_dummy);
     ft_actor_del(&p_dummy);
 	ft_actor_del(&p_dummy2);
 }
@@ -64,23 +66,35 @@ static t_ft_msg   *_wait_mes(t_ft_actor *p_dummy, size_t max)
 
 void    test_common_update_normal(void)
 {
-    t_ft_msg   *res = NULL;
+    t_ft_msg   	*res = NULL;
+	t_ft_msg	*msg;
+	long		*delta;
 
-	_common_update(p, p_dummy);
-	res = _wait_mes(p_dummy, WAIT_TIME);
+	delta = philo_calloc(1, sizeof(long));
+	*delta = 1;
+	msg = msg_new(UPDATE, NULL, delta);
+	_common_update(p, msg);
+	res = _wait_mes(p->sv, WAIT_TIME);
     TEST_ASSERT_NULL(res);
+	msg_del(&msg);
 }
 
 void	test_common_update_dead(void)
 {
     t_ft_msg   *res = NULL;
+	t_ft_msg	*msg;
+	long		*delta;
 
+	delta = philo_calloc(1, sizeof(long));
+	*delta = 1;
 	p->now_hp = 1;
-	_common_update(p, p_dummy);
-	res = _wait_mes(p_dummy, WAIT_TIME);
+	msg = msg_new(UPDATE, NULL, delta);
+	_common_update(p, msg);
+	res = _wait_mes(p->sv, WAIT_TIME);
 	TEST_ASSERT_NOT_NULL(res);
 	TEST_ASSERT_EQUAL_INT(res->type, PHILO_DEAD);
-	free(res);
+	msg_del(&res);
+	msg_del(&msg);
 }
 
 void	test_thinking_cant_eat(void)
@@ -149,7 +163,7 @@ void	test_eating(void)
 	p->r_fork = p_dummy;
 	p->l_fork = p_dummy2;
 	TEST_ASSERT_EQUAL_INT(p->now_eat, 0);
-	_eating(p, p_dummy);
+	_eating(p);
 	TEST_ASSERT_EQUAL_INT(p->now_eat, 1);
 }
 
@@ -160,13 +174,13 @@ void	test_eating_done(void)
 	t_ft_msg	*res3 = NULL;
 
 	p->r_fork = p_dummy;
-	p->l_fork = p_dummy;
-	p->max_eat = 1;
-	TEST_ASSERT_EQUAL_INT(p->now_eat, 0);
-	_eating(p, p_dummy2);
+	p->l_fork = p_dummy2;
+	p->now_eat = p->max_eat -1;
+	TEST_ASSERT_EQUAL_INT(p->now_eat, p->max_eat -1);
+	_eating(p);
 	res1 = _wait_mes(p_dummy, WAIT_TIME);
-	res2 = _wait_mes(p_dummy, WAIT_TIME);
-	res3 = _wait_mes(p_dummy2, WAIT_TIME);
+	res2 = _wait_mes(p_dummy2, WAIT_TIME);
+	res3 = _wait_mes(p_sv_dummy, WAIT_TIME);
 	TEST_ASSERT_NOT_NULL(res1);
 	TEST_ASSERT_NOT_NULL(res2);
 	TEST_ASSERT_NOT_NULL(res3);

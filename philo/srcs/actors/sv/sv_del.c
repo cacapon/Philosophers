@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:25:41 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 22:42:10 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 22:37:19 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	sv_prop_del(t_sv_prop **prop_ptr)
 		return ;
 	prop = *prop_ptr;
 	free(prop->philos_ref);
+	free(prop->forks_ref);
 	free_matrix(&prop->send_ptn);
 	free(prop);
 	*prop_ptr = NULL;

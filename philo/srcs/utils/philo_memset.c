@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix.h                                           :+:      :+:    :+:   */
+/*   philo_memset.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/08 17:47:07 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 21:05:48 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/03 19:04:40 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/20 21:04:05 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATRIX_H
-# define MATRIX_H
+#include "philo_utils.h"
 
-# include "philo_utils.h"
-# include "stddef.h"
-
-typedef struct s_size_t_matrix
+void	*philo_memset(void *b, int c, size_t len)
 {
-	size_t		**rows;
-	size_t		*flat_data;
-	size_t		row;
-	size_t		col;
-}				t_size_t_matrix;
+	size_t			i;
+	unsigned char	*ptr;
 
-void			free_matrix(t_size_t_matrix **m_ptr);
-t_size_t_matrix	*create_matrix(size_t row, size_t col);
-
-#endif
+	if (!b)
+		return (b);
+	i = 0;
+	ptr = (unsigned char *)b;
+	while (i < len)
+		ptr[i++] = (unsigned char)c;
+	return (b);
+}

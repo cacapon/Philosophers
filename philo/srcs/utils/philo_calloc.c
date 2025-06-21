@@ -6,25 +6,11 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:04:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/04 17:20:04 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 21:04:17 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_calloc.h"
-
-static void	*_philo_memset(void *b, int c, size_t len)
-{
-	size_t			i;
-	unsigned char	*ptr;
-
-	if (!b)
-		return (b);
-	i = 0;
-	ptr = (unsigned char *)b;
-	while (i < len)
-		ptr[i++] = (unsigned char)c;
-	return (b);
-}
+#include "philo_utils.h"
 
 void	*philo_calloc(size_t count, size_t size)
 {
@@ -37,6 +23,6 @@ void	*philo_calloc(size_t count, size_t size)
 	_block = malloc(count * size);
 	if (!_block)
 		return (NULL);
-	_philo_memset(_block, 0, count * size);
+	philo_memset(_block, 0, count * size);
 	return (_block);
 }

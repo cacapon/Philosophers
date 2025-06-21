@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:25:38 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 21:19:19 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/20 21:39:20 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ void	msg_del(t_ft_msg **msg)
 {
 	t_ft_msg	*_msg;
 
+	if (!msg || !*msg)
+		return ;
 	_msg = *msg;
-	if (!_msg->args)
-		free(_msg->args);
+	free(_msg->args);
 	free(_msg);
 	*msg = NULL;
 }

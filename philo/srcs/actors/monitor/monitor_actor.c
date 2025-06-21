@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 22:21:22 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/18 00:12:05 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	monitor_actor_del(t_monitor_actor **monitor)
 
 t_monitor_actor	*monitor_actor_new(void)
 {
-	t_monitor_actor			*monitor;
-	const t_ft_actor_vtable	vtable = {
+	t_monitor_actor					*monitor;
+	static const t_ft_actor_vtable	vtable = {
 		.on_start = on_start,
 		.on_receive = on_receive,
 		.on_stop = NULL,

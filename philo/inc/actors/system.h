@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:00:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 21:27:30 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/17 23:16:49 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ typedef struct s_system
 
 t_system			*system_new(t_main_args args);
 void				system_del(t_system **sys, size_t num);
+void				system_run(t_system *sys);
 
 #endif
