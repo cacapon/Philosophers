@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 19:14:09 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 21:40:55 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,13 @@ bool				sv_on_receive(t_ft_actor *self, t_ft_msg *msg);
 void				_on_actor_start_done(t_sv_actor *self);
 void				_on_actor_stop_done(t_sv_actor *self);
 void				_on_update(t_sv_actor *self);
+void				_on_philo_eat_done(t_sv_actor *self);
 void				_on_philo_dead(t_sv_actor *self);
 void				_on_shut_down(t_sv_actor *self);
 void				_on_monitor_msg(t_sv_actor *self, t_ft_msg *msg);
 
 // methods
 t_size_t_matrix		*_create_send_ptn(size_t n);
-void				_advance_to_next_phase(t_sv_actor *self);
 void				_send_grant_eat(t_sv_actor *self);
 
 #endif

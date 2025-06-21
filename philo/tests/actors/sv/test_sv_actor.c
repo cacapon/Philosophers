@@ -130,13 +130,6 @@ void	test_create_send_ptn_odd(void)
 	}
 }
 
-void	test_advance_to_next_phase_countup(void)
-{
-	TEST_ASSERT_EQUAL_INT(sv->prop->philo_done_count, 0);
-	_advance_to_next_phase(sv);
-	TEST_ASSERT_EQUAL_INT(sv->prop->philo_done_count, 1);
-}
-
 void	test_create_forks(void)
 {
 	TEST_ASSERT_EQUAL(true, false);
@@ -156,8 +149,4 @@ void	test_sv(void)
 {
 	RUN_PHILO_TEST(test_create_send_ptn_even);
 	RUN_PHILO_TEST(test_create_send_ptn_odd);
-	RUN_PHILO_TEST(test_advance_to_next_phase_countup);
-	// RUN_PHILO_TEST(test_create_forks);
-	// RUN_PHILO_TEST(test_create_philos);
-	// RUN_PHILO_TEST(test_update_philos);
 }
