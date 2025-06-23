@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/23 13:58:51 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/23 14:00:13 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,8 @@ typedef struct s_philo_msg
 	t_ft_msg			*base;
 	t_philo_msg_data	data;
 }						t_philo_msg;
+
+t_philo_msg	*p_msg_new(int type, t_ft_actor *sender);
+void		p_msg_del(t_philo_msg **msg);	
 
 #endif
