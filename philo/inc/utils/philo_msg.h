@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 21:55:08 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/23 13:58:51 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,17 @@ typedef enum e_philo_msg_type
 	MONITOR_DIED,
 	MONITOR_MSG_END,
 }	t_philo_msg_type;
+
+typedef union u_philo_msg_data
+{
+	int				i;
+	long			l;
+}					t_philo_msg_data;
+
+typedef struct s_philo_msg
+{
+	t_ft_msg			*base;
+	t_philo_msg_data	data;
+}						t_philo_msg;
 
 #endif
