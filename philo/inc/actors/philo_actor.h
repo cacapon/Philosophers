@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 21:39:06 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:33:15 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ enum			e_philo_sts
 	PHILO_STS_DEAD,
 };
 
+typedef struct s_philo_bar
+{
+	long	max;
+	long	now;
+}			t_philo_bar;
+
 typedef struct s_philo_actor
 {
 	t_ft_actor	*base;
@@ -35,12 +41,9 @@ typedef struct s_philo_actor
 	t_ft_actor	*l_fork;
 	t_ft_actor	*r_fork;
 	int			sts;
-	long		max_hp;
-	long		now_hp;
-	long		max_eat;
-	long		now_eat;
-	long		max_slp;
-	long		now_slp;
+	t_philo_bar	hp;
+	t_philo_bar	eat;
+	t_philo_bar	slp;
 	int			max_eat_count;
 	int			eat_count;
 	size_t		no;

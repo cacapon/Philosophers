@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:15:56 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:31:58 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void setup(void) {
 	p_sv_dummy = ft_actor_new(NULL);
 	p->base->parent = p_sv_dummy;
 	p->sv = p_sv_dummy;
-	p->now_hp = p->max_hp;
-	p->now_eat = 0;
-	p->now_slp = 0;
+	p->hp.now = p->hp.max;
+	p->eat.now = 0;
+	p->slp.now = 0;
 }
 
 static void teardown(void) {
@@ -78,7 +78,7 @@ void	test_common_update_dead(void)
     t_ft_msg   *res = NULL;
 	t_ft_msg	*msg;
 
-	p->now_hp = 1;
+	p->hp.now = 1;
 	msg = msg_new(UPDATE, NULL);
 	_common_update(p, 1);
 	res = _wait_mes(p->sv, WAIT_TIME);
@@ -146,16 +146,16 @@ void	test_thinking_has_both_fork(void)
     TEST_ASSERT_NULL(res1);
     TEST_ASSERT_NULL(res2);
 	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_EATING);
-	TEST_ASSERT_EQUAL_INT(p->max_hp, p->now_hp);
+	TEST_ASSERT_EQUAL_INT(p->hp.max, p->hp.now);
 }
 
 void	test_eating(void)
 {
 	p->r_fork = p_dummy;
 	p->l_fork = p_dummy2;
-	TEST_ASSERT_EQUAL_INT(p->now_eat, 0);
+	TEST_ASSERT_EQUAL_INT(p->eat.now, 0);
 	_eating(p, 1);
-	TEST_ASSERT_EQUAL_INT(p->now_eat, 1);
+	TEST_ASSERT_EQUAL_INT(p->eat.now, 1);
 }
 
 void	test_eating_done(void)
@@ -166,8 +166,8 @@ void	test_eating_done(void)
 
 	p->r_fork = p_dummy;
 	p->l_fork = p_dummy2;
-	p->now_eat = p->max_eat -1;
-	TEST_ASSERT_EQUAL_INT(p->now_eat, p->max_eat -1);
+	p->eat.now = p->eat.max -1;
+	TEST_ASSERT_EQUAL_INT(p->eat.now, p->eat.max -1);
 	_eating(p, 1);
 	res1 = _wait_mes(p_dummy, WAIT_TIME);
 	res2 = _wait_mes(p_dummy2, WAIT_TIME);
@@ -187,17 +187,17 @@ void	test_eating_done(void)
 
 void	test_sleeping(void)
 {
-	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
+	TEST_ASSERT_EQUAL_INT(p->slp.now, 0);
 	_sleeping(p, 1);
-	TEST_ASSERT_EQUAL_INT(p->now_slp, 1);
+	TEST_ASSERT_EQUAL_INT(p->slp.now, 1);
 }
 
 void	test_sleeping_wakeup(void)
 {
-	p->max_slp = 1;
-	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
+	p->slp.max = 1;
+	TEST_ASSERT_EQUAL_INT(p->slp.now, 0);
 	_sleeping(p, 1);
-	TEST_ASSERT_EQUAL_INT(p->now_slp, 0);
+	TEST_ASSERT_EQUAL_INT(p->slp.now, 0);
 	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_THINKING);
 }
 

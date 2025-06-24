@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:16:35 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:25:31 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	_sleeping(t_philo_actor *self, long delta)
 {
-	self->now_slp += delta;
-	if (self->now_slp >= self->max_slp)
+	self->slp.now += delta;
+	if (self->slp.now >= self->slp.max)
 	{
-		self->now_slp = 0;
+		self->slp.now = 0;
 		self->sts = PHILO_STS_THINKING;
 		self->sv->tell(self->sv, msg_new(MONITOR_THINKING, self->base));
 	}
