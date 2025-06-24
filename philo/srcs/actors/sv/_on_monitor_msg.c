@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 18:59:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 19:20:25 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 12:24:09 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,15 @@ static long	_get_timestamp(t_sv_actor *self)
 	return (timestamp);
 }
 
-void	_on_monitor_msg(t_sv_actor *self, t_ft_msg *msg)
+void	_on_monitor_msg(t_sv_actor *self, t_ft_msg *rv_msg)
 {
 	t_ft_actor		*monitor_ref;
-	t_philo_actor	*sender;
-	t_monitor_data	*data;
-	long			timestamp;
+	t_ft_msg		*msg;
 
-	sender = (t_philo_actor *)msg->sender->ref;
-	timestamp = _get_timestamp(self);
-	data = monitor_data_new(timestamp, sender->no, msg->type);
+	msg = msg_new(rv_msg->type, rv_msg->sender, NULL);
+	if (!msg)
+		return ;
+	msg->data.l = _get_timestamp(self);
 	monitor_ref = self->prop->monitor_ref;
-	monitor_ref->tell(monitor_ref, msg_new(msg->type, msg->sender, data));
+	monitor_ref->tell(monitor_ref, msg);
 }
