@@ -6,22 +6,12 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 18:59:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:18:12 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 23:14:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "monitor_actor.h"
 #include "sv_actor.h"
-
-static long	_get_timestamp(t_sv_actor *self)
-{
-	long		timestamp;
-	t_timeval	now;
-
-	gettimeofday(&now, NULL);
-	timestamp = get_delta_ms(&self->prop->start, &now);
-	return (timestamp);
-}
 
 void	_on_monitor_msg(t_sv_actor *self, t_ft_msg *rv_msg)
 {
@@ -31,7 +21,7 @@ void	_on_monitor_msg(t_sv_actor *self, t_ft_msg *rv_msg)
 	msg = msg_new(rv_msg->type, rv_msg->sender);
 	if (!msg)
 		return ;
-	msg->data.l = _get_timestamp(self);
+	msg->data.l = tvtol(&rv_msg->data.tv) - tvtol(&self->prop->start);
 	monitor_ref = self->prop->monitor_ref;
 	monitor_ref->tell(monitor_ref, msg);
 }

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 22:26:48 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:56:37 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 void	_common_update(t_philo_actor *self, long delta)
 {
+	t_ft_msg	*msg;
+
 	if (!self)
 		return ;
 	self->hp.now -= delta;
 	if (self->hp.now <= 0)
 	{
 		self->sts = PHILO_STS_DEAD;
-		self->sv->eg_tell(self->sv, msg_new(MONITOR_DIED, self->base));
+		msg = msg_new(MONITOR_DIED, self->base);
+		if (msg)
+			msg->data.tv = self->last_update_time;
+		self->sv->eg_tell(self->sv, msg);
 		self->sv->tell(self->sv, msg_new(PHILO_DEAD, self->base));
 	}
 }
