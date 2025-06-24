@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 21:39:26 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:28:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ t_philo_actor	*philo_actor_new(size_t no, t_main_args args)
 	philo->no = no;
 	philo->run_update = false;
 	philo->base->v = &vtable;
-	philo->max_hp = args.time_to_die;
-	philo->max_eat = args.time_to_eat;
-	philo->max_slp = args.time_to_sleep;
+	philo->hp.max = args.time_to_die;
+	philo->eat.max = args.time_to_eat;
+	philo->slp.max = args.time_to_sleep;
 	philo->max_eat_count = args.number_of_times_each_philosopher_must_eat;
 	return (philo);
 }

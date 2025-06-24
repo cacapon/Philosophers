@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:15:45 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:27:43 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	philo_on_start(t_ft_actor *self)
 	philo = self->ref;
 	parent = self->parent;
 	philo->sts = PHILO_STS_THINKING;
-	philo->now_hp = philo->max_hp;
-	philo->now_eat = 0;
-	philo->now_slp = 0;
+	philo->hp.now = philo->hp.max;
+	philo->eat.now = 0;
+	philo->slp.now = 0;
 	philo->eat_count = 0;
 	philo->has_r_fork = false;
 	philo->has_l_fork = false;

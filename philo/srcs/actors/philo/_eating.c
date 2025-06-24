@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:16:33 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:26:29 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	_eating(t_philo_actor *self, long delta)
 	l_tell = self->l_fork->tell;
 	r_tell = self->r_fork->tell;
 	sv_tell = self->sv->tell;
-	self->now_eat += delta;
-	if (self->now_eat >= self->max_eat)
+	self->eat.now += delta;
+	if (self->eat.now >= self->eat.max)
 	{
 		self->eat_count++;
 		if (self->eat_count == self->max_eat_count)
 			sv_tell(self->sv, msg_new(PHILO_FINISHED_EATING, NULL));
-		self->now_eat = 0;
+		self->eat.now = 0;
 		l_tell(self->l_fork, msg_new(RELEASE_FORK, self->base));
 		r_tell(self->r_fork, msg_new(RELEASE_FORK, self->base));
 		sv_tell(self->sv, msg_new(PHILO_EAT_DONE, NULL));
