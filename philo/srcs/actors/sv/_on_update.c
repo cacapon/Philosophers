@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 11:45:42 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:52:34 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	_on_update(t_sv_actor *self)
 {
-	size_t			i;
-	struct timeval	now;
-	t_ft_actor		*philo_ref;
-	t_ft_msg		*msg;
+	size_t		i;
+	t_timeval	now;
+	t_ft_actor	*philo_ref;
+	t_ft_msg	*msg;
 
 	gettimeofday(&now, NULL);
 	i = 0;

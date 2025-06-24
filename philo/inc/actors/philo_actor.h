@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 21:29:05 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:50:55 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo_actor
 	bool		has_l_fork;
 	bool		has_r_fork;
 	bool		can_eat;
+	t_timeval	last_update_time;
 }				t_philo_actor;
 
 t_philo_actor	*philo_actor_new(size_t no, t_main_args args);
