@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 21:05:44 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:36:12 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef enum e_philo_msg_type
 {
 	E_PHILO_TOP = CUSTOM_MSG_START,
-	PHILO_SET_START,
+	SYNC_START,
 	GRANT_EAT,
 	UPDATE,
 	PHILO_EAT_DONE,

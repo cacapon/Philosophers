@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 14:02:46 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:39:06 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_philo_actor
 	bool		has_l_fork;
 	bool		has_r_fork;
 	bool		can_eat;
+	bool		run_update;
 	t_timeval	last_update_time;
 }				t_philo_actor;
 
@@ -56,6 +57,7 @@ void			philo_on_start(t_ft_actor *self);
 bool			philo_on_receive(t_ft_actor *self, t_ft_msg *msg);
 void			philo_update(t_ft_actor *self);
 // methods
+void			_philo_sync_start(t_philo_actor *self, t_ft_msg *msg);
 void			_common_update(t_philo_actor *self, long delta);
 void			_thinking(t_philo_actor *self);
 void			_eating(t_philo_actor *self, long delta);
