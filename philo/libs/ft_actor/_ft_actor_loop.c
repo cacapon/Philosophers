@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/22 00:10:35 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:14:40 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	*_ft_actor_loop(void *arg)
 	while (self->is_running)
 	{
 		usleep(1000);
+		if (self->v->update)
+			self->v->update(self);
 		_take_msg(self, self->emergency_inbox);
 		_take_msg(self, self->inbox);
 	}

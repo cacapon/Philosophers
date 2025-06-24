@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:35:06 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:15:37 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_philo_actor	*philo_actor_new(size_t no, t_main_args args)
 		.on_start = philo_on_start,
 		.on_receive = philo_on_receive,
 		.on_stop = NULL,
+		.update = philo_update,
 	};
 
 	philo = philo_calloc(1, sizeof(t_philo_actor));

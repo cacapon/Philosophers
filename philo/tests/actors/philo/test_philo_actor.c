@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 11:46:49 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:04:05 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,10 @@ static t_ft_msg   *_wait_mes(t_ft_actor *p_dummy, size_t max)
 void    test_common_update_normal(void)
 {
     t_ft_msg   	*res = NULL;
-	t_ft_msg	*msg;
 
-	msg = msg_new(UPDATE, NULL, NULL);
-	msg->data.l = 1;
-	_common_update(p, msg);
+	_common_update(p, 1);
 	res = _wait_mes(p->sv, WAIT_TIME);
     TEST_ASSERT_NULL(res);
-	msg_del(&msg);
 }
 
 void	test_common_update_dead(void)
@@ -84,8 +80,7 @@ void	test_common_update_dead(void)
 
 	p->now_hp = 1;
 	msg = msg_new(UPDATE, NULL, NULL);
-	msg->data.l = 1;
-	_common_update(p, msg);
+	_common_update(p, 1);
 	res = _wait_mes(p->sv, WAIT_TIME);
 	TEST_ASSERT_NOT_NULL(res);
 	TEST_ASSERT_EQUAL_INT(res->type, PHILO_DEAD);

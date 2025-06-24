@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:09:06 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/22 00:14:24 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:14:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_ft_actor_vtable
 	void	(*on_start)(t_ft_actor *self);
 	bool	(*on_receive)(t_ft_actor * self, t_ft_msg * msg);
 	void	(*on_stop)(t_ft_actor *self);
+	void	(*update)(t_ft_actor *self);
 }			t_ft_actor_vtable;
 
 typedef struct s_ft_actor

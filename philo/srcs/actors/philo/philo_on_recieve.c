@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 12:27:25 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:03:16 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ bool	philo_on_receive(t_ft_actor *self, t_ft_msg *msg)
 	if (!self || !self->ref || !msg)
 		return (true);
 	philo = (t_philo_actor *)self->ref;
-	if (msg->type == UPDATE)
-	{
-		if (philo->sts == PHILO_STS_DEAD)
-			return (true);
-		_common_update(philo, msg);
-		if (philo->sts == PHILO_STS_THINKING)
-			_thinking(philo);
-		if (philo->sts == PHILO_STS_EATING)
-			_eating(philo, msg->data.l);
-		if (philo->sts == PHILO_STS_SLEEPING)
-			_sleeping(philo, msg->data.l);
-	}
 	if (msg->type == GRANT_EAT)
 		philo->can_eat = true;
 	if (msg->type == GRANT_FORK)

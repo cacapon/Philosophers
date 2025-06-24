@@ -6,13 +6,14 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 13:50:55 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:02:46 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_ACTOR_H
 # define PHILO_ACTOR_H
 
+# include "philo_define.h"
 # include "ft_actor.h"
 # include "philo_msg.h"
 
@@ -53,8 +54,9 @@ t_philo_actor	*philo_actor_new(size_t no, t_main_args args);
 void			philo_actor_del(t_philo_actor **philo_ptr);
 void			philo_on_start(t_ft_actor *self);
 bool			philo_on_receive(t_ft_actor *self, t_ft_msg *msg);
+void			philo_update(t_ft_actor *self);
 // methods
-void			_common_update(t_philo_actor *self, t_ft_msg *msg);
+void			_common_update(t_philo_actor *self, long delta);
 void			_thinking(t_philo_actor *self);
 void			_eating(t_philo_actor *self, long delta);
 void			_sleeping(t_philo_actor *self, long delta);
