@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:09:06 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 13:14:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:34:10 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "ft_queue.h"
 # include "ft_actor_msg.h"
 # include "stdbool.h"
+# include <sys/time.h>	
 # include <pthread.h>
 
 typedef struct s_ft_actor	t_ft_actor;
@@ -32,6 +33,7 @@ typedef struct s_ft_actor_vtable
 typedef struct s_ft_actor
 {
 	pthread_t				thread;
+	struct timeval			start;
 	t_ft_queue				*inbox;
 	t_ft_queue				*emergency_inbox;
 	void					*ref;
