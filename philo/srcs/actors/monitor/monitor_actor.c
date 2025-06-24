@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:44:53 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:41:29 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ t_monitor_actor	*monitor_actor_new(void)
 	if (!monitor->base)
 		return (monitor_actor_del(&monitor), NULL);
 	monitor->base->v = &vtable;
+	monitor->is_someone_died = false;
 	return (monitor);
 }

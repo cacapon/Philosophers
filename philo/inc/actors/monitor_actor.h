@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 12:29:46 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:41:12 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct s_monitor_actor
 {
 	t_ft_actor		*base;
+	bool			is_someone_died;
 }				t_monitor_actor;
 
 t_monitor_actor	*monitor_actor_new(void);
