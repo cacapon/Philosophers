@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:49:34 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:16:24 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	_on_request_fork(t_fork_actor *fork, t_ft_actor *sender)
 	{
 		fork->sts = FORK_HELD;
 		fork->holder = sender;
-		sender->tell(sender, msg_new(GRANT_FORK, fork->base, NULL));
+		sender->tell(sender, msg_new(GRANT_FORK, fork->base));
 	}
 }

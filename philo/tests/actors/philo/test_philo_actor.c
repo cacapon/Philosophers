@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 14:04:05 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:56 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	test_common_update_dead(void)
 	t_ft_msg	*msg;
 
 	p->now_hp = 1;
-	msg = msg_new(UPDATE, NULL, NULL);
+	msg = msg_new(UPDATE, NULL);
 	_common_update(p, 1);
 	res = _wait_mes(p->sv, WAIT_TIME);
 	TEST_ASSERT_NOT_NULL(res);

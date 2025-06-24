@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:40:58 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:45 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	philo_on_start(t_ft_actor *self)
 	philo->has_r_fork = false;
 	philo->has_l_fork = false;
 	philo->can_eat = false;
-	parent->tell(parent, msg_new(ACTOR_START_DONE, self, NULL));
+	parent->tell(parent, msg_new(ACTOR_START_DONE, self));
 }

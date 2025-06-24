@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 13:52:34 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:51 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	_on_update(t_sv_actor *self)
 	i = 0;
 	while (i < self->prop->args.num_of_philos)
 	{
-		msg = msg_new(UPDATE, NULL, NULL);
+		msg = msg_new(UPDATE, NULL);
 		if (!msg)
 			return ;
 		msg->data.l = get_delta_ms(&self->prop->last_update_time, &now);

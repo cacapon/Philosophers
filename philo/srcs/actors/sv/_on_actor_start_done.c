@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 17:31:27 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:46 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	_on_actor_start_done(t_sv_actor *self)
 		gettimeofday(&self->prop->start, NULL);
 		self->prop->last_update_time = self->prop->start;
 		self->sys_notify_inbox->enq(
-			self->sys_notify_inbox, msg_new(ACTOR_START_DONE, NULL, NULL));
+			self->sys_notify_inbox, msg_new(ACTOR_START_DONE, NULL));
 	}
 }

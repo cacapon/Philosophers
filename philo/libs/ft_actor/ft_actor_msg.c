@@ -6,16 +6,13 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:25:38 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/20 21:39:20 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:17:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_actor_msg.h"
 
-/**
- * @note pre: args is allocate memory or NULL.
- */
-t_ft_msg	*msg_new(int type, t_ft_actor *sender, void *args)
+t_ft_msg	*msg_new(int type, t_ft_actor *sender)
 {
 	t_ft_msg	*msg;
 
@@ -24,13 +21,9 @@ t_ft_msg	*msg_new(int type, t_ft_actor *sender, void *args)
 		return (NULL);
 	msg->sender = sender;
 	msg->type = type;
-	msg->args = args;
 	return (msg);
 }
 
-/**
- * @note pre: msg.args is allocate memory or NULL.
- */
 void	msg_del(t_ft_msg **msg)
 {
 	t_ft_msg	*_msg;
@@ -38,7 +31,6 @@ void	msg_del(t_ft_msg **msg)
 	if (!msg || !*msg)
 		return ;
 	_msg = *msg;
-	free(_msg->args);
 	free(_msg);
 	*msg = NULL;
 }

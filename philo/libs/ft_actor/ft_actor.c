@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/22 00:14:32 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ void	ft_actor_stop(t_ft_actor *a)
 	if (a->v && a->v->on_stop)
 		a->v->on_stop(a);
 	if (a->parent)
-		a->parent->tell(a->parent, msg_new(ACTOR_STOP_DONE, a, NULL));
+		a->parent->tell(a->parent, msg_new(ACTOR_STOP_DONE, a));
 	pthread_join(a->thread, NULL);
 }

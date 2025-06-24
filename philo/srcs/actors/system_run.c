@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 23:13:02 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 14:26:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:21 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	_shatdown_phase(t_system *sys)
 {
 	t_ft_msg	*sys_msg;
 
-	sys->sv->base->tell(sys->sv->base, msg_new(SHUT_DOWN, NULL, NULL));
+	sys->sv->base->tell(sys->sv->base, msg_new(SHUT_DOWN, NULL));
 	while (true)
 	{
 		sys_msg = sys->notify_inbox->deq(sys->notify_inbox);

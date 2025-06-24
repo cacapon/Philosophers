@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 18:59:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 13:52:20 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:18:12 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	_on_monitor_msg(t_sv_actor *self, t_ft_msg *rv_msg)
 	t_ft_actor	*monitor_ref;
 	t_ft_msg	*msg;
 
-	msg = msg_new(rv_msg->type, rv_msg->sender, NULL);
+	msg = msg_new(rv_msg->type, rv_msg->sender);
 	if (!msg)
 		return ;
 	msg->data.l = _get_timestamp(self);

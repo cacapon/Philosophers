@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 11:42:08 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:17:00 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ typedef struct s_ft_msg
 	int				type;
 	t_ft_actor		*sender;
 	t_ft_msg_data	data;	
-	void		*args;
 }				t_ft_msg;
 
-t_ft_msg	*msg_new(int type, t_ft_actor *sender, void *args);
+t_ft_msg	*msg_new(int type, t_ft_actor *sender);
 void		msg_del(t_ft_msg **msg);	
 
 #endif
