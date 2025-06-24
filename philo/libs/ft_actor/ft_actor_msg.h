@@ -6,14 +6,15 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:58:39 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:17:00 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:07:44 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ACTOR_MSG_H
 # define FT_ACTOR_MSG_H
 
-// using NULL
+// using NULL timeval
+# include <sys/time.h>
 # include <stddef.h>
 # include "ft_actor_calloc.h"
 
@@ -32,8 +33,9 @@ enum e_msg_type
 
 typedef union u_ft_msg_data
 {
-	int		i;
-	long	l;
+	int				i;
+	long			l;
+	struct timeval	tv;
 }			t_ft_msg_data;
 
 typedef struct s_ft_msg
