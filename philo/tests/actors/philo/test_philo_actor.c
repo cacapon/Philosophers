@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 21:31:56 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:56 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,36 +67,24 @@ static t_ft_msg   *_wait_mes(t_ft_actor *p_dummy, size_t max)
 void    test_common_update_normal(void)
 {
     t_ft_msg   	*res = NULL;
-	t_ft_msg	*msg;
-	long		*delta;
 
-	delta = philo_calloc(1, sizeof(long));
-	*delta = 1;
-	msg = msg_new(UPDATE, NULL, delta);
-	_common_update(p, msg);
+	_common_update(p, 1);
 	res = _wait_mes(p->sv, WAIT_TIME);
     TEST_ASSERT_NULL(res);
-	msg_del(&msg);
 }
 
 void	test_common_update_dead(void)
 {
-    t_ft_msg   *res1 = NULL;
-    t_ft_msg   *res2 = NULL;
+    t_ft_msg   *res = NULL;
 	t_ft_msg	*msg;
-	long		*delta;
 
-	delta = philo_calloc(1, sizeof(long));
-	*delta = 1;
 	p->now_hp = 1;
-	msg = msg_new(UPDATE, NULL, delta);
-	_common_update(p, msg);
-	res1 = _wait_mes(p->sv, WAIT_TIME);
-	res2 = _wait_mes(p->sv, WAIT_TIME);
-	TEST_ASSERT_NOT_NULL(res2);
-	TEST_ASSERT_EQUAL_INT(res2->type, PHILO_DEAD);
-	msg_del(&res1);
-	msg_del(&res2);
+	msg = msg_new(UPDATE, NULL);
+	_common_update(p, 1);
+	res = _wait_mes(p->sv, WAIT_TIME);
+	TEST_ASSERT_NOT_NULL(res);
+	TEST_ASSERT_EQUAL_INT(res->type, PHILO_DEAD);
+	msg_del(&res);
 	msg_del(&msg);
 }
 

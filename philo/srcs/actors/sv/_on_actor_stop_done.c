@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 17:25:43 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	_on_actor_stop_done(t_sv_actor *sv)
 	if (sv->prop->ref_count == 0)
 	{
 		sv->sys_notify_inbox->enq(sv->sys_notify_inbox,
-			msg_new(ACTOR_STOP_DONE, NULL, NULL));
+			msg_new(ACTOR_STOP_DONE, NULL));
 		ft_actor_stop(sv->base);
 	}
 }

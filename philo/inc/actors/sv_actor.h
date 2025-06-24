@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 22:03:11 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:29:59 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SV_ACTOR_H
 
 # include "args.h"
+# include "philo_define.h"
 # include "ft_actor.h"
 # include "matrix.h"
 # include "philo_msg.h"
@@ -24,8 +25,8 @@ typedef struct s_sv_prop
 {
 	t_size_t_matrix	*send_ptn;
 	t_main_args		args;
-	struct timeval	start;
-	struct timeval	last_update_time;
+	t_timeval		start;
+	t_timeval		last_update_time;
 	size_t			philo_done_count;
 	size_t			ptn_i;
 	t_ft_actor		**philos_ref;

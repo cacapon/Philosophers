@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:48:14 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:25 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	fork_on_start(t_ft_actor *self)
 	fork = (t_fork_actor *)self->ref;
 	fork->sts = FORK_AVAILABLE;
 	fork->holder = NULL;
-	self->parent->tell(self->parent, msg_new(ACTOR_START_DONE, self, NULL));
+	self->parent->tell(self->parent, msg_new(ACTOR_START_DONE, self));
 }

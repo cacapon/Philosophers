@@ -6,11 +6,12 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 21:19:30 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 12:12:15 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_queue.h"
+#include "ft_actor_msg.h"
 
 /**
  * @return true     :SUCCESS
@@ -88,6 +89,7 @@ void	ft_queue_del(t_ft_queue **q)
 	while (curr)
 	{
 		next = curr->next;
+		msg_del((t_ft_msg **)&curr->msg);
 		free(curr);
 		curr = next;
 	}

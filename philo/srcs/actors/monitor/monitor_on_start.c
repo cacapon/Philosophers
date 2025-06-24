@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:45:10 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:26 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	monitor_on_start(t_ft_actor *self)
 {
-	self->parent->tell(self->parent, msg_new(ACTOR_START_DONE, self, NULL));
+	self->parent->tell(self->parent, msg_new(ACTOR_START_DONE, self));
 }

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:34:57 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 22:40:08 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:15:52 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	_send_grant_eat(t_sv_actor *self)
 	{
 		send_i = self->prop->send_ptn->rows[self->prop->ptn_i][i];
 		philo_ref = self->prop->philos_ref[send_i];
-		philo_ref->tell(philo_ref, msg_new(GRANT_EAT, NULL, NULL));
+		philo_ref->tell(philo_ref, msg_new(GRANT_EAT, NULL));
 		i++;
 	}
 }

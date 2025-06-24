@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:49:58 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:16:22 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	_on_release_fork(t_fork_actor *fork, t_ft_actor *sender)
 	{
 		fork->sts = FORK_AVAILABLE;
 		fork->holder = NULL;
-		sender->tell(sender, msg_new(FORK_RELEASED, fork->base, NULL));
+		sender->tell(sender, msg_new(FORK_RELEASED, fork->base));
 	}
 }

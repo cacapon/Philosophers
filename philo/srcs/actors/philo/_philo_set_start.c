@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _sleeping.c                                        :+:      :+:    :+:   */
+/*   _philo_set_start.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:16:35 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/24 21:22:17 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/24 21:42:27 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_actor.h"
 
-void	_sleeping(t_philo_actor *self, long delta)
+void	_philo_sync_start(t_philo_actor *self, t_ft_msg *msg)
 {
-	self->now_slp += delta;
-	if (self->now_slp >= self->max_slp)
-	{
-		self->now_slp = 0;
-		self->sts = PHILO_STS_THINKING;
-		self->sv->tell(self->sv, msg_new(MONITOR_THINKING, self->base));
-	}
+	self->base->start = msg->data.tv;
+	self->last_update_time = self->base->start;
+	self->run_update = true;
 }
