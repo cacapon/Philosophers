@@ -6,20 +6,20 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:44:20 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 13:49:33 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:21:17 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_utils.h"
 
+long	tvtol(t_timeval *tv)
+{
+	return (tv->tv_sec * 1000 + tv->tv_usec / 1000);
+}
+
 long	get_delta_ms(t_timeval *prev, t_timeval *now)
 {
-	long	sec;
-	long	micro_sec;
-
-	sec = now->tv_sec - prev->tv_sec;
-	micro_sec = now->tv_usec - prev->tv_usec;
-	return (sec * 1000 + micro_sec / 1000);
+	return (tvtol(now) - tvtol(prev));
 }
 
 long	get_elapsed_ms(t_timeval *start)
