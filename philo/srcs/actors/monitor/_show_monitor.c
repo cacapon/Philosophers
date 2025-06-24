@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:11:18 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 12:19:10 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 12:37:42 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	_show_monitor(t_ft_msg *msg)
 	philo = msg->sender->ref;
 	time_ms = msg->data.l;
 	no = philo->no;
-	printf("%ld %ld %s\n", time_ms, no, _get_msg(msg));
+	printf("%08ld %ld %s\n", time_ms, no, _get_msg(msg));
 }
