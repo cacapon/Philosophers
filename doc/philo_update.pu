@@ -34,6 +34,7 @@ loop self.is_runningがtrueの限り
 		opt philo get LR fork
 			philo->sv: MONITOR_EATING
 			sv->monitor: MONITOR_EATING
+			philo->sv: PHILO_EAT_START
 		end
 	end
 	opt philo.sts == EATING 
@@ -49,7 +50,6 @@ loop self.is_runningがtrueの限り
 			philo->R_fork: RELEASE_FORK
 			R_fork->philo: FORK_RELEASED
 			opt フォークを返し終わったら
-			philo->sv: PHILO_EAT_DONE
 				note right of philo
 					philo.sts = PHILO_STS_WAITING
 				end note

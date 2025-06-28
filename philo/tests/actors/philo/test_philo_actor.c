@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 18:04:13 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 19:36:39 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	test_eating_done(void)
 	TEST_ASSERT_NOT_NULL(res3);
 	TEST_ASSERT_EQUAL_INT(res1->type, RELEASE_FORK);
 	TEST_ASSERT_EQUAL_INT(res2->type, RELEASE_FORK);
-	TEST_ASSERT_EQUAL_INT(res3->type, PHILO_EAT_DONE);
+	TEST_ASSERT_EQUAL_INT(res3->type, PHILO_EAT_START);
 	TEST_ASSERT_EQUAL_INT(p->can_eat, false);
 	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_WAITING);
 	free(res1);

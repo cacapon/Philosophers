@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _on_philo_eat_done.c                               :+:      :+:    :+:   */
+/*   _on_philo_eat_start.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/21 21:37:09 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 22:13:19 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/28 19:40:20 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/28 19:40:26 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	_advance_to_next_phase(t_sv_actor *self)
 	}
 }
 
-void	_on_philo_eat_done(t_sv_actor *self)
+void	_on_philo_eat_start(t_sv_actor *self)
 {
 	_advance_to_next_phase(self);
 }
