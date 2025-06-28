@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 22:31:58 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 17:01:42 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,13 @@ void    test_common_update_normal(void)
 void	test_common_update_dead(void)
 {
     t_ft_msg   *res = NULL;
-	t_ft_msg	*msg;
 
 	p->hp.now = 1;
-	msg = msg_new(UPDATE, NULL);
 	_common_update(p, 1);
 	res = _wait_mes(p->sv, WAIT_TIME);
 	TEST_ASSERT_NOT_NULL(res);
 	TEST_ASSERT_EQUAL_INT(res->type, PHILO_DEAD);
 	msg_del(&res);
-	msg_del(&msg);
 }
 
 void	test_thinking_cant_eat(void)
