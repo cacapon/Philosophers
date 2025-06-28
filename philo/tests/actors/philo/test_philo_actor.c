@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 19:36:39 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 20:27:33 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void	test_eating_done(void)
 	p->r_fork = p_dummy;
 	p->l_fork = p_dummy2;
 	p->eat.now = p->eat.max -1;
+	p->max_eat_count = 1;
 	TEST_ASSERT_EQUAL_INT(p->eat.now, p->eat.max -1);
 	_eating(p, 1);
 	res1 = _wait_mes(p_dummy, WAIT_TIME);
@@ -172,7 +173,7 @@ void	test_eating_done(void)
 	TEST_ASSERT_NOT_NULL(res3);
 	TEST_ASSERT_EQUAL_INT(res1->type, RELEASE_FORK);
 	TEST_ASSERT_EQUAL_INT(res2->type, RELEASE_FORK);
-	TEST_ASSERT_EQUAL_INT(res3->type, PHILO_EAT_START);
+	TEST_ASSERT_EQUAL_INT(res3->type, PHILO_FINISHED_EATING);
 	TEST_ASSERT_EQUAL_INT(p->can_eat, false);
 	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_WAITING);
 	free(res1);
