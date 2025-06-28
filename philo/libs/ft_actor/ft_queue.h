@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:11 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/16 21:19:44 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 18:19:06 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 typedef struct s_ft_node	t_ft_node;
 typedef struct s_ft_queue	t_ft_queue;
+typedef void 				(*t_ft_deleter)(void **);
 
 typedef struct s_ft_node
 {
@@ -39,9 +40,10 @@ typedef struct s_ft_queue
 	pthread_mutex_t	mutex;
 	bool			(*enq)(t_ft_queue * self, void *msg);
 	void			*(*deq)(t_ft_queue *self);
+	t_ft_deleter	del_func;
 }					t_ft_queue;
 
-t_ft_queue	*ft_queue_new(void);
+t_ft_queue	*ft_queue_new(t_ft_deleter del_func);
 void		ft_queue_del(t_ft_queue **q);
 
 #endif

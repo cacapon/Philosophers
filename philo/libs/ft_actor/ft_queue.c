@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 12:12:15 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 18:29:00 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	*_dequeue(t_ft_queue *self)
 	return (msg);
 }
 
-t_ft_queue	*ft_queue_new(void)
+t_ft_queue	*ft_queue_new(t_ft_deleter del_func)
 {
 	t_ft_queue	*q;
 
@@ -73,6 +73,7 @@ t_ft_queue	*ft_queue_new(void)
 	q->head = NULL;
 	q->tail = NULL;
 	pthread_mutex_init(&q->mutex, NULL);
+	q->del_func = del_func;
 	q->enq = _enqueue;
 	q->deq = _dequeue;
 	return (q);
@@ -82,18 +83,21 @@ void	ft_queue_del(t_ft_queue **q)
 {
 	t_ft_node	*curr;
 	t_ft_node	*next;
+	t_ft_queue	*_q;
 
 	if (!q || !*q)
 		return ;
-	curr = (*q)->head;
+	_q = *q;
+	curr = _q->head;
 	while (curr)
 	{
 		next = curr->next;
-		msg_del((t_ft_msg **)&curr->msg);
+		if (_q->del_func)
+			_q->del_func(&curr->msg);
 		free(curr);
 		curr = next;
 	}
-	pthread_mutex_destroy(&(*q)->mutex);
-	free(*q);
+	pthread_mutex_destroy(&_q->mutex);
+	free(_q);
 	*q = NULL;
 }
