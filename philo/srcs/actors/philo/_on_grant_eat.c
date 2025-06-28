@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _thinking.c                                        :+:      :+:    :+:   */
+/*   _on_grant_eat.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 18:02:20 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/28 17:51:13 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/28 18:02:11 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_actor.h"
 
-void	_thinking(t_philo_actor *self)
+static void	_send_request_fork(t_ft_actor *fork, t_ft_actor *philo_ref)
 {
-	t_ft_msg	*msg;
+	fork->tell(fork, msg_new(REQUEST_FORK, philo_ref));
+}
 
-	if (!self->can_eat)
-		return ;
-	if (self->has_l_fork && self->has_r_fork)
-	{
-		msg = msg_new(MONITOR_EATING, self->base);
-		if (msg)
-			msg->data.tv = self->last_update_time;
-		self->sts = PHILO_STS_EATING;
-		self->hp.now = self->hp.max;
-		self->sv->tell(self->sv, msg);
-	}
+void	_on_grant_eat(t_philo_actor *self)
+{
+	self->can_eat = true;
+	_send_request_fork(self->l_fork, self->base);
+	_send_request_fork(self->r_fork, self->base);
 }

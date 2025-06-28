@@ -15,48 +15,69 @@ note right of philo
 	Philo考え中 
 end note
 sv -> philo : GRANT_EAT
-loop GRANT_FORK貰うまで
-	philo -> L_fork : REQUEST_FORK
-end
-loop GRANT_FORK貰うまで
-	philo -> R_fork : REQUEST_FORK
-end
-opt L_fork.sts == AVAILABLE
+philo -> L_fork : REQUEST_FORK
+philo -> R_fork : REQUEST_FORK
+alt L_fork.sts == AVAILABLE
 	L_fork -> philo : GRANT_FORK
 	note left of L_fork
 		L_fork.sts = HELD
 	end note
-end
-opt R_fork.sts == AVAILABLE
-	R_fork -> philo : GRANT_FORK
+else
 	note left of L_fork
-		R_fork.sts = HELD
+		L_fork.wait.enq(sender)
 	end note
 end
-note right of philo
-	食事開始 
-end note
+alt R_fork.sts == AVAILABLE
+	R_fork -> philo : GRANT_FORK
+	note left of R_fork
+		R_fork.sts = HELD
+	end note
+else
+	note left of R_fork
+		R_fork.wait.enq(sender)
+	end note
+end
+opt LRからフォーク使用許可が出たら
+	note right of philo
+		食事開始 
+	end note
+end
 == release-fork ==
 note right of philo
 	食事完了 
 end note
-loop FORK_RELEASED貰うまで
-	philo -> L_fork : RELEASE_FORK
+philo -> L_fork : RELEASE_FORK
+philo -> R_fork : RELEASE_FORK
+
+group L_fork release
+	opt L_fork.sts == HELD
+		L_fork -> philo : FORK_RELEASED
+		note left of L_fork
+			L_fork.sts = AVAILABLE
+		end note
+	end
+	opt L_fork.sts == AVAILABLE && !L_fork.wait.is_empty
+		note left of L_fork
+			philo = L_fork.wati.deq()
+			L_fork.sts = HELD 
+		end note
+		L_fork->philo: GRANT_FORK
+	end
 end
-loop FORK_RELEASED貰うまで
-	philo -> R_fork : RELEASE_FORK
-end
-opt L_fork.sts == HELD
-	L_fork -> philo : FORK_RELEASED
-	note left of L_fork
-		L_fork.sts = AVAILABLE
-	end note
-end
-opt R_fork.sts == HELD
-	R_fork -> philo : FORK_RELEASED
-	note left of L_fork
-		R_fork.sts = AVAILABLE
-	end note
+group R_fork release
+	opt R_fork.sts == HELD
+		R_fork -> philo : FORK_RELEASED
+		note left of R_fork
+			R_fork.sts = AVAILABLE
+		end note
+	end
+	opt R_fork.sts == AVAILABLE && !R_fork.wait.is_empty
+		note left of R_fork
+			philo = R_fork.wati.deq()
+			R_fork.sts = HELD 
+		end note
+		R_fork->philo: GRANT_FORK
+	end
 end
 note right of philo
 	睡眠開始 

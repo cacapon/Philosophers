@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 21:37:02 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 17:53:58 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	philo_on_receive(t_ft_actor *self, t_ft_msg *msg)
 	if (msg->type == SYNC_START)
 		_philo_sync_start(philo, msg);
 	if (msg->type == GRANT_EAT)
-		philo->can_eat = true;
+		_on_grant_eat(philo);
 	if (msg->type == GRANT_FORK)
 		_confirm_fork(philo, msg->sender);
 	if (msg->type == FORK_RELEASED)

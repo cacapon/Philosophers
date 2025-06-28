@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 22:33:15 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 17:51:50 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void			_eating(t_philo_actor *self, long delta);
 void			_sleeping(t_philo_actor *self, long delta);
 void			_confirm_fork(t_philo_actor *self, t_ft_actor *sender);
 void			_on_fork_released(t_philo_actor *self, t_ft_actor *sender);
+void			_on_grant_eat(t_philo_actor *self);
 
 #endif

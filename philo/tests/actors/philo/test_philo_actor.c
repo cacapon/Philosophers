@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 17:01:42 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 18:04:13 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,7 @@ void	test_thinking_l_fork_send(void)
 	p->l_fork = p_dummy;
 	_thinking(p);
 	res = _wait_mes(p_dummy, WAIT_TIME);
-    TEST_ASSERT_NOT_NULL(res);
-	TEST_ASSERT_EQUAL_INT(res->type, REQUEST_FORK);
+    TEST_ASSERT_NULL(res);
 	free(res);
 }
 
@@ -122,8 +121,7 @@ void	test_thinking_r_fork_send(void)
 	p->l_fork = p_dummy2;
 	_thinking(p);
 	res = _wait_mes(p_dummy, WAIT_TIME);
-    TEST_ASSERT_NOT_NULL(res);
-	TEST_ASSERT_EQUAL_INT(res->type, REQUEST_FORK);
+    TEST_ASSERT_NULL(res);
 	free(res);
 }
 
