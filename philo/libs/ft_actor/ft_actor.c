@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:15:18 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 18:25:13 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_ft_actor	*ft_actor_new(void *ref)
 	a = ft_actor_calloc(1, sizeof(t_ft_actor));
 	if (!a)
 		return (NULL);
-	a->inbox = ft_queue_new();
-	a->emergency_inbox = ft_queue_new();
+	a->inbox = ft_queue_new((t_ft_deleter)msg_del);
+	a->emergency_inbox = ft_queue_new((t_ft_deleter)msg_del);
 	a->is_running = false;
 	a->tell = _ft_actor_tell;
 	a->eg_tell = _ft_actor_eg_tell;

@@ -1,0 +1,79 @@
+@startuml request-fork
+
+
+actor monitor
+actor sv
+actor philo
+actor L_fork
+actor R_fork
+
+== philo-update ==
+activate monitor
+activate sv
+activate philo
+activate L_fork
+activate R_fork
+
+loop self.is_runningがtrueの限り
+	note right of philo
+		_common_update()
+	end note
+	opt philo.hp < 0
+		philo -> sv: PHILO_DEAD
+		philo -> sv: MONITOR_DEAD 
+		sv -> monitor: MONITOR_DEAD 
+	end
+	opt philo.sts == THINKING
+		note right of philo
+			_thinking()
+		end note
+		philo->L_fork: REQUEST_FORK
+		L_fork->philo: GRANT_FORK
+		philo->R_fork: REQUEST_FORK
+		R_fork->philo: GRANT_FORK
+		opt philo get LR fork
+			philo->sv: MONITOR_EATING
+			sv->monitor: MONITOR_EATING
+			philo->sv: PHILO_EAT_START
+		end
+	end
+	opt philo.sts == EATING 
+		note right of philo
+			_eating()
+		end note
+		opt 食事完了
+			opt 食事回数が指定回数到達 
+				philo->sv: PHILO_FINISHED_EATING
+			end
+			philo->L_fork: RELEASE_FORK
+			L_fork->philo: FORK_RELEASED
+			philo->R_fork: RELEASE_FORK
+			R_fork->philo: FORK_RELEASED
+			opt フォークを返し終わったら
+				note right of philo
+					philo.sts = PHILO_STS_WAITING
+				end note
+			end
+		end
+	end
+	opt philo.sts == SLEEPING 
+		note right of philo
+			_sleeping()
+		end note
+		opt 起きた
+			note right of philo
+				philo.sts = PHILO_STS_THINKING
+			end note
+			philo -> sv: MONITOR_THINKING
+			sv -> monitor: MONITOR_THINKING
+		end
+	end
+end
+
+deactivate monitor
+deactivate sv
+deactivate philo
+deactivate L_fork
+deactivate R_fork
+
+@enduml

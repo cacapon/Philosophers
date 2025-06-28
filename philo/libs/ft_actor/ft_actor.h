@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:09:06 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:34:10 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 16:12:53 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "ft_actor_calloc.h"
 # include "ft_queue.h"
 # include "ft_actor_msg.h"
-# include "stdbool.h"
+# include "ft_usleep.h"
+# include <stdbool.h>
 # include <sys/time.h>	
 # include <pthread.h>
 

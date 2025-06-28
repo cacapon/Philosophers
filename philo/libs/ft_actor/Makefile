@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/22 00:09:50 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/06/28 16:13:04 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MAKEFLAGS += --no-print-directory
 
 W_FLG = -Wall -Wextra -Werror
 
-SRCS = ft_actor.c ft_actor_msg.c ft_queue.c ft_actor_calloc.c \
+SRCS = ft_actor.c ft_actor_msg.c ft_queue.c ft_actor_calloc.c ft_usleep.c\
 		_ft_actor_tell.c _ft_actor_set_parent.c _ft_actor_loop.c
 OBJS = $(SRCS:.c=.o)
 

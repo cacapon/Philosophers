@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 22:26:29 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 20:20:47 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	_eating(t_philo_actor *self, long delta)
 		self->eat.now = 0;
 		l_tell(self->l_fork, msg_new(RELEASE_FORK, self->base));
 		r_tell(self->r_fork, msg_new(RELEASE_FORK, self->base));
-		sv_tell(self->sv, msg_new(PHILO_EAT_DONE, NULL));
-		self->can_eat = false;
 		self->sts = PHILO_STS_WAITING;
 	}
 }

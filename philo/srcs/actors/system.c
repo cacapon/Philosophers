@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 23:13:43 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 18:24:40 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_system	*_system_new(t_system *sys, t_main_args args)
 	sys->num = args.num_of_philos;
 	sys->sv = sv_actor_new(args);
 	sys->monitor = monitor_actor_new();
-	sys->notify_inbox = ft_queue_new();
+	sys->notify_inbox = ft_queue_new((t_ft_deleter)msg_del);
 	if (!sys->sv || !sys->monitor || !sys->notify_inbox)
 		return (system_del(&sys, i), NULL);
 	while (i < sys->num)

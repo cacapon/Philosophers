@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _on_request_fork.c                                 :+:      :+:    :+:   */
+/*   ft_usleep.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 17:57:46 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/28 16:06:27 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/28 16:15:49 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fork_actor.h"
+#ifndef FT_USLEEP_H
+# define FT_USLEEP_H
 
-void	_on_request_fork(t_fork_actor *fork, t_ft_actor *sender)
-{
-	if (fork->holder == sender)
-		return ;
-	if (fork->sts == FORK_AVAILABLE)
-	{
-		fork->sts = FORK_HELD;
-		fork->holder = sender;
-		sender->tell(sender, msg_new(GRANT_FORK, fork->base));
-	}
-	else
-		fork->wait->enq(fork->wait, sender);
-}
+// using gettimeofday(), NULL, usleep()
+# include <sys/time.h>
+# include <stddef.h>
+# include <unistd.h>
+
+void	ft_usleep(long ms);
+
+#endif

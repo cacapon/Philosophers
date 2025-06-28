@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _on_request_fork.c                                 :+:      :+:    :+:   */
+/*   ft_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 17:57:46 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/28 16:06:27 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/28 22:22:41 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fork_actor.h"
+#include "ft_usleep.h"
 
-void	_on_request_fork(t_fork_actor *fork, t_ft_actor *sender)
+static long	_get_current_time(void)
 {
-	if (fork->holder == sender)
-		return ;
-	if (fork->sts == FORK_AVAILABLE)
-	{
-		fork->sts = FORK_HELD;
-		fork->holder = sender;
-		sender->tell(sender, msg_new(GRANT_FORK, fork->base));
-	}
-	else
-		fork->wait->enq(fork->wait, sender);
+	struct timeval	now;
+
+	gettimeofday(&now, NULL);
+	return (now.tv_sec * 1000 + now.tv_usec / 1000);
+}
+
+void	ft_usleep(long ms)
+{
+	long	start;
+
+	start = _get_current_time();
+	while (_get_current_time() - start < ms)
+		usleep(500);
 }
