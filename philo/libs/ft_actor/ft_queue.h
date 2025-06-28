@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:11 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 18:19:06 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/28 22:22:57 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 typedef struct s_ft_node	t_ft_node;
 typedef struct s_ft_queue	t_ft_queue;
-typedef void 				(*t_ft_deleter)(void **);
+typedef void				(*t_ft_deleter)(void **);
 
 typedef struct s_ft_node
 {
