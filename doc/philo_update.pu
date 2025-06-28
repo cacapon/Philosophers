@@ -28,7 +28,9 @@ loop self.is_runningがtrueの限り
 			_thinking()
 		end note
 		philo->L_fork: REQUEST_FORK
+		L_fork->philo: GRANT_FORK
 		philo->R_fork: REQUEST_FORK
+		R_fork->philo: GRANT_FORK
 		opt philo get LR fork
 			philo->sv: MONITOR_EATING
 			sv->monitor: MONITOR_EATING
@@ -43,11 +45,15 @@ loop self.is_runningがtrueの限り
 				philo->sv: PHILO_FINISHED_EATING
 			end
 			philo->L_fork: RELEASE_FORK
+			L_fork->philo: FORK_RELEASED
 			philo->R_fork: RELEASE_FORK
+			R_fork->philo: FORK_RELEASED
+			opt フォークを返し終わったら
 			philo->sv: PHILO_EAT_DONE
-			note right of philo
-				philo.sts = PHILO_STS_WAITING
-			end note
+				note right of philo
+					philo.sts = PHILO_STS_WAITING
+				end note
+			end
 		end
 	end
 	opt philo.sts == SLEEPING 
