@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 19:38:04 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/29 12:59:19 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_sv_prop
 	t_ft_actor		*monitor_ref;
 	size_t			ref_count;
 	size_t			start_done_count;
-	size_t			philo_finished_eat_count;
+	int				philo_finished_eat_count;
 }					t_sv_prop;
 
 typedef struct s_sv_actor

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 21:40:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/29 12:58:54 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	_send_set_start_msg(t_sv_actor *self)
 {
-	size_t		i;
+	int			i;
 	t_ft_msg	*msg;
 	t_ft_actor	*philo_ref;
 
