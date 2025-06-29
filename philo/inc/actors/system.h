@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:00:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/17 23:16:49 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/29 12:58:30 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_system
 {
-	size_t			num;
+	int				num;
 	t_ft_queue		*notify_inbox;
 	t_sv_actor		*sv;
 	t_monitor_actor	*monitor;

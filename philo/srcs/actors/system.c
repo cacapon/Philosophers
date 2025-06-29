@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 18:24:40 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/29 13:00:10 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	system_del(t_system **sys, size_t num)
 	*sys = NULL;
 }
 
-static t_system	*_calloc_system(size_t num)
+static t_system	*_calloc_system(int num)
 {
 	t_system	*sys;
 
@@ -52,7 +52,7 @@ static t_system	*_calloc_system(size_t num)
 
 static t_system	*_system_new(t_system *sys, t_main_args args)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	sys->num = args.num_of_philos;
@@ -74,7 +74,7 @@ static t_system	*_system_new(t_system *sys, t_main_args args)
 
 static t_system	*_system_ref(t_system *sys)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i < sys->num)

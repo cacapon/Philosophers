@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 17:07:27 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 17:08:05 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/29 13:00:23 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sv_on_start(t_ft_actor *self)
 {
-	size_t		i;
+	int			i;
 	t_sv_actor	*sv;
 
 	sv = self->ref;
