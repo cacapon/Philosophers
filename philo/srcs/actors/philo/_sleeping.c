@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 23:15:55 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:14:15 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	_sleeping(t_philo_actor *self, long delta)
 		if (msg)
 			msg->data.tv = self->last_update_time;
 		self->sv->tell(self->sv, msg);
+		_send_request_forks(self);
 	}
 }

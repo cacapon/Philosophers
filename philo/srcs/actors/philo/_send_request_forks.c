@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _on_sync_start.c                                   :+:      :+:    :+:   */
+/*   _send_request_forks.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 21:22:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 16:18:47 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/30 16:01:48 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/30 16:15:06 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_actor.h"
-#include "ft_usleep.h"
 
-void	_on_sync_start(t_philo_actor *self, t_ft_msg *msg)
+static void	_send_request_fork(t_ft_actor *fork, t_ft_actor *philo_ref)
 {
-	self->base->start = msg->data.tv;
-	self->last_update_time = self->base->start;
-	self->run_update = true;
+	fork->tell(fork, msg_new(REQUEST_FORK, philo_ref));
+}
+
+void	_send_request_forks(t_philo_actor *self)
+{
 	if (self->no % 2 == 0)
-		ft_usleep(5);
-	_send_request_forks(self);
+	{
+		_send_request_fork(self->l_fork, self->base);
+		_send_request_fork(self->r_fork, self->base);
+	}
+	else
+	{
+		_send_request_fork(self->r_fork, self->base);
+		_send_request_fork(self->l_fork, self->base);
+	}
 }
