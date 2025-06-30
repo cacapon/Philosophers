@@ -1,11 +1,21 @@
 #!/bin/bash
 
+echo "check" | ./copy_to_subject.sh > /dev/null
+echo -n "Checking norminette before commit..."
+if ! norminette check/philo > /dev/null 2> >(cat >&2); then
+	echo "❌"
+	echo "norminette failed. Commit aborted."
+	exit 1
+fi
+echo "✅"
+
+echo "Build OK. Processing to commit."
 echo -n "Checking build before push..."
-if ! make -C philo re > /dev/null 2> >(cat >&2); then
+if ! make -C check/philo re > /dev/null 2> >(cat >&2); then
 	echo "❌"
 	echo "Build failed. Push aborted."
 	exit 1
 fi
 echo "✅"
 echo "Build OK. Processing to push."
-make -C philo fclean > /dev/null
+rm -rf check/
