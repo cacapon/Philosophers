@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/29 12:58:54 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 19:39:49 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	_on_actor_start_done(t_sv_actor *self)
 	self->prop->start_done_count++;
 	if (self->prop->start_done_count == self->prop->ref_count)
 	{
-		_send_grant_eat(self);
 		gettimeofday(&self->prop->start, NULL);
 		self->prop->last_update_time = self->prop->start;
 		_send_set_start_msg(self);

@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:25:22 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 18:38:55 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 19:57:07 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 static void	_put_fork(t_fork *self)
 {
 	pthread_mutex_unlock(&self->mutex);
+	__builtin_printf("put fork\n");
 }
 
 static void	_take_fork(t_fork *self)
 {
 	pthread_mutex_lock(&self->mutex);
+	__builtin_printf("take fork\n");
 }
 
 void	fork_del(t_fork **fork)

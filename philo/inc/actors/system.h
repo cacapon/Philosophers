@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:00:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/29 12:58:30 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 18:52:02 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_system
 	t_sv_actor		*sv;
 	t_monitor_actor	*monitor;
 	t_philo_actor	**philos;
-	t_fork_actor	**forks;
+	t_fork			**forks;
 }					t_system;
 
 t_system			*system_new(t_main_args args);

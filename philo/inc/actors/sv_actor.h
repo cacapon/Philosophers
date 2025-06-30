@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/29 12:59:19 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 19:37:14 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void				_on_monitor_msg(t_sv_actor *self, t_ft_msg *msg);
 void				_on_philo_finished_eating(t_sv_actor *self);
 
 // methods
-t_size_t_matrix		*_create_send_ptn(size_t n);
 void				_send_grant_eat(t_sv_actor *self);
 
 #endif
