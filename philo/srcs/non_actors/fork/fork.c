@@ -6,20 +6,20 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 18:25:22 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 18:36:59 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 18:38:55 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fork.h"
 
-static void _put_fork(t_fork *self)
+static void	_put_fork(t_fork *self)
 {
 	pthread_mutex_unlock(&self->mutex);
 }
 
-static void _take_fork(t_fork *self)
+static void	_take_fork(t_fork *self)
 {
-	pthread_mutex_lock(&self->mutex);	
+	pthread_mutex_lock(&self->mutex);
 }
 
 void	fork_del(t_fork **fork)
