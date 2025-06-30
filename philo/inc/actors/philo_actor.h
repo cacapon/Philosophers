@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 17:51:50 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 15:58:00 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void			philo_on_start(t_ft_actor *self);
 bool			philo_on_receive(t_ft_actor *self, t_ft_msg *msg);
 void			philo_update(t_ft_actor *self);
 // methods
-void			_philo_sync_start(t_philo_actor *self, t_ft_msg *msg);
+void			_on_sync_start(t_philo_actor *self, t_ft_msg *msg);
 void			_common_update(t_philo_actor *self, long delta);
 void			_thinking(t_philo_actor *self);
 void			_eating(t_philo_actor *self, long delta);
