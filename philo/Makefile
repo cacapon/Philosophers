@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/06/30 16:09:46 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/07/02 19:48:10 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ PHILO_SRC	= philo_actor.c	philo_on_start.c philo_on_recieve.c philo_update.c \
 			  _send_request_forks.c _on_fork_released.c _on_grant_eat.c _sleeping.c _thinking.c
 SV_SRC		= sv_actor.c sv_on_start.c sv_on_receive.c \
 			  _on_actor_start_done.c _on_actor_stop_done.c _on_philo_eat_start.c \
-			  _on_philo_dead.c _on_shut_down.c _on_update.c _on_monitor_msg.c _on_philo_finished_eating.c \
+			  _on_philo_dead.c _on_sv_shut_down.c _on_update.c _on_monitor_msg.c _on_philo_finished_eating.c \
 			  _create_send_ptn.c _send_grant_eat.c
 MONITOR_SRC	= monitor_actor.c monitor_on_start.c monitor_on_receive.c \
 			  _show_monitor.c	

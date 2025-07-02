@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 15:57:09 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/02 19:47:06 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ bool	philo_on_receive(t_ft_actor *self, t_ft_msg *msg)
 		_confirm_fork(philo, msg->sender);
 	if (msg->type == FORK_RELEASED)
 		_on_fork_released(philo, msg->sender);
+	if (msg->type == SHUT_DOWN)
+		ft_actor_stop(self);
 	return (true);
 }

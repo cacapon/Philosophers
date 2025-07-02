@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 23:13:02 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/24 15:15:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/02 19:58:31 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	_start_phase(t_system *sys)
 {
 	t_ft_msg	*sys_msg;
 
+	ft_actor_start(sys->sv->base);
 	while (true)
 	{
 		sys_msg = sys->notify_inbox->deq(sys->notify_inbox);
@@ -44,7 +45,7 @@ static void	_run_phase(t_system *sys)
 	}
 }
 
-static void	_shatdown_phase(t_system *sys)
+static void	_shutdown_phase(t_system *sys)
 {
 	t_ft_msg	*sys_msg;
 
@@ -59,12 +60,12 @@ static void	_shatdown_phase(t_system *sys)
 		}
 		msg_del(&sys_msg);
 	}
+	pthread_join(sys->sv->base->thread, NULL);
 }
 
 void	system_run(t_system *sys)
 {
-	ft_actor_start(sys->sv->base);
 	_start_phase(sys);
 	_run_phase(sys);
-	_shatdown_phase(sys);
+	_shutdown_phase(sys);
 }

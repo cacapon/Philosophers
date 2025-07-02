@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 18:48:47 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/02 19:46:38 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	fork_on_receive(t_ft_actor *self, t_ft_msg *msg)
 		_on_request_fork(fork, msg->sender);
 	if (msg->type == RELEASE_FORK)
 		_on_release_fork(fork, msg->sender);
-	if (msg->type == ACTOR_STOP)
+	if (msg->type == SHUT_DOWN)
 		ft_actor_stop(self);
 	return (true);
 }
