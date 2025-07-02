@@ -6,13 +6,13 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 21:50:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/02 19:57:38 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/02 20:13:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sv_actor.h"
 
-static void _join_actor(t_sv_actor *sv)
+static void	_join_actor(t_sv_actor *sv)
 {
 	int			i;
 	t_ft_actor	*philo_ref;
