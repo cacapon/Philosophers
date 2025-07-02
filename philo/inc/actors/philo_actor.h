@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 19:52:48 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:13:57 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "philo_define.h"
 # include "ft_actor.h"
-# include "fork.h"
 # include "philo_msg.h"
 
 typedef struct s_main_args	t_main_args;
@@ -39,8 +38,8 @@ typedef struct s_philo_actor
 {
 	t_ft_actor	*base;
 	t_ft_actor	*sv;
-	t_fork		*l_fork;
-	t_fork		*r_fork;
+	t_ft_actor	*l_fork;
+	t_ft_actor	*r_fork;
 	int			sts;
 	t_philo_bar	hp;
 	t_philo_bar	eat;
@@ -60,9 +59,7 @@ void			philo_on_start(t_ft_actor *self);
 bool			philo_on_receive(t_ft_actor *self, t_ft_msg *msg);
 void			philo_update(t_ft_actor *self);
 // methods
-void			_send_monitor_msg(t_philo_actor *self, int msg_type);
-void			_take_forks(t_philo_actor *self);
-void			_put_forks(t_philo_actor *self);
+void			_send_request_forks(t_philo_actor *self);
 void			_on_sync_start(t_philo_actor *self, t_ft_msg *msg);
 void			_common_update(t_philo_actor *self, long delta);
 void			_thinking(t_philo_actor *self);

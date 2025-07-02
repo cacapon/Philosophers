@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 12:09:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 19:59:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/16 22:44:28 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int	main(void)
 	UNITY_BEGIN();
 	test_fork();
 	test_philo();
+	test_sv();
 	return (UNITY_END());
 }

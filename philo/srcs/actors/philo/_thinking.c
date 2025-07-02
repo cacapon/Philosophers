@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 19:43:20 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:05:00 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 void	_thinking(t_philo_actor *self)
 {
+	t_ft_msg	*msg;
+
 	if (self->has_l_fork && self->has_r_fork)
 	{
-		_send_monitor_msg(self, MONITOR_EATING);
+		msg = msg_new(MONITOR_EATING, self->base);
+		if (msg)
+			msg->data.tv = self->last_update_time;
 		self->sts = PHILO_STS_EATING;
 		self->hp.now = self->hp.max;
 		self->sv->tell(self->sv, msg_new(PHILO_EAT_START, NULL));
+		self->sv->tell(self->sv, msg);
 	}
 }

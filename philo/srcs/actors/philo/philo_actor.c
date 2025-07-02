@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 19:53:31 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 22:28:18 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	philo_actor_del(t_philo_actor **philo_ptr)
 	if (!philo)
 		return ;
 	ft_actor_del(&philo->base);
-	_put_forks(philo);
 	free(philo);
 	*philo_ptr = NULL;
 }

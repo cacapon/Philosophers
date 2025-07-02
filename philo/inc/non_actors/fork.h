@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 18:51:19 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 18:39:33 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FORK_H
 
 # include <pthread.h>
-# include "philo_utils.h"
 
 typedef struct s_fork	t_fork;
 

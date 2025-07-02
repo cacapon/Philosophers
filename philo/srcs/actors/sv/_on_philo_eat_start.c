@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _on_sync_start.c                                   :+:      :+:    :+:   */
+/*   _on_philo_eat_start.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 21:22:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 16:18:47 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/28 19:40:20 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/28 19:40:26 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_actor.h"
-#include "ft_usleep.h"
+#include "sv_actor.h"
 
-void	_on_sync_start(t_philo_actor *self, t_ft_msg *msg)
+static void	_advance_to_next_phase(t_sv_actor *self)
 {
-	self->base->start = msg->data.tv;
-	self->last_update_time = self->base->start;
-	self->run_update = true;
-	if (self->no % 2 == 0)
-		ft_usleep(5);
-	_send_request_forks(self);
+	self->prop->philo_done_count++;
+	if (self->prop->philo_done_count >= self->prop->send_ptn->col)
+	{
+		self->prop->philo_done_count = 0;
+		self->prop->ptn_i = (self->prop->ptn_i + 1) % self->prop->send_ptn->row;
+		_send_grant_eat(self);
+	}
+}
+
+void	_on_philo_eat_start(t_sv_actor *self)
+{
+	_advance_to_next_phase(self);
 }

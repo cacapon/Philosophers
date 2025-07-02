@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 19:38:54 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/21 17:30:38 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static t_sv_prop	*_sv_prop_new(t_main_args args)
 	prop->forks_ref = philo_calloc(args.num_of_philos, sizeof(t_ft_actor *));
 	prop->philo_done_count = 0;
 	prop->ptn_i = 0;
-	if (!prop->philos_ref)
+	prop->send_ptn = _create_send_ptn(args.num_of_philos);
+	if (!prop->send_ptn || !prop->philos_ref)
 		_sv_prop_del(&prop);
 	return (prop);
 }

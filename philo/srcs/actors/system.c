@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 19:37:42 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/29 13:00:10 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	system_del(t_system **sys, size_t num)
 	while (i < num)
 	{
 		philo_actor_del(&_sys->philos[i]);
-		fork_del(&_sys->forks[i]);
+		fork_actor_del(&_sys->forks[i]);
 		i++;
 	}
 	free(_sys->forks);
@@ -44,12 +44,12 @@ static t_system	*_calloc_system(int num)
 	if (!sys)
 		return (NULL);
 	sys->philos = philo_calloc(num, sizeof(t_philo_actor *));
-	sys->forks = philo_calloc(num, sizeof(t_fork *));
+	sys->forks = philo_calloc(num, sizeof(t_fork_actor *));
 	if (!sys->philos || !sys->forks)
 		return (system_del(&sys, 0), NULL);
 	return (sys);
 }
- 
+
 static t_system	*_system_new(t_system *sys, t_main_args args)
 {
 	int	i;
@@ -63,7 +63,7 @@ static t_system	*_system_new(t_system *sys, t_main_args args)
 		return (system_del(&sys, i), NULL);
 	while (i < sys->num)
 	{
-		sys->forks[i] = fork_new();
+		sys->forks[i] = fork_actor_new();
 		sys->philos[i] = philo_actor_new(i + 1, args);
 		if (!sys->forks || !sys->philos)
 			return (system_del(&sys, i), NULL);
@@ -80,10 +80,12 @@ static t_system	*_system_ref(t_system *sys)
 	while (i < sys->num)
 	{
 		sys->sv->prop->philos_ref[i] = sys->philos[i]->base;
+		sys->sv->prop->forks_ref[i] = sys->forks[i]->base;
 		sys->philos[i]->sv = sys->sv->base;
-		sys->philos[i]->l_fork = sys->forks[i % sys->num];
-		sys->philos[i]->r_fork = sys->forks[(i + 1) % sys->num];
+		sys->philos[i]->l_fork = sys->forks[i % sys->num]->base;
+		sys->philos[i]->r_fork = sys->forks[(i + 1) % sys->num]->base;
 		ft_actor_set_parent(sys->philos[i]->base, sys->sv->base);
+		ft_actor_set_parent(sys->forks[i]->base, sys->sv->base);
 		i++;
 	}
 	sys->sv->prop->monitor_ref = sys->monitor->base;

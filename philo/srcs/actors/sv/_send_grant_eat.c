@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _on_sync_start.c                                   :+:      :+:    :+:   */
+/*   _send_grant_eat.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 21:22:17 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 16:18:47 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/17 22:34:57 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/06/24 15:15:52 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_actor.h"
-#include "ft_usleep.h"
+#include "sv_actor.h"
 
-void	_on_sync_start(t_philo_actor *self, t_ft_msg *msg)
+void	_send_grant_eat(t_sv_actor *self)
 {
-	self->base->start = msg->data.tv;
-	self->last_update_time = self->base->start;
-	self->run_update = true;
-	if (self->no % 2 == 0)
-		ft_usleep(5);
-	_send_request_forks(self);
+	size_t		i;
+	t_ft_actor	*philo_ref;
+	size_t		send_i;
+
+	i = 0;
+	while (i < self->prop->send_ptn->col)
+	{
+		send_i = self->prop->send_ptn->rows[self->prop->ptn_i][i];
+		philo_ref = self->prop->philos_ref[send_i];
+		philo_ref->tell(philo_ref, msg_new(GRANT_EAT, NULL));
+		i++;
+	}
 }

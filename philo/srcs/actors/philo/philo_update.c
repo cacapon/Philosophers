@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 13:15:49 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 19:18:55 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/24 21:40:07 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	philo_update(t_ft_actor *self)
 	if (!philo->run_update || philo->sts == PHILO_STS_DEAD)
 		return ;
 	delta = _get_philo_delta(philo);
+	_common_update(philo, delta);
 	if (philo->sts == PHILO_STS_THINKING)
 		_thinking(philo);
 	if (philo->sts == PHILO_STS_EATING)
