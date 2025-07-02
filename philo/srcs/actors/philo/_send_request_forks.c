@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _sleeping.c                                        :+:      :+:    :+:   */
+/*   _send_request_forks.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 16:14:15 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/06/30 16:01:48 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/07/02 14:43:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_actor.h"
 
-void	_sleeping(t_philo_actor *self, long delta)
+static void	_send_request_fork(t_ft_actor *fork, t_ft_actor *philo_ref)
 {
-	t_ft_msg	*msg;
+	if (!fork)
+		return ;
+	fork->tell(fork, msg_new(REQUEST_FORK, philo_ref));
+}
 
-	self->slp.now += delta;
-	if (self->slp.now >= self->slp.max)
+void	_send_request_forks(t_philo_actor *self)
+{
+	if (self->no % 2 == 0)
 	{
-		self->slp.now = 0;
-		self->sts = PHILO_STS_THINKING;
-		msg = msg_new(MONITOR_THINKING, self->base);
-		if (msg)
-			msg->data.tv = self->last_update_time;
-		self->sv->tell(self->sv, msg);
-		_send_request_forks(self);
+		_send_request_fork(self->l_fork, self->base);
+		_send_request_fork(self->r_fork, self->base);
+	}
+	else
+	{
+		_send_request_fork(self->r_fork, self->base);
+		_send_request_fork(self->l_fork, self->base);
 	}
 }

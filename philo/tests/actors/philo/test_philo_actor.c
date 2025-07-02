@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 22:29:14 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:36:39 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,49 +89,15 @@ void	test_thinking_cant_eat(void)
 {
     t_ft_msg   *res = NULL;
 
-	p->can_eat = false;
 	_thinking(p);
 	res = _wait_mes(p_dummy, WAIT_TIME);
     TEST_ASSERT_NULL(res);
-}
-
-void	test_thinking_l_fork_send(void)
-{
-    t_ft_msg   *res = NULL;
-
-	p->can_eat = true;
-	p->has_r_fork = true;
-	p->has_l_fork = false;
-	p->r_fork = p_dummy2;
-	p->l_fork = p_dummy;
-	_thinking(p);
-	res = _wait_mes(p_dummy, WAIT_TIME);
-    TEST_ASSERT_NOT_NULL(res);
-	TEST_ASSERT_EQUAL_INT(res->type, REQUEST_FORK);
-	free(res);
-}
-
-void	test_thinking_r_fork_send(void)
-{
-    t_ft_msg   *res = NULL;
-
-	p->can_eat = true;
-	p->has_r_fork = false;
-	p->has_l_fork = true;
-	p->r_fork = p_dummy;
-	p->l_fork = p_dummy2;
-	_thinking(p);
-	res = _wait_mes(p_dummy, WAIT_TIME);
-    TEST_ASSERT_NOT_NULL(res);
-	TEST_ASSERT_EQUAL_INT(res->type, REQUEST_FORK);
-	free(res);
 }
 
 void	test_thinking_has_both_fork(void)
 {
     t_ft_msg   *res = NULL;
 
-	p->can_eat = false;
 	p->has_r_fork = true;
 	p->has_l_fork = true;
 	p->r_fork = p_dummy;
@@ -175,7 +141,6 @@ void	test_eating_done(void)
 	TEST_ASSERT_EQUAL_INT(res1->type, RELEASE_FORK);
 	TEST_ASSERT_EQUAL_INT(res2->type, RELEASE_FORK);
 	TEST_ASSERT_EQUAL_INT(res3->type, PHILO_FINISHED_EATING);
-	TEST_ASSERT_EQUAL_INT(p->can_eat, false);
 	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_WAITING);
 	free(res1);
 	free(res2);
@@ -184,6 +149,8 @@ void	test_eating_done(void)
 
 void	test_sleeping(void)
 {
+	p->r_fork = p_dummy;
+	p->l_fork = p_dummy2;
 	TEST_ASSERT_EQUAL_INT(p->slp.now, 0);
 	_sleeping(p, 1);
 	TEST_ASSERT_EQUAL_INT(p->slp.now, 1);
@@ -191,6 +158,8 @@ void	test_sleeping(void)
 
 void	test_sleeping_wakeup(void)
 {
+	p->r_fork = p_dummy;
+	p->l_fork = p_dummy2;
 	p->slp.max = 1;
 	TEST_ASSERT_EQUAL_INT(p->slp.now, 0);
 	_sleeping(p, 1);
@@ -250,8 +219,6 @@ void	test_on_fork_released_both()
 void test_philo(void) {
     RUN_PHILO_TEST(test_common_update_normal);
     RUN_PHILO_TEST(test_common_update_dead);
-	RUN_PHILO_TEST(test_thinking_l_fork_send);
-	RUN_PHILO_TEST(test_thinking_r_fork_send);
 	RUN_PHILO_TEST(test_thinking_has_both_fork);
 	RUN_PHILO_TEST(test_eating);
 	RUN_PHILO_TEST(test_eating_done);

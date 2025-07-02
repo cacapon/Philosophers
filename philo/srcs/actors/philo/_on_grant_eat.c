@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 17:51:13 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 22:23:36 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:04:22 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	_on_grant_eat(t_philo_actor *self)
 {
-	self->can_eat = true;
+	(void)self;
 }

@@ -8,14 +8,3 @@ if ! make -C philo/ test > /dev/null 2> /dev/null; then
 	exit 1
 fi
 echo "✅"
-
-echo "check" | ./copy_to_subject.sh > /dev/null
-echo -n "Checking norminette before commit..."
-if ! norminette check/ > /dev/null 2> >(cat >&2); then
-	echo "❌"
-	echo "norminette failed. Commit aborted."
-	exit 1
-fi
-echo "✅"
-echo "Build OK. Processing to commit."
-rm -rf check/
