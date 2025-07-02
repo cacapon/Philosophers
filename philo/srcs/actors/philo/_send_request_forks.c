@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 16:01:48 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 16:15:06 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/02 14:43:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	_send_request_fork(t_ft_actor *fork, t_ft_actor *philo_ref)
 {
+	if (!fork)
+		return ;
 	fork->tell(fork, msg_new(REQUEST_FORK, philo_ref));
 }
 
