@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 18:08:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/02 19:53:21 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/03 13:47:27 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void	ft_actor_stop(t_ft_actor *a)
 	if (a->v && a->v->on_stop)
 		a->v->on_stop(a);
 	if (a->parent)
-		a->parent->tell(a->parent, msg_new(ACTOR_STOP_DONE, a));
+		a->parent->eg_tell(a->parent, msg_new(ACTOR_STOP_DONE, a));
 }
