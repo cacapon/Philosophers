@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:51 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/03 11:37:24 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/03 11:44:35 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,16 @@
 # include "args.h"
 # include "philo_define.h"
 # include "ft_actor.h"
-# include "matrix.h"
 # include "philo_msg.h"
 # include "philo_utils.h"
 # include <stdint.h>
 
 typedef struct s_sv_prop
 {
-	t_size_t_matrix	*send_ptn;
 	t_main_args		args;
 	t_timeval		start;
 	t_timeval		last_update_time;
 	size_t			philo_done_count;
-	size_t			ptn_i;
 	t_ft_actor		**philos_ref;
 	t_ft_actor		**forks_ref;
 	t_ft_actor		*monitor_ref;
@@ -55,13 +52,9 @@ bool				sv_on_receive(t_ft_actor *self, t_ft_msg *msg);
 void				_on_actor_start_done(t_sv_actor *self);
 void				_on_actor_stop_done(t_sv_actor *self);
 void				_on_update(t_sv_actor *self);
-void				_on_philo_eat_start(t_sv_actor *self);
 void				_on_philo_dead(t_sv_actor *self);
 void				_on_sv_shut_down(t_sv_actor *self);
 void				_on_monitor_msg(t_sv_actor *self, t_ft_msg *msg);
 void				_on_philo_finished_eating(t_sv_actor *self);
-
-// methods
-t_size_t_matrix		*_create_send_ptn(size_t n);
 
 #endif
