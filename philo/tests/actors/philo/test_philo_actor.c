@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 13:51:36 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/30 16:36:39 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/03 14:06:26 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static void teardown(void) {
 	ft_actor_del(&p_dummy2);
 }
 
-static t_ft_msg   *_wait_mes(t_ft_actor *p_dummy, size_t max)
+static t_ft_msg   *_wait_mes(t_ft_queue *inbox, size_t max)
 {
     t_ft_msg   *res = NULL;
     size_t  time = 0;
 
     while (time < max)
     {
-		res = p_dummy->inbox->deq(p_dummy->inbox);
+		res = inbox->deq(inbox);
         if (res)
             return (res);
         time++;
@@ -69,20 +69,25 @@ void    test_common_update_normal(void)
     t_ft_msg   	*res = NULL;
 
 	_common_update(p, 1);
-	res = _wait_mes(p->sv, WAIT_TIME);
+	res = _wait_mes(p->sv->inbox, WAIT_TIME);
     TEST_ASSERT_NULL(res);
 }
 
 void	test_common_update_dead(void)
 {
-    t_ft_msg   *res = NULL;
+    t_ft_msg   *res1 = NULL;
+    t_ft_msg   *res2 = NULL;
 
 	p->hp.now = 1;
 	_common_update(p, 1);
-	res = _wait_mes(p->sv, WAIT_TIME);
-	TEST_ASSERT_NOT_NULL(res);
-	TEST_ASSERT_EQUAL_INT(res->type, PHILO_DEAD);
-	msg_del(&res);
+	res1 = _wait_mes(p->sv->inbox, WAIT_TIME);
+	res2 = _wait_mes(p->sv->emergency_inbox, WAIT_TIME);
+	TEST_ASSERT_NOT_NULL(res1);
+	TEST_ASSERT_NOT_NULL(res2);
+	TEST_ASSERT_EQUAL_INT(res1->type, MONITOR_DIED);
+	TEST_ASSERT_EQUAL_INT(res2->type, PHILO_DEAD);
+	msg_del(&res1);
+	msg_del(&res2);
 }
 
 void	test_thinking_cant_eat(void)
@@ -90,7 +95,7 @@ void	test_thinking_cant_eat(void)
     t_ft_msg   *res = NULL;
 
 	_thinking(p);
-	res = _wait_mes(p_dummy, WAIT_TIME);
+	res = _wait_mes(p_dummy->inbox, WAIT_TIME);
     TEST_ASSERT_NULL(res);
 }
 
@@ -103,7 +108,7 @@ void	test_thinking_has_both_fork(void)
 	p->r_fork = p_dummy;
 	p->l_fork = p_dummy2;
 	_thinking(p);
-	res = _wait_mes(p->sv, WAIT_TIME);
+	res = _wait_mes(p->sv->inbox, WAIT_TIME);
     TEST_ASSERT_NOT_NULL(res);
 	TEST_ASSERT_EQUAL_INT(res->type, PHILO_EAT_START);
 	TEST_ASSERT_EQUAL_INT(p->sts, PHILO_STS_EATING);
@@ -132,9 +137,9 @@ void	test_eating_done(void)
 	p->max_eat_count = 1;
 	TEST_ASSERT_EQUAL_INT(p->eat.now, p->eat.max -1);
 	_eating(p, 1);
-	res1 = _wait_mes(p_dummy, WAIT_TIME);
-	res2 = _wait_mes(p_dummy2, WAIT_TIME);
-	res3 = _wait_mes(p_sv_dummy, WAIT_TIME);
+	res1 = _wait_mes(p_dummy->inbox, WAIT_TIME);
+	res2 = _wait_mes(p_dummy2->inbox, WAIT_TIME);
+	res3 = _wait_mes(p_sv_dummy->inbox, WAIT_TIME);
 	TEST_ASSERT_NOT_NULL(res1);
 	TEST_ASSERT_NOT_NULL(res2);
 	TEST_ASSERT_NOT_NULL(res3);
