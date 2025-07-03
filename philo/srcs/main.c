@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:47:33 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/03 12:56:57 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/03 13:01:46 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static void	_print_err(int argc, char **argv)
 {
 	printf("%s", USAGE_STR);
 	printf("Error: invalid argument\n");
+	if (argc < 5 || 6 < argc)
+	{
+		printf("\targc\t\t\t\t\t\t[5 <= x <= 6      ]:%d\n", argc);
+		return ;
+	}
 	printf("\t%s:%s\n", ERR_STR1, argv[1]);
 	printf("\t%s:%s\n", ERR_STR2, argv[2]);
 	printf("\t%s:%s\n", ERR_STR3, argv[3]);
