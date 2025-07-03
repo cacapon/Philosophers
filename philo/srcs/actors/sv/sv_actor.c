@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:42:16 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/21 17:30:38 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/03 11:44:43 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	_sv_prop_del(t_sv_prop **prop_ptr)
 	prop = *prop_ptr;
 	free(prop->philos_ref);
 	free(prop->forks_ref);
-	free_matrix(&prop->send_ptn);
 	free(prop);
 	*prop_ptr = NULL;
 }
@@ -38,9 +37,7 @@ static t_sv_prop	*_sv_prop_new(t_main_args args)
 	prop->philos_ref = philo_calloc(args.num_of_philos, sizeof(t_ft_actor *));
 	prop->forks_ref = philo_calloc(args.num_of_philos, sizeof(t_ft_actor *));
 	prop->philo_done_count = 0;
-	prop->ptn_i = 0;
-	prop->send_ptn = _create_send_ptn(args.num_of_philos);
-	if (!prop->send_ptn || !prop->philos_ref)
+	if (!prop->philos_ref)
 		_sv_prop_del(&prop);
 	return (prop);
 }
@@ -53,7 +50,6 @@ void	sv_actor_del(t_sv_actor **sv_ptr)
 	if (!sv)
 		return ;
 	ft_actor_del(&sv->base);
-	free_matrix(&sv->prop->send_ptn);
 	_sv_prop_del(&sv->prop);
 	free(sv);
 	*sv_ptr = NULL;
