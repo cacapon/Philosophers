@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 18:28:44 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/04 19:49:05 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	fork_actor_del(t_fork_actor **fork_ptr)
 		return ;
 	ft_actor_del(&fork->base);
 	ft_queue_del(&fork->wait);
+	pthread_mutex_destroy(&fork->mutex);
 	free(fork);
 	*fork_ptr = NULL;
 }
@@ -41,6 +42,7 @@ t_fork_actor	*fork_actor_new(void)
 	fork->wait = ft_queue_new(NULL);
 	if (!fork->base || !fork->wait)
 		return (fork_actor_del(&fork), NULL);
+	pthread_mutex_init(&fork->mutex, NULL);
 	fork->base->v = &vtable;
 	return (fork);
 }

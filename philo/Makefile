@@ -6,7 +6,7 @@
 #    By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/03 17:04:43 by ttsubo            #+#    #+#              #
-#    Updated: 2025/07/03 11:45:20 by ttsubo           ###   ########.fr        #
+#    Updated: 2025/07/04 19:55:26 by ttsubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ L_FT_ACTOR		= $(L_FT_ACTOR_DIR)ft_actor.a
 UTILS_SRC	= philo_calloc.c philo_memset.c philo_atoi.c get_elapsed_ms.c
 SYS_SRC		= system.c system_run.c
 FORK_SRC	= fork_actor.c fork_on_start.c fork_on_receive.c \
-			  _on_release_fork.c _on_request_fork.c
+			  _on_release_fork.c _on_request_fork.c _set_fork_sts.c
 PHILO_SRC	= philo_actor.c	philo_on_start.c philo_on_recieve.c philo_update.c \
  			  _on_sync_start.c _common_update.c _confirm_fork.c _eating.c \
 			  _send_request_forks.c _on_fork_released.c _sleeping.c _thinking.c

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _on_request_fork.c                                 :+:      :+:    :+:   */
+/*   _set_fork_sts.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/06 16:32:30 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/04 19:55:01 by ttsubo           ###   ########.fr       */
+/*   Created: 2025/07/04 19:49:24 by ttsubo            #+#    #+#             */
+/*   Updated: 2025/07/04 19:53:20 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fork_actor.h"
 
-void	_on_request_fork(t_fork_actor *fork, t_ft_actor *sender)
+void	_set_fork_sts(t_fork_actor *self, t_fork_sts sts)
 {
-	if (fork->holder == sender)
-		return ;
-	if (fork->sts == FORK_AVAILABLE)
-	{
-		_set_fork_sts(fork, FORK_HELD);
-		fork->holder = sender;
-		sender->tell(sender, msg_new(GRANT_FORK, fork->base));
-	}
-	else
-		fork->wait->enq(fork->wait, sender);
+	pthread_mutex_lock(&self->mutex);
+	self->sts = sts;	
+	pthread_mutex_unlock(&self->mutex);
 }
