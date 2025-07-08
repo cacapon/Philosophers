@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/02 14:42:48 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/08 12:46:22 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static t_system	*_system_new(t_system *sys, t_main_args args)
 	int	i;
 
 	i = 0;
+	if (!sys)
+		return (NULL);
 	sys->num = args.num_of_philos;
 	sys->sv = sv_actor_new(args);
 	sys->monitor = monitor_actor_new();
@@ -77,6 +79,8 @@ static t_system	*_system_ref(t_system *sys)
 	int	i;
 
 	i = 0;
+	if (!sys)
+		return (NULL);
 	while (i < sys->num)
 	{
 		sys->sv->prop->philos_ref[i] = sys->philos[i]->base;

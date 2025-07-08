@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:47:33 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/03 13:01:46 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/08 12:46:01 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	main(int argc, char **argv)
 	else
 		args.number_of_times_each_philosopher_must_eat = -1;
 	sys = system_new(args);
+	if (!sys)
+		return (printf("ERR:sys could not start.\n"), 1);
 	system_run(sys);
 	system_del(&sys, args.num_of_philos);
 	return (0);
