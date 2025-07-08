@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:28:12 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/04 19:53:51 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/08 13:08:52 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_fork_actor
 	int				sts;
 	t_ft_actor		*holder;
 	t_ft_queue		*wait;
-	pthread_mutex_t	mutex;	
+	pthread_mutex_t	mutex;
+	bool			is_mutex_init;	
 }					t_fork_actor;
 
 t_fork_actor	*fork_actor_new(void);

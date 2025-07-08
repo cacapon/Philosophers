@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/08 12:41:48 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/08 13:08:07 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ t_ft_queue	*ft_queue_new(t_ft_deleter del_func)
 	q = ft_actor_calloc(1, sizeof(t_ft_queue));
 	if (!q)
 		return (NULL);
+	q->is_mutex_init = false;
+	if (pthread_mutex_init(&q->mutex, NULL) != 0)
+		return (ft_queue_del(&q), NULL);
+	q->is_mutex_init = true;
 	q->head = NULL;
 	q->tail = NULL;
-	pthread_mutex_init(&q->mutex, NULL);
 	q->del_func = del_func;
 	q->enq = _enqueue;
 	q->deq = _dequeue;
@@ -97,7 +100,8 @@ void	ft_queue_del(t_ft_queue **q)
 		free(curr);
 		curr = next;
 	}
-	pthread_mutex_destroy(&_q->mutex);
+	if (_q->is_mutex_init)
+		pthread_mutex_destroy(&_q->mutex);
 	free(_q);
 	*q = NULL;
 }
