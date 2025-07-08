@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:55:40 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/06/28 18:29:00 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/08 12:41:48 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	_enqueue(t_ft_queue *self, void *msg)
 {
 	t_ft_node	*node;
 
-	node = malloc(sizeof(t_ft_node));
+	node = ft_actor_calloc(1, sizeof(t_ft_node));
 	if (!node)
 		return (false);
 	node->msg = msg;
@@ -67,7 +67,7 @@ t_ft_queue	*ft_queue_new(t_ft_deleter del_func)
 {
 	t_ft_queue	*q;
 
-	q = malloc(sizeof(t_ft_queue));
+	q = ft_actor_calloc(1, sizeof(t_ft_queue));
 	if (!q)
 		return (NULL);
 	q->head = NULL;
