@@ -6,7 +6,7 @@
 /*   By: ttsubo <ttsubo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:01 by ttsubo            #+#    #+#             */
-/*   Updated: 2025/07/08 12:46:22 by ttsubo           ###   ########.fr       */
+/*   Updated: 2025/07/08 12:56:17 by ttsubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static t_system	*_system_new(t_system *sys, t_main_args args)
 	{
 		sys->forks[i] = fork_actor_new();
 		sys->philos[i] = philo_actor_new(i + 1, args);
-		if (!sys->forks || !sys->philos)
-			return (system_del(&sys, i), NULL);
+		if (!sys->forks[i] || !sys->philos[i])
+			return (system_del(&sys, i + 1), NULL);
 		i++;
 	}
 	return (sys);
